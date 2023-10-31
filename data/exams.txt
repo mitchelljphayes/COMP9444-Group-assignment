@@ -1,0 +1,1351 @@
+CS230: Deep Learning
+Spring Quarter 2018
+Stanford University
+Midterm Examination
+180 minutes
+Problem Full Points Your Score
+1 Multiple Choice 14
+2 Short Answers 28
+3 Loss functions 17
+4 Batch Norm 15
+5 Numpy coding 10
+6"Who let the cars in?" 4
+7 X-Network 23
+8Practical case Study 11
+Total 122
+The exam contains 34 pages including this cover page.
+•This exam is closed book i.e. no laptops, notes, textbooks, etc. during the
+exam . However, you may use one A4 sheet (front and back) of notes as reference.
+•In all cases, and especially if you're stuck or unsure of your answers, explain your
+work, including showing your calculations and derivations! We'll give partial
+credit for good explanations of what you were trying to do.
+Name:
+SUNETID: @stanford.edu
+The Stanford University Honor Code:
+I attest that I have not given or received aid in this examination, and that I have done my
+share and taken an active part in seeing to it that others as well as myself uphold the spirit
+and letter of the Honor Code.
+Signature:
+1CS230
+Question 1 (Multiple Choice Questions, 14 points)
+For each of the following questions, circle the letter of your choice. There is only ONE correct
+choice unless explicitly mentioned. No explanation is required.
+(a)(2 points) Which of the following is true about max-pooling?
+(i) It allows a neuron in a network to have information about features in a larger
+part of the image, compared to a neuron at the same depth in a network without
+max pooling.
+(ii) It increases the number of parameters when compared to a similar network with-
+out max pooling.
+(iii) It increases the sensitivity of the network towards the position of features within
+an image.
+Solution: (i)
+(b)(2 points) In order to backpropagate through a max-pool layer, you need to pass
+information about the positions of the max values from the forward pass.
+(i) True
+(ii) False
+Solution: (i)
+(c)(2 points) Consider a simple convolutional neural network with one convolutional
+layer. Which of the following statements is true about this network? (Check all that
+apply.)
+(i) It is scale invariant.
+(ii) It is rotation invariant.
+(iii) It is translation invariant.
+(iv) All of the above.
+Solution: (iii)
+(d)(2 points) You are training a Generative Adversarial Network to generate nice iguana
+images, with mini-batch gradient descent. The generator cost J(G)is extremely low,
+but the generator is not generating meaningful output images. What could be the
+reason? (Circle all that apply.)
+2CS230
+(i) The discriminator has poor performance.
+(ii) Your generator is overtting.
+(iii) Your optimizer is stuck in a saddle point.
+(iv) None of the above.
+Solution: (i)
+(e)(2 points) Mini-batch gradient descent is a better optimizer than full-batch gradient
+descent to avoid getting stuck in saddle points.
+(i) True
+(ii) False
+Solution: (i)
+(f)(2 points) Using "neural style transfer" (as seen in class), you want to generate an
+RGB image of the Great Wall of China that looks like it was painted by Picasso. The
+size of your image is 100x100x3 and you are using a pretrained network with 1,000,000
+parameters. At every iteration of gradient descent, how many updates do you perform?
+(i) 10,000
+(ii) 30,000
+(iii) 1,000,000
+(iv) 1,030,000
+Solution: (ii) You only update the image, i.e. 10,000 pixels and each pixel has
+3 channels.
+(g)(2 points) You are building a model to predict the presence (labeled 1) or absence
+(labeled 0) of a tumor in a brain scan. The goal is to ultimately deploy the model to
+help doctors in hospitals. Which of these two metrics would you choose to use?
+(i) Precision =True positive examples
+Total predicted positive examples
+(ii) Recall =True positive examples
+Total positive examples.
+3CS230
+Solution: (ii) Increase recall, because we don't want false negatives.
+4CS230
+Question 2 (Short Answers, 28 points)
+The questions in this section can be answered in 3-4 sentences. Please be short and concise
+in your responses.
+(a) Consider an input image of shape 500 5003. You atten this image and use a fully
+connected layer with 100 hidden units.
+(i)(1 point) What is the shape of the weight matrix of this layer?
+Solution: Weight matrix which is 750 ;000100 , giving 75 million.
+(ii)(1 point) What is the shape of the corresponding bias vector?
+Solution: 1001
+(b)(2 points) Consider an input image of shape 500 5003. You run this image in
+a convolutional layer with 10 lters, of kernel size 5 5. How many parameters does
+this layer have?
+Solution: 55310 and a bias value for each of the 10 lters, giving 760
+parameters.
+(c)(2 points) You forward propagate an input xin your neural network. The output
+probability is ^ y. Explain briey what@^y
+@xis.
+Solution: The derivative represents how much the output changes when the
+input is changed. In other words, how much the input has inuenced the output.
+(d)(2 points) Why is it necessary to include non-linearities in a neural network?
+Solution: Without nonlinear activation functions, each layer simply performs a
+linear mapping of the input to the output of the layer. Because linear functions are
+closed under composition, this is equivalent to having a single (linear) layer. Thus,
+no matter how many such layers exist, the network can only learn linear functions.
+(e)(2 points) The universal approximation theorem states that a neural network with a
+single hidden layer can approximate any continuous function (with some assumptions
+on the activation). Give one reason why you would use deep networks with multiple
+layers.
+5CS230
+Solution: While a neural network with a single hidden layer can represent any
+continuous function, the size of the hidden layer required to do so is prohibitively
+large for most problems. Also, having multiple layers allows the network to rep-
+resent highly nonlinear (e.g. more than what a single sigmoid can represent) with
+fewer number of parameters than a shallow network can.
+(f)(3 points) Consider a dataset fx(1);x(2);:::;x(m)gwhere each example x(i)contains
+a sequence of 100 numbers:
+x(i)= (x(i)<1>;x(i)<2>;:::;x(i)<100>)
+You have a very accurate (but not perfect) model that predicts x<t+1>from (x<1>;:::;x<t>).
+Givenx<1>, you want to generate ( x<2>;:::;x<100>) by repeatedly running your model.
+Your method is:
+1. Predict ^x<2>fromx<1>
+2. Predict ^x<3>from (x<1>;^x<2>)
+3. ...
+4. Predict ^x<100>from (x<1>;^x<2>;:::;^x<99>)
+The resulting ^ x<100>turns out to be very dierent from the true x<100>. Explain why.
+Solution: (Training/Test mismatch on sequence prediction)
+There is a mismatch between training data and test data. During training, the
+network took inhx1;:::;xtias input to predict xt+1. In test time, however, most
+of the input ( x2;:::;xt) are what the model generated. And because the model is
+not perfect, the input distribution changes from the real distribution. And this drift
+from the training data distribution becomes worse because the error compounds
+over 100 steps.
+(g)(3 points) You want to use the gure below to explain the concept of early stopping
+to a friend. Fill-in the blanks. (1) and (2) describe the axes. (3) and (4) describe
+values on the vertical and horizontal axis. (5) and (6) describe the curves. Be precise.
+6CS230
+Solution:
+(1) Loss value (or error)
+(2) Number of iterations
+(3) Best validation loss value (or best validation error)
+(4) Optimal stopping point (or early stopping point)
+(5) Validation loss (or validation error)
+(6) Training loss (or training error)
+(h)(2 point) Look at the grayscale image at the top of the collection of images below.
+Deduce what type of convolutional lter was used to get each of the lower images.
+Explain briey and include the values of these lters. The lters have a shape of (3,3).
+7CS230
+Solution: Left image: Vertical edge detector. Filter: [[1,0,-1][1,0,-1][1,0,-1]] Right
+image: Horizontal edge detector. Filter: [[1,1,1][0,0,0][-1,-1,-1]]
+(i)(1 point) When the input is 2-dimensional, you can plot the decision boundary of your
+neural network and clearly see if there is overtting.
+How do you check overtting if the input is 10-dimensional?
+Solution: Compute cost function in the dev and training set. If there is a
+signicant dierence, then you have a variance problem.
+(j)(2 points) What is the advantage of using Inverted Dropout compared to its older
+version (\Normal" dropout)? Mention the dierence of implementation.
+Solution: Implementation dierence: Add line of code, a[L]==keepprobThe
+expected value of the activation doesn't decrease with this extra line of code, so
+the activations do not need to be rescaled at test time.
+(k)(1 point) Give a method to ght exploding gradient in fully-connected neural net-
+works.
+Solution: Gradient clipping.
+(l)(2 points) You are using an Adam optimizer. Show why the bias correction naturally
+disappears when the numbers of steps to compute the exponential moving averages
+gets large.
+Solution:Vt
+1 t!Vtwhent!1
+(m) Consider the two images below:
+(A) Image 1
+ (B) Image 2
+Figure 1: (A) Image 1 is a binary image. Each pixel has value 1 (white) or 0 (black). There's
+only a single channel. (B) Image 2 is a color image. Each pixel has value 0 (absence of that
+color) or 1 (presence of that color), but there are 3 color channels (RGB). The cross on the
+left is red, and the cross on the right is blue.
+You have access to an algorithm ( ?) that can eciently nd the position of the maxi-
+mum value in a matrix.
+8CS230
+(i)(2 points) You would like to detect the 3 3 cross in Image 1. Hand-engineer
+a lter to be convolved over Image 1. Given the output of this "convolved"
+operation, the algorithm ( ?) should give you the position of the cross.
+Solution:0
+BBB@ 1 1 1
+1 1 1
+ 1 1 11
+CCCAbias is anything really
+(ii)(2 points) You would like to detect the 3 3 red cross in Image 2 but not the
+blue cross. Hand-engineer a lter to be convolved over Image 2. Given the output
+of this "convolved" operation, the algorithm ( ?) should give you the position of
+the red cross.
+Solution:0
+BBB@1 1 1
+ 1 1 1
+1 1 11
+CCCAfor red channel and previous part's answer
+everywhere else
+9CS230
+Question 3 (Loss Functions, 17 points + 3 bonus points)
+Equipped with cutting-edge Deep Learning knowledge, you are working with a biology lab.
+Specically, you're asked to build a classier that predicts the animal type from a given
+image into four ( ny= 4) classes: dog, cat, iguana, mouse . There's always exactly one
+animal per image. You decide to use cross-entropy loss to train your network. Recall that
+the cross-entropy (CE) loss for a single example is dened as follows:
+LCE(^y;y) = nyP
+i=1yilog ^yi
+where ^y= (^y1;:::; ^yny)>represents the predicted probability distribution over the classes
+andy= (y1;:::;yny)>is the ground truth vector, which is zero everywhere except for the
+correct class (e.g. y= (1;0;0;0)>fordog, andy= (0;0;1;0)>foriguana ).
+(a)(2 points) Suppose you're given an example image of an iguana. If the model correctly
+predicts the resulting probability distribution as ^ y= (0:25;0:25;0:3;0:2)>, what is the
+value of the cross-entropy loss? You can give an answer in terms of logarithms.
+Solution: log 0:3
+(b)(2 points) After some training, the model now incorrectly predicts mouse with distri-
+butionh0:0;0:0;0:4;0:6ifor the same image. What is the new value of the cross-entropy
+loss for this example?
+Solution: log 0:4
+(c)(2 points) Suprisingly, the model achieves lower loss for a misprediction than for a
+correct prediction. Explain what implementation choices led to this phenomenon.
+Solution: This is because our objective is to minimize CE-loss, rather than to
+directly maximize accuracy. While CE-loss is a reasonable proxy to accuracy, there
+is no guarantee that a lower CE loss will lead to higher accuracy.
+(d)(2 points) Given your observation from question (c), you decide to train your neural
+network with the accuracy as the objective instead of the cross-entropy loss. Is this a
+good idea? Give one reason. Note that the accuracy of a model is dened as
+Accuracy =(Number of correctly-classied examples)
+(Total number of examples)
+10CS230
+Solution: It's dicult to directly optimize the accuracy because
+{it depends on the entire training data, making it impossible to use stochastic
+gradient descent.
+{the classication accuracy of a neural network is not dierentiable with respect
+to its parameters.
+(e)(3 points) After tuning the model architecture, you nd that softmax classier works
+well. Specically, the last layer of your network computes logits z= (z1;:::;zny)>,
+which are then fed into the softmax activation. The model achieves 100% accuracy
+on the training data. However, you observe that the training loss doesn't quite reach
+zero. Show why the cross-entropy loss can never be zero if you are using a softmax
+activation.
+Solution: Assume the correct class is cand letnyP
+i=1ezibe the normalization term
+for softmax. Then ^ y=*
+ez1
+nyP
+i=1ezi;:::;ezny
+nyP
+i=1ezi+
+.
+Then the CE-loss reduces to the following term:
+ log ^yc= logezc
+nyP
+i=1ezi= lognyP
+i=1ezi logezc
+And becausenyP
+i=1ezi6=ezc, the two terms are never equal and the loss will never
+reach zero, although it will get very close to zero at the end of training.
+(f)(2 points) The classier you trained worked well for a while, but its performance
+suddenly dropped. It turns out that the biology lab started producing chimeras (crea-
+tures that consist of body parts of dierent animals) by combining dierent animals
+together. Now each image can have multiple classes associated with them; for exam-
+ple, it could be a picture of a dog with mouse whiskers, cat ears and an iguana tail!
+Propose a way to label new images, where each example can simultaneously belong to
+multiple classes.
+Solution: Use multi-hot encoding, e.g. (1 ;0;0;1) would be dog and mouse.
+(g)(2 points) The lab asks you to build a new classier that will work on chimeras as well
+as normal animals. To avoid extra work, you decide to retrain a new model with the
+same architecture (softmax output activation with cross-entropy loss). Explain why
+this is problematic.
+11CS230
+Solution: This is problematic because softmax activation with CE-loss unfairly
+penalizes examples with many labels. In the extreme case, if the example belongs to
+allclasses and the model correctly predicts h1
+ny;:::;1
+nyi, then the CE-loss becomes
+ nyP
+i=1log ^yi=nylogny, which will be far bigger than the loss for most single-class
+examples.
+(h)(2 points) Propose a dierent activation function for the last layer and a loss function
+that are better suited for this multi-class labeling task.
+Solution: We can formulate this as nyindependent logistic regression tasks, each
+trying to predict whether the example belongs to the corresponding class or not.
+Then the loss can simply be the average of nylogistic losses over all classes.
+(i)(Bonus: 3 points extra credit) Prove the following lower bound on the cross-entropy
+loss for an example with Lcorrect classes:
+LCE(^y;y)LlogL
+Assume you are still using softmax activation with cross-entropy loss with ground truth
+vectory2f0;1gnywithLnonzero components.
+Solution: LetSdenote the set of classes the given example belongs to (note
+jSj=L. Then,
+LCE(^y;y) = nyX
+i2Slog ^yi
+= ( L)nyX
+i2S1
+Llog ^yi
+( L) log nyX
+i2S1
+L^yi!
+(by Jensen's Inequality)
+= ( L) log1
+L(softmax sums to 1)
+=LlogL
+12CS230
+Question 4 (Batch Norm, 15 points)
+In this question, you will explore the importance of good balance between positive and neg-
+ative labeled examples within a mini-batch, especially when your network includes batch
+normalization layers.
+Recall the batch normalization layer takes values z= (z(1);:::;z(m)) as input and computes
+znorm= (z(1)
+norm;:::;z(m)
+norm) according to:
+z(i)
+norm=z(i) p
+(2) +where=1
+mmX
+i=1z(i)(2) =1
+mmX
+i=1(z(i) )2
+It then applies a second transformation to get ez= (ez(1);:::;ez(m)) using learned parameters
+and:
+ez(i)=z(i)
+norm+
+(a)(1 point) Explain the purpose of in the expression for z(i)
+norm.
+Solution: It prevents division by 0 for features with variance 0.
+You want to use a neural network with batch normalization layers to build a classier that
+can distinguish a hot dog from not a hot dog. (For the rest of this question, assume = 0.)
+13CS230
+Figure 2: Hot Dog Network
+(b)(2 points) You forward propagate a batch of mexamples in your network. The input
+z= (z(1);:::;z(m)) of the batch normalization layer has shape ( nh= 3;m= 4), where
+nhrepresents the number of neurons in the pre-batchnorm layer:
+0
+BBB@12 14 14 12
+0 10 10 0
+ 5 5 5 51
+CCCA
+What isznorm? Express your answer as a matrix with shape (3, 4).
+14CS230
+Solution:
+0
+BBB@ 1 1 1 1
+ 1 1 1 1
+ 1 1 1 11
+CCCA
+(c)(2 points) Suppose= (1;1;1) and= (0; 10;10). What is ez? Express your
+answer as a matrix with shape (3, 4).
+Solution:
+0
+BBB@ 1 1 1 1
+ 11 9 9 11
+9 11 11 91
+CCCA
+(d)(2 points) Give 2 benets of using a batch normalization layer.
+Solution: We accept any of these: (i) accelerates learning by reducing covariate
+shift, decoupling dependence of layers, and/or allowing for higher learning rates/
+deeper networks, (ii) accelerates learning by normalizing contours of output dis-
+tribution to be more uniform across dimensions, (iii) Regularizes by using batch
+statistics as noisy estimates of the mean and variance for normalization (reducing
+likelihood of overtting), (iv) mitigates poor weights initialization and/or vari-
+ability in scale of weights, (v) mitigates vanishing/exploding gradient problems,
+(vi) constrains output of each layer to relevant regions of an activation function,
+and/or stabilizes optimization process, (vii) mitigates linear discrepancies between
+batches, (viii) improves expressiveness of the model by including additional learned
+parameters, and, producing improved loss.
+Partial credit was awarded to responses which cited multiple benets from the
+same category.
+Some responses that were intentionally not accepted: (i) symmetry-breaking, (ii)
+adds noise (without mentioning regularization), (iii) normalizes input distribution
+(without mentioning accelerated training), (iv) adds stability (without mentioning
+optimization process), (v) faster (without mentioning learning or training) (vi)
+reduces variance (without mentioning of what)
+(e)(2 points) Explain what would go wrong if the batch normalization layer only applied
+the rst transformation ( znorm).
+15CS230
+Solution: Normalizing each input of a layer may change what the layer can
+represent. For instance, normalizing the inputs of a sigmoid would constrain them
+to the linear regime of the nonlinearity. ezmakes sure that the transformation
+inserted in the network can represent the identity transform.
+Recall that during training time, the batch normalization layer uses the mini-batch statistics
+to estimate and (2). However, at test time, it uses the moving averages of the mean and
+variance tracked (but not used) during training time.
+(f)(2 points) Why is this approach preferred over using the mini-batch statistics during
+training andat test time?
+Solution: There were two correct answers:
+(1) Moving averages of the mean and variance produce a normalization that's more
+consistent with the transformation the network used to learn during training than
+the mini-batch statistics. You need to support variable batch sizes at test time,
+which includes small batch sizes (as small as a single example). The variabili-
+ty/noisiness between input images means batches with small batch sizes at test
+time will be less likely to have the same mini-batch statistics that produce the
+normalized activations trained on at training time. Using the moving averages of
+mean and variance as estimates of the population statistics addresses this issue.
+To receive full credit, these responses included three components: (i) Mini-batches
+might be small at test time. (ii) Smaller mini-batches mean the mini-batch statis-
+tics are more likely to dier from the mini-batch statistics used at training. (iii)
+Moving averages are better estimates.
+(2) Moving averages of the mean and variance produce a consistent normalization
+for an example, that's independent of the other examples in the batch.
+To receive full credit, these responses included three components: (i) An single
+example might be part of dierent batches at test time. (ii) That example should
+receive the same prediction at test time, independent of the other examples in its
+batch. (iii) Mini-batch statistics vary per batch but moving averages do not.
+Suppose you have the following dataset:
+Description Number of images Example of an image
+Photos of hot dogs 100k
+Photos of not hot dogs 100k
+16CS230
+You make the mistake of constructing each mini-batch entirely out of one of the two groups
+of data, instead of mixing both groups into each mini-batch. As a result, even though your
+training loss is low, when you start using the trained model at test time in your new mobile
+app, it performs very poorly.
+(g)(4 points) Explain why inclusion of the batch normalization layer causes a discrepancy
+between training error and testing error when mini-batches are constructed with poor
+mixing. Hint: Consider the example values given in Figure 2. What are the moving-
+averages over the two batches depicted and how do they compare to the batch statistics?
+Solution: First, consider the distributions for the mini-batch statistics and
+over the mini-batches used during training. If batches were constructed IID,
+both of the distributions would be normal centered on the population statistic (for
+which the moving averages are accurate estimates). However, since the batches
+were constructed as described, both the distributions would be compositions of
+two normal distributions (i.e. bimodal)|one per group of data.
+During training, batches on average get normalized according to a statistic drawn
+from each of the distributions; however, at test time, batches get normalized ac-
+cording to the mean of both of the distributions, which never occurred during
+training. The following gure demonstrates this point in one dimension.
+This eect is observable given the values in Figure 2. Consider the mini-batch
+meansfor the hot dogs (13 ;5;0) and not hot dogs (  13; 5;0). During training,
+a hot dog will be normalized according to these (and similar) statistics to produce
+normalized values similar to the ones calculated in part (b). Now consider the
+moving means for the training set. Activations from hot dogs and not hot dogs are
+all grouped together into a single moving statistic (0 ;0;0). At test time, normaliz-
+ing with this statistic will produced normalized values very dierent from the ones
+calculated in part (b), which were unseen during training; therefore, the testing
+error is much higher than the training error.
+The same argument applies to the mini-batch variances.
+17CS230
+Rubric +1 for mentioning the moving averages are dierent from the mini-batch
+statistics. +1 for describing how the moving averages are dierent from the mini-
+batch statistics (as in the gure above or using the example numbers provided).
++1 for describing this is caused by the way we constructed the mini-batches. +1
+for describing how this causes a disparity in training/testing.
+18CS230
+Question 5 (Numpy coding, 10 points)
+In this question, you will implement a fully-connected network. The architecture is LINEAR
+!RELU!DROPOUT!BATCHNORM . This is a dummy architecture that has been
+made up for this exercise.
+The code below implements the forward propagation, but some parts are missing. You will
+need to ll the parts between the tags (START CODE HERE) and (END CODE HERE)
+based on the given instructions . Note that we are using only numpy (not tensorow),
+and the relu function has been imported for you.
+import numpy as np
+from utils import relu
+def forward_propagation_with_dropout_and_batch_norm(X, parameters, keep_prob = 0.5):
+"""
+Implements the forward propagation: LINEAR -> RELU -> DROPOUT -> BATCHNORM.
+Arguments:
+X -- input data of shape (n_x, m)
+parameters -- python dictionary containing your parameters:
+W -- weight matrix of shape (n_y, n_x)
+b -- bias vector of shape (n_y, 1)
+keep_prob -- probability of keeping a neuron active during drop-out, scalar
+gamma -- shifting parameter of the batch normalization layer, scalar
+beta -- scaling parameter of the batch normalization layer, scalar
+epsilon -- stability parameter of the batch normalization layer, scalar
+Returns:
+A2 -- output of the forward propagation
+cache -- tuple, information stored for computing the backward propagation
+"""
+# retrieve parameters
+W = parameters["W"]
+b = parameters["b"]
+gamma = parameters["gamma"]
+beta = parameters["beta"]
+epsilon = parameters["epsilon"]
+### START CODE HERE ###
+# LINEAR
+Z1 =
+# RELU
+A1 =
+19CS230
+# DROPOUT
+# Step 1: initialize matrix D1 = np.random.rand(..., ...)
+D1 =
+# Step 2: convert entries of D1 to 0 or 1 (using keep_prob as the threshold)
+D1 =
+# Step 3: shut down some neurons of A1
+A1 =
+# Step 4: scale the value of neurons that havent been shut down
+A1 =
+# BATCHNORM
+# Step 1: compute the vector of means; you can use np.mean(..., axis=...)
+mu =
+# Step 2: compute the vector of variances; you can use np.var(..., axis=...)
+var =
+# Step 3: normalize the activations (dont forget about stability)
+A1_norm =
+# Step 4: scale and shift
+A2 =
+### END CODE HERE ###
+cache = (Z1, D1, A1, W, b, A1_norm, mu, var, gamma, beta, epsilon)
+return A2, cache
+Solution:
+import numpy as np
+from utils import relu
+def forward_propagation_with_dropout_and_batch_norm(X, parameters, keep_prob = 0.5):
+"""
+Implements the forward propagation: LINEAR -> RELU -> DROPOUT -> BATCHNORM.
+Arguments:
+X -- input data of shape (n_x, m)
+parameters -- python dictionary containing your parameters:
+W -- weight matrix of shape (n_y, n_x)
+b -- bias vector of shape (n_y, 1)
+keep_prob -- probability of keeping a neuron active during drop-out, scalar
+gamma -- shifting parameter of the batch normalization layer, scalar
+beta -- scaling parameter of the batch normalization layer, scalar
+20CS230
+epsilon -- stability parameter of the batch normalization layer, scalar
+Returns:
+A2 -- output of the forward propagation
+cache -- tuple, information stored for computing the backward propagation
+"""
+# retrieve parameters
+W = parameters["W"]
+b = parameters["b"]
+keep_prob = parameters["W2"]
+gamma = parameters["gamma"]
+beta = parameters["beta"]
+epsilon = parameters["epsilon"]
+### START CODE HERE ###
+# LINEAR
+Z1 = np.dot(W, X) + b
+# RELU
+A1 = relu(Z1)
+# DROPOUT
+# Step 1: initialize matrix D1 = np.random.rand(..., ...)
+D1 = np.random.rand(A1.shape[0], A1.shape[1])
+# Step 2: convert entries of D1 to 0 or 1 (using keep_prob as the threshold)
+D1 = D1 <= keep_prob
+# Step 3: shut down some neurons of A1
+A1 = D1 * A1
+# Step 4: scale the value of neurons that havent been shut down
+A1 = A1 / keep_prob
+# BATCHNORM
+# Step 1: compute the vector of means
+mu = np.mean(A1, axis=1)
+# Step 2: compute the vector of variances
+var = np.var(A1, axis=1)
+# Step 3: normalize the activations (dont forget about stability)
+A1_norm = (A1 - mu) / np.sqrt(var + epsilon)
+# Step 4: scale and shift
+A2 = gamma * A1_norm + beta
+### END CODE HERE ###
+cache = (Z1, D1, A1, W, b, A1_norm, mu, var, gamma, beta, epsilon)
+21CS230
+return A2, cache
+22CS230
+Question 6 ("Who let the cars in?", 4 points)
+You have just moved into your new holiday mansion Mar-a-Yolo and would like to build
+a car detection model to use at your front gate. You have a database D=fx1;:::;xNgof
+theNcars allowed to enter your mansion. A training example for your network is a pair
+of images (x(1);x(2)) wherex(1)andx(2)are dierent images of the same car. You forward
+propagate ( x(1);x(2)) through your network to get encodings ( e(1);e(2)).
+Using these encodings, you compute the loss (distance between encodings):
+L=jje(1) e(2)jj2(1)
+Figure 3: Car detection model
+You've chosen your loss such that pictures of the same car have similar encodings. You hope
+that your network learned to output meaningful encodings to identify cars.
+(a)(2 points) You pick a pair of (dierent) unseen images of the same car and compute
+the lossL. The loss is extremely low, but your model performs poorly when deployed.
+What could be a possible problem with your approach?
+Solution: Using pairs causes all encodings to be clustered tightly in the em-
+bedding space. Cannot dierentiate between dierent objects. Having the same
+encoding for all objects gives minimum MSE.
+You decide to implement the triplet training scheme, as used in class for face recognition
+and retrain your network using this scheme.
+23CS230
+(b)(2 points) Explain how you would you use this newly trained network to decide
+whether a car in front of your mansion should be allowed to enter.
+Solution: Encode all examples in the database Dusing the newly trained net-
+work. Encode the image of the car waiting in front of the mansion. Use the Nearest
+Neighbors algorithm with a thresholding to decide if this car is in the database or
+not.
+24CS230
+Question 7 (X-Network, 23 points)
+An X-neuron, as opposed to a neuron, takes vectors as input, and outputs vectors. There
+are three stages in the forward propagation for an X-neuron.
+Figure 4: (a[l 1]
+1;a[l 1]
+2;a[l 1]
+3) are vector outputs of the previous layer's X-neurons (assuming
+there are only 3 X-neurons in the previous layer). The forward propagation in an X-neuron
+is split into 3 stages. a[l]
+1is the vector output of layer l's X-neuron.
+Stage 1 is the linear transformation. For a given X-neuron jwith inputs from X-neurons in
+the previous layer indexed with i:
+ea[l]
+ji=W[l]
+jia[l 1]
+i
+Stage 2 is the linear combination of the outputs of stage 1.
+s[l]
+j=3X
+i=1c[l]
+jiea[l]
+ji
+Stage 3 is the non-linear sigmoid activation of the X-neuron. It is applied element-wise to
+its input vector s[l]
+j.
+a[l]
+j=(s[l]
+j)
+Note that with the above scheme, every X-neuron of a layer is connected to every X-neuron
+of the previous layer, just like in classic fully-connected networks. The dierence is that each
+X-neuron outputs a vector.
+25CS230
+Consider the following 3-layer X-network, made of X-neurons exclusively.
+Figure 5: The input is a vector xof shape (nx;1), which is duplicated and given to every
+X-neuron of the rst layer. The X-network consists of three layers in which layer 1 has
+n[1]X-neurons, layer 2 has n[2]X-neurons, and layer 3 has a single X-neuron. Although for
+simplicity we did not draw all arrows, every layer is fully-connected to the next one.
+(a) Given that all X-neurons in your network output a vector of shape ( D;1):
+(i)(2 points) What is the dimension of W[2]
+ji, for a single X-neuron in layer 2 of your
+X-network?
+Solution: DD
+(ii)(2 points) What is the dimension of W[1]
+ji, for a single X-neuron in layer 1 of your
+network?
+Solution: Dnx
+(b)(2 points) For thejthX-neuron of the 2ndlayer, how many weights ( c[l]
+ij) does it have
+in its stage 2?
+26CS230
+Solution: n[1]orn[l 1]bothacceptable
+(c) Consider the Stage 2 computation of the jthX-neuron in layer 2:
+(i)(2 points) How would you vectorize this sum as a matrix product?
+Solution: Stack all ^ujjiin matrix that is Dn[1]multiply with vector c[2]
+i
+which isn[1]1
+(ii)(1 point) What is the dimension of the output of stage 2 of the jthX-neuron?
+Solution: D1.
+(d) The loss function Lis a scalar that has been calculated from the output a[3]
+1from the
+nal layer's X-neuron. You are given the derivative@L
+@a[2]
+1.
+(i)(2 points) What is the dimension of this gradient?
+Solution: Dimension (D, 1)
+(ii)(3 points) Given this derivative, write the derivative@L
+@s[2]
+1in terms of@L
+@a[2]
+1and
+a[2]
+1?
+Solution:@L
+@a[2]
+1Ja[2]
+1J(1 a[2]
+1)
+(e)(3 points) Using the derivative calculated in question (d), write down the gradient
+@L
+@W[2]
+1i.
+Solution: c1i
+@L
+@a[2]
+1J(1 a[2]
+1)Ja[2]
+1)
+a[1]T
+i
+You decide to use your X-network to predict if an image contains a falafel or not. The falafel
+is a type of food, and this is a binary classication application.
+Given an image, you run it through your X-network, and use the output activation a[3]
+1to
+make a prediction. You do this by using the L2 norm of the output as a measure of probabil-
+ity of the presence of a falafel. You dene the loss function for one training example as follows:
+L=ymax(0;m+ jja[3]
+1jj)2+(1 y) max(0;jja[3]
+1jj m )2
+You have set = 1,m = 0:1 andm+= 0:9 (they are hyperparameters). Here, yis the
+label which tells you whether the image truly has a falafel ( y= 1) or not ( y= 0).
+27CS230
+(f)(2 point) Draw the graph of Lagainstjja[3]
+1jjassuming the picture contains a falafel.
+Solution:
+(g) Recall that your output activation is sigmoid, and the output of every X-neuron is of
+dimension D. Considering an image that is nota falafel:
+(i)(2 points) What is the maximum value the loss can have?
+Solution:p
+D 0:12
+(ii)(2 points) What is the minimum value of the loss and when is this minimum
+reached?
+Solution: minimum is reached when jja[3]
+1jjis less than 0.1. Value is 0.
+28CS230
+Question 8 (Practical case study: Online advertising, 11 points)
+Learning and predicting user response plays a crucial role in online advertising.
+(a)(2 points) Let's say you have a website with a lot of trac. You would like to build
+a network that computes the probability of a user clicking on a given advertisement
+on your website. This is a supervised learning setting. What dataset do you need to
+train such a network?
+Solution: Pairs (~ x;y) such that:
+{~ x: Features of the user + advertisement
+{y: Binary label (0/1)
+(b)(2 points) Choose an appropriate cost function for the problem and give the formula
+of the cost.
+Solution: Pm
+i=1(yilog(^yi) + (1 yi)log(1 ^yi)) Summation over all training
+examples.
+(c)(2 points) Your website sells sport footwear and you have already collected a dataset
+of 1 million examples from past visits. Your friend, who works in the high fashion
+industry, oers to let you use their dataset as it has similar descriptors. However, you
+are concerned about the impact of this dierent distribution dataset in the performance
+of your predictive system. Explain how you would use your friend's dataset.
+Solution: Training set. Reasons include:
+{Neural networks are very data intensive. Therefore, opportunities to increase
+the dataset should not be missed.
+{The new data in the training set could help the neural network to learn better
+lower level features (as you have more data)
+{Using the new data in the dev/test set would change the goal/target of the
+optimization process. Thus, the optimized system would not perform well
+with real world data.
+(d)(1 point) How would you assess the impact of the new dataset?
+Solution: Split the training set in a new training set + train-dev set (made
+exclusively of old training examples). Measure the dierence of accuracy between
+the new training set and train-dev set. If there is a signicant dierence, then the
+distribution mismatch between the old and new images is a problem.
+29CS230
+(e)(2 points) Initially, you decide to build a fully connected neural network for the
+problem. This baseline model would have Lhidden layers, one input layer and an
+output layer. The number of neurons in the lthlayer isn[l]. Write down the number
+of parameters of this model as a function of Landn[l]forl= 0:::L.
+Note: The input layer is considered to be layer number 0
+Solution:PL
+i=0(n[l+1]n[l]+n[l+1]) =PL
+i=0(n[l+1](n[l]+ 1))
+(f)(2 points) Based on the information provided in the graph below, what type of prob-
+lem will you encounter as the number of hidden layer approaches 10? Mention possible
+solutions to this problem.
+Solution: Overtting problem. Possible solutions are:
+{Regularization: Parameter norm penalties (L2/L1), Dropout.
+{Reduce complexity of the neural network (decrease number of neurons and
+hidden layers)
+{Increase the training dataset. Data Augmentation/GANs
+30CS230
+Extra Page 1/3
+31CS230
+Extra Page 2/3
+32CS230
+Extra Page 3/3
+33CS230
+END OF PAPER
+34CS230: Deep Learning
+Fall Quarter 2018
+Stanford University
+Midterm Examination
+180 minutes
+Problem Full Points Your Score
+1 Multiple Choice Questions 10
+2 Short Answer Questions 35
+3 Attacks on Neural Networks 15
+4 Autonomous Driving Case Study 27
+5Traversability Estimation Using GANs 14
+6 LogSumExp 16
+Total 117
+The exam contains 25 pages including this cover page.
+•This exam is closed book i.e. no laptops, notes, textbooks, etc. during the
+exam . However, you may use one A4 sheet (front and back) of notes as reference.
+•In all cases, and especially if you're stuck or unsure of your answers, explain your
+work, including showing your calculations and derivations! We'll give partial
+credit for good explanations of what you were trying to do.
+Name:
+SUNETID: @stanford.edu
+The Stanford University Honor Code:
+I attest that I have not given or received aid in this examination, and that I have done my
+share and taken an active part in seeing to it that others as well as myself uphold the spirit
+and letter of the Honor Code.
+Signature:
+1CS230
+Question 1 (Multiple Choice Questions, 10 points)
+For each of the following questions, circle the letter of your choice. There is only ONE correct
+choice unless explicitly mentioned. No explanation is required. There is no penalty for a
+wrong answer.
+(a)(1 point) Which of the following techniques does NOT prevent a model from overt-
+ting?
+(i) Data augmentation
+(ii) Dropout
+(iii) Early stopping
+(iv) None of the above
+Solution: (iv)
+(b)(3 points) Consider the following data sets:
+•Xtrain= (x(1);x(2);:::;x(mtrain));Ytrain= (y(1);y(2);:::;y(mtrain))
+•Xtest= (x(1);x(2);:::;x(mtest));Ytest= (y(1);y(2);:::;y(mtest))
+You want to normalize your data before training your model. Which of the following
+propositions are true? (Circle all that apply.)
+(i) The normalizing mean and variance computed on the training set, and used to
+train the model, should be used to normalize test data.
+(ii) Test data should be normalized with its own mean and variance before being fed
+to the network at test time because the test distribution might be dierent from
+the train distribution.
+(iii) Normalizing the input impacts the landscape of the loss function.
+(iv) In imaging, just like for structured data, normalization consists in subtracting the
+mean from the input and multiplying the result by the standard deviation.
+Solution: (i) and (iii)
+2CS230
+(c)(2 points) Which of the following is true, given the optimal learning rate?
+(i) Batch gradient descent is always guaranteed to converge to the global optimum
+of a loss function.
+(ii) Stochastic gradient descent is always guaranteed to converge to the global opti-
+mum of a loss function.
+(iii) For convex loss functions (i.e. with a bowl shape), batch gradient descent is
+guaranteed to eventually converge to the global optimum while stochastic gradient
+descent is not.
+(iv) For convex loss functions (i.e. with a bowl shape), stochastic gradient descent
+is guaranteed to eventually converge to the global optimum while batch gradient
+descent is not.
+(v) For convex loss functions (i.e. with a bowl shape), both stochastic gradient descent
+and batch gradient descent will eventually converge to the global optimum.
+(vi) For convex loss functions (i.e. with a bowl shape), neither stochastic gradient
+descent nor batch gradient descent are guaranteed to converge to the global opti-
+mum.
+Solution: (iii)
+(d)(1 point) You design the following 2-layer fully connected neural network.
+All activations are sigmoids and your optimizer is stochastic gradient descent. You
+initialize all the weights and biases to zero and forward propagate an input x2Rn1
+in the network. What is the output ^ y?
+(i) -1
+(ii) 0
+(iii) 0.5
+(iv) 1
+3CS230
+Solution: (iii)
+(e)(1 point) Consider the model dened in question (d) with parameters initialized with
+zeros.W[1]denotes the weight matrix of the rst layer. You forward propagate a batch
+of examples, and then backpropagate the gradients and update the parameters. Which
+of the following statements is true?
+(i) Entries of W[1]may be positive or negative
+(ii) Entries of W[1]are all negative
+(iii) Entries of W[1]are all positive
+(iv) Entries of W[1]are all zeros
+Solution: (i)
+(f)(2 points) Consider the layers landl 1 in a fully connected neural network:
+The forward propagation equations for these layers are:
+z[l 1]=W[l 1]a[l 2]+b[l 1]
+a[l 1]=g[l 1](z[l 1])
+z[l]=W[l]a[l 1]+b[l]
+a[l]=g[l](z[l])
+Which of the following propositions is true? Xavier initialization ensures that :
+(i)Var(W[l 1]) is the same as Var(W[l]).
+(ii)Var(b[l]) is the same as Var(b[l 1]).
+(iii)Var(a[l]) is the same as Var(a[l 1]), at the end of training.
+(iv)Var(a[l]) is the same as Var(a[l 1]), at the beginning of training.
+Solution: (iv)
+4CS230
+Question 2 (Short Answer Questions, 35 points)
+Please write concise answers.
+(a)(2 points) You are training a logistic regression model. You initialize the parameters
+with 0's. Is this a good idea? Explain your answer.
+Solution: There is no symmetry problem with this approach. In logistic regres-
+sion, we have a=Wx+bwhereais a scalar and Wandxare both vectors. The
+derivative of the binary cross entropy loss with respect to a single dimension in the
+weight vector W[i] is a function of x[i], which is in general dierent than x[j] when
+i6=j.
+(b)(2 points) You design a fully connected neural network architecture where all acti-
+vations are sigmoids. You initialize the weights with large positive numbers. Is this a
+good idea? Explain your answer.
+Solution: LargeWcausesWxto be large. When Wxis large, the gradient
+is small for sigmoid activation function. Hence, we will encounter the vanishing
+gradient problem.
+(c)(2 points) You are given a dataset of 10 10 grayscale images. Your goal is to build
+a 5-class classier. You have to adopt one of the following two options:
+•the input is attened into a 100-dimensional vector, followed by a fully-connected
+layer with 5 neurons
+•the input is directly given to a convolutional layer with ve 10 10 lters
+Explain which one you would choose and why.
+Solution: The 2 approaches are the same. But the second one seems better in
+terms of computational costs (no need to atten the input). We accept the answer
+"the 2 approaches are the same".
+5CS230
+(d)(2 points) You are doing full batch gradient descent using the entire training set (not
+stochastic gradient descent). Is it necessary to shue the training data? Explain your
+answer.
+Solution: It is not necessary. Each iteration of full batch gradient descent runs
+through the entire dataset and therefore order of the dataset does not matter.
+(e)(2 points) You would like to train a dog/cat image classier using mini-batch gradient
+descent. You have already split your dataset into train, dev and test sets. The classes
+are balanced. You realize that within the training set, the images are ordered in such a
+way that all the dog images come rst and all the cat images come after. A friend tells
+you: "you absolutely need to shue your training set before the training procedure."
+Is your friend right? Explain.
+Solution: Yes, there is a problem. The optimization is much harder with mini-
+batch gradient descent because the loss function moves by a lot when going from
+the one type of image to another.
+(f)(2 points) You want to evaluate the classier you trained in (e). Your test set
+(Xtest;Ytest) is such that the rst m1images are of dogs, and the remaining images
+are of cats. After shuing XtestandYtest, you evaluate your model on it to obtain a
+classication accuracy a1%. You also evaluate your model on XtestandYtestwithout
+shuing to obtain accuracy a2%. What is the relationship between a1anda2(>,<,
+=,,)? Explain.
+Solution: a1=a2When evaluating on the test set, the only form of calculation
+that you do is a single metric (e.g. accuracy) on the entire test set. The calculation
+of this metric on the entire test set does not depend on the ordering.
+6CS230
+(g)(2 points) Data augmentation is often used to increase the amount of data you have.
+Should you apply data augmentation to the test set? Explain why.
+Solution: Both answers are okay but need to be justied. If no, then explain
+that we want to test on real data only. If yes, then explain in which situation doing
+data augmentation on test set might make sense (e.g. as an ensemble approach in
+image classiers).
+(h)(2 points) Weight sharing allows CNNs to deal with image data without using too
+many parameters. Does weight sharing increase the bias or the variance of a model?
+Solution: Increases bias.
+(i)(2 points) You'd like to train a fully-connected neural network with 5 hidden layers,
+each with 10 hidden units. The input is 20-dimensional and the output is a scalar.
+What is the total number of trainable parameters in your network?
+Solution: (20+1)*10 + (10+1)*10*4 + (10+1)*1
+(j)(3 points) Consider the gure below:
+Figure 1: Input of shape ( nH;nW;nC) = (10;10;1); There are ve 4 4 convolutional lters
+with 'valid' padding and a stride of (2 ;2)
+What is the output shape after performing the convolution step in Figure 1? Write
+your answer in the following format: ( nH,nW,nc).
+Solution: (h=4,w=4,c=5)
+(k)(2 points) Recall that (z) =1
+1+e zandtanh(z) =ez e z
+ez+e z. Calculate@(z)
+@zin terms
+of(z) and@tanh (z)
+@zin terms of tanh(z).
+Solution: Gradient for sigmoid: (z)(1 (z))
+Gradient for tanh: 1  tanh2(z)
+7CS230
+(l)(2 points) Assume that before training your neural network the setting is:
+(1) The data is zero centered.
+(2) All weights are initialized independently with mean 0 and variance 0.001.
+(3) The biases are all initialized to 0.
+(4) Learning rate is small and cannot be tuned.
+Using the result from (k), explain which activation function between tanh andsigmoid
+is likely to lead to a higher gradient during the rst update.
+Solution: tanh. During initialization, expected value of zis 0.
+Derivative of w.r.t.zevaluated at zero = 0 :50:5 = 0:25.
+Derivative of tanh w.r.t.zevaluated at zero = 1.
+tanh has higher gradient magnitude close to zero.
+(m) You want to build a 10-class neural network classier, Given a cat image, you want to
+classify which of the 10 cat breeds it belongs to.
+(i)(2 points) What loss function do you use? Introduce the appropriate notation
+and write down the formula of the loss function.
+Solution: You would want to use the cross entropy loss given by L=
+ Pn
+i=1yilog(^yi)
+(ii)(2 points) Assuming you train your network using mini-batch gradient descent
+with a batch size of 64, what cost function do you use? Introduce the appropriate
+notation and write down the formula of the cost function.
+Solution: If there are m training examples, J=1
+mPm
+i=1L(i)
+(iii)(3 points) One of your friends has trained a cat vs. non-cat classier. It performs
+very well and you want to use transfer learning to build your own model. Explain
+what additional hyperparameters (due to the transfer learning) you will need to
+tune.
+Solution: The parameters you would need to choose are: 1) How many
+layers of the original network to keep. 2) How many new layers to introduce
+3) How many of the layers of the original network would you want to keep
+frozen while ne tuning.
+8CS230
+(n)(3 points) A binary classication problem could be solved with the two approaches
+described below:
+Approach 1: Simple Logistic Regression (one neuron)
+Your output will be ^ y=(Wlx+bl)
+Classify as 0 if ^ y0:5 and 1 otherwise.
+Approach 2: simple softmax regression (two neurons)
+Your output will be ^ y=softmax (Wsx+bs) = [^y1;^y2]T
+Classify as 0 if ^ y1^y2and 1 otherwise.
+Approach 2 involves twice as many parameters as approach 1. Can approach 2 learn
+more complex models than approach 1?
+If yes, give the parameters ( Ws;bs) of a function that can be modeled by approach 2
+but not by approach 1. If no, show that ( Ws;bs) can always be written in terms of
+(Wl;bl).
+Solution: No. For approach 1, the classier is (w1x+b1)0:5 which is equiv-
+alent tow1x+b10.
+Now, for approach 2, dene w1
+2as the weights for the rst output and w2
+2as the
+weights for the second output. Similarly, dene b1
+2as the bias for the rst output
+andb2
+2as the bias for the second output.
+For approach 2, the classier isexp(w1
+2x+b1
+2)
+exp(w1
+2x+b1
+2)+exp(w2
+2x+b2
+2)exp(w2
+2x+b2
+2)
+exp(w1
+2x+b1
+2)+exp(w2
+2x+b2
+2).
+Since the denominator is positive and same on both sides, this is equivalent to
+exp(w1
+2x+b1
+2)exp(w2
+2x+b2
+2).
+Sinceexpis a monotonic increasing function, this is equivalent to w1
+2x+b1
+2
+w2
+2x+b2
+2.
+This is equivalent to ( w1
+2 w2
+2)x+ (b1
+2 b2
+2)0.
+Given anyw2andb2in approach 2, we can get the exact same model by setting
+w1=w1
+2 w2
+2andb1=b1
+2 b2
+2in approach 1.
+Alternatively, one can argue based on degrees of freedom.
+Note that in this case, we are asking about model complexity, which is independent
+of loss function.
+9CS230
+Question 3 (Attacks on Neural Networks, 15 points)
+Alice and Bob are deep learning engineers working at two rival start-ups. They are both
+trying to deliver the same neural network-based product.
+Alice and Bob do not have access to each other's models and code. However they can query
+each other's models as much as they'd like.
+(a)(2 points) Name a type of neural network attack that Alice cannot use against Bob's
+model, and explain why it cannot be used in this case.
+Solution: White-box attacks
+White box attacks require access to the weights of the model whereas black box
+attacks do not.
+(b)(3 points) How can Alice forge an image xiguana which looks like an iguana but will be
+wrongly classied as a plant by Bob's model? Give an iterative method and explicitly
+mention the loss function.
+Solution: L=jj^y yiguanajj+jjx xplantjj
+(c)(3 points) It is possible to add an invisible perturbation to an image x, such that
+~x=x+is misclassied by a model. Assuming you have access to the target model,
+explain how you would nd .
+Solution: can be chosen using a method such as the Fast Gradient Sign Based
+Method. It is an iterative method that requires access to the model (a white-box
+attack)
+(d)(2 points) Given that you have obtained , you notice that jj<<1. Explain why
+even though the adversarial noise has a small magnitude, it can cause a large change
+in the output of a model.
+Solution: Since the dimensionality of the images is very large, even though the
+noise is small, it can cause a large swing in the output. To illustrate consider
+~x=x+. While passing this through a single layer, W~x=Wx+W=P
+jWijj.
+Ifj, is very large, this can have a signicant contribution.
+(e)(3 points) Alice doesn't have access to Bob's network. How can she still generate an
+adversarial example using the method described above?
+10CS230
+Solution: Adversarial examples are transferable, and so Alice can use Fast
+Gradient Sign Based Method on a dierent model, built for the same task (cat vs.
+non-cat classication), and it is likely that this adversarial example will also be
+misclassied by Bob's model.
+(f)(2 points) To defend himself against Alice's attacks, Bob is thinking of using dropout.
+Dropout randomly shuts down certain neurons of the network, and makes it more
+robust to changes in the input. Thus, Bob has the intuition that the network will be
+less vulnerable to adversarial examples. Is Bob correct? Explain why or why not.
+Solution: No, dropout isn't used at test time while Alice will forge her adversarial
+examples by querying a network at test time.
+11CS230
+Question 4 (Autonomous driving case study, 27 points)
+As the CEO of an autonomous driving company Potato Inc., you are trying to build a
+pipeline to predict a car's steering angle 2[ 1;1] from an input image.
+(a) After setting up a camera on the hood of your car, an expert driver in your team has
+collected the dataset Xin a city where most roads are straight. She always drives in
+the center of the lane.
+(i)(2 points) Describe two problems that can occur if you train a model on Xand
+test it on real-world data.
+Solution: System hasn't seen situations where you're not driving sensibly,
+or away from the centre of the lane. This can lead to an accumulation of
+errors if your model output slightly diers from the correct output at a given
+time step. Also, a majority of outputs from the steering will be 0, if the driver
+was always in the center of the lane, and most of the roads were straight.
+(ii)(3 points) Without collecting new data, how can you help your model gener-
+alize to real world data? Describe the details of how you would implement the
+approach.
+Solution: Data augmentation. Slight left and right translations of the
+images, with a corresponding change in steering angle. For example, if you
+translate an image to the right, add some small quantity to the steering
+angle (if positive implies steering to the left), so that you're now steering to
+the left.
+(b)(2 points) Give two reasons why you wouldn't use an end-to-end model to predict
+the steering direction ( ) from the input image.
+Solution: 1 - If there's not enough data. 2 - If it is easier to collect data for
+submodules than end-to-end data. For instance, collecting high variance data while
+driving a car around with a camera on the hood is costly. Finding images with
+cars/pedestrians and labelling with bounding boxes might be easier, and helps
+train "car detector" and "pedestrian detector" submodules.
+12CS230
+(c) You nally design the following pipeline:
+Figure 2: The input camera image is given to two modules: the Car Detector Cand the
+Pedestrian Detector P.Coutputs a set of bounding boxes localizing the cars. Poutputs a set
+of bounding boxes localizing the pedestrians. The bounding boxes are then given to a Path
+PlannerSwhich outputs the steering angle. Assume all these submodules are supervised
+learning algorithms.
+(i)(3 points) What data do you need to train the submodules in the pipeline pre-
+sented in Figure 2?
+Solution:
+•To train the Car Detector, we need to collect Xc(images from a camera
+hood of a car) and Yc(bounding box labels localizing the cars.)
+•To train the Pedestrian Detector, we need to collect Xp(images from a
+camera hood of a car) and Yp(bounding box labels localizing the pedes-
+trians.)
+•To train the Path planner, we need to collect Xs(bounding boxes local-
+izing the cars and the pedestrians) and Ys(steering angle.)
+(ii)(3 points) Explain how you would collect this data.
+Solution:
+•(Xc;Yc) : Put a camera on the hood of a car, label the bounding boxes
+by hand. You can also download images from roads online or use online
+datasets such as COCO or PASCAL VOC.
+•(Xp;Yp) : Put a camera on the hood of a car, label the bounding boxes
+by hand. You can also download images from roads online or use online
+datasets such as COCO or PASCAL VOC.
+•(Xs;Ys) : Put a camera on the hood of a car, label the bounding boxes by
+13CS230
+hand. Track the steering angle using a sensor in the car. Note that the
+most challenging to train seems to be the path planner. You collect images
+of roads with and without cars and pedestrians. Each image should be
+labelled with bounding boxes around cars and pedestrians, and indicate
+the true steering angle.
+You can thus set-up a camera on the hood of your car and a sensor
+capturing the steering angle. Drive it in various environment, track the
+live variations in steering angle mapped to the camera's video stream.
+Finally, label the video frames with bounding boxes around pedestrians
+and cars.
+To boost the performance of your car detector and pedestrian detector,
+you can also add images from other sources such as PASCAL VOC and
+COCO which have bounding box labels.
+(d)(2 points) Propose a metric to measure the performance of your pipeline model.
+Solution:
+•Sum of absolute deviations (i.e. L1 distance) between ground truth and pre-
+dicted steering angle.
+•Sum of squared errors (i.e. L2 distance) between ground truth and predicted
+steering angle.
+•(not expected) You can also design metrics for submodules. For CandPit
+might be mAP (/mean IoU)
+(e) Assume that you have designed a metric that scores your pipeline between 0% (bad)
+and 100% (good.) On unseen data from the real world, your entire pipeline gets a score
+of 54%.
+(i)(2 points) Dene Bayes error and human level error. How do these two compare
+with each other? ( ,, =)
+Solution: Bayes error is a lower bound on the minimum error that can be
+achieved. Human level error is the error achieved by an expert human on the
+same task. The Bayes error is human level error.
+(ii)(2 points) How would you measure human level error for your autonomous driv-
+ing task?
+Solution: Possible solution: Create a simulator with the same path followed
+by the car while recording data, and have an expert try following the path.
+14CS230
+Calculate the error between the original path and the expert's new path to
+get an estimate of human level error on this task.
+(iii)(3 points) Human level performance is 96% for your task. Your pipeline should
+do a lot better! Assuming one component (among C,PandS) is failing, explain
+how you would identify which one it is.
+Solution: Replace every component in turn with the ground truth. For
+example if you are testing whether Cis failing, supply Swith ground truth
+bounding boxes of all the cars, and see if performance of the overall pipeline
+increases. If it increases signicantly, it is likely that the failing component is
+C.
+(iv)(3 points) You have identied that the failing component is P.Pfails at de-
+tecting pedestrians in 3 distinct settings: at night, when it is snowing, and when
+it is raining. You cannot solve the 3 problems at once. How would you decide
+which of the 3 problems to focus on rst?
+Solution: Do an error analysis. Ascertain how much of your error is due
+to each of the three cases, by using images only from these cases. Then focus
+on the case which contributes the most to your error. You could also choose
+to based your choice in practical situations. If Potato Inc. is in a place which
+has high rainfall, you might want to focus on the errors made on images with
+rain.
+(f)(2 points) After xing the only failing component, your pipeline gets a score of 67%.
+What could be wrong?
+Solution: Each of the modules has been trained independently and on perfect
+outputs from the other components. It is likely that small perturbations/errors
+in the output of previous components is aecting the performance of the other
+components, leading to a snowballing of errors.
+15CS230
+Question 5 (Traversability Estimation Using GANs, 14 points)
+In robot navigation, the traversability problem aims to answer the question: can the robot
+traverse through a situation?
+Figure 3: Example of dierent situations. Left: traversable; Right : non-traversable
+You want to estimate the traversability of a situation for a robot. Traversable data is easy
+to collect (e.g. going through a corridor) while non-traversable data is very costly (e.g. go-
+ing down the stairs). You have a large and rich datasetXof traversable images, but no
+non-traversable images.
+The question you are trying to answer is: 'Is it possible to train a neural network that
+classies whether or not a situation is traversable using only dataset X?' More precisely, if
+a non-traversable image was fed into the network, you want the network to predict that it
+is non-traversable. In this part, you will use a Generative Adversarial Network (GAN) to
+solve this problem.
+(a) Before considering the traversability problem, let us do a warm-up question. Consider
+that you have trained a network fw:Rnx1!Rny1. The parameters of the network
+are denoted w. Given an input x2Rnx1, the network outputs ^ y=fw(x)2Rny1.
+Given an arbitrary output ^ y, you would like to use gradient descent optimization
+to generate an input xsuch thatfw(x) = ^y.
+(i)(2 points) Write down the formula of the l2loss function you would use.
+Solution:L(x;^y) =kfw(x) ^yk2
+2
+(ii)(2 points) Write down the update rule of the gradient descent optimizer in terms
+ofl2norm.
+16CS230
+Solution: x
+t+1=x
+t @kfw(x) ^yk2
+2
+@xjx=x
+t
+(iii)(2 points) Calculate the gradient of the loss in your update rule in terms of
+@fw(x)
+@w, and@fw(x)
+@x(it is not necessary to use both terms).
+Solution: x
+t+1=x
+t 2
+@fw(x)
+@xjx=x
+tT
+(fw(x
+t) ^y)
+(b) Now, let us go back to the traversability problem. In particular, imagine that you have
+successfully trained a perfect GAN with generator Gand discriminator DonX. As
+a consequence, given a code z2RC,G(z) will look like a traversable image.
+(i)(2 points) Consider a new image x. How can you nd a code zsuch that the
+output of the generator G(z) would as close as possible to x?
+Solution: We can apply the backpropagation technique developed in part
+(a), wherezplays the role of x, andxplays the role of y.
+(ii)(2 points) Suppose you've found zsuch thatG(z) is the closest possible value to
+xout of all possible z. How can you decide if xrepresents a traversable situation
+or not? Give a qualitative explanation.
+Solution: We compare G(z) to the image xin the sense that if kG(z) xk2
+is \big" then xis non-traversable, and vice versa.
+(iii)(2 points) Instead of using the method above, Amelia suggests directly running
+xthrough the discriminator D. Amelia believes that if D(x) predicts that it is
+a real image, then xis likely a traversable situation. Else, it is likely to be a
+non-traversable situation. Do you think that Amelia's method would work and
+why?
+Solution: The reason is if the GAN is trained perfectly, which is the case
+here, then the discriminator cannot tell if a generated image by the generator
+is real or fake, that is, traversable or non-traversable.
+(c)(2 points) The iterative method developed in part (a) is too slow for your self-driving
+application. Given ^ yyou need to generate xin real time. Come up with a method us-
+ing an additional network to generate xfaster, e.g., with a single forward propagation.
+Solution: We can train a second network to spit out the inverse of the network
+in hand.
+Some ideas for this question are borrowed from the paper titled GONet: A Semi-Supervised
+Deep Learning Approach For Traversability Estimation (Hirose et al.).
+17CS230
+Question 6 (LogSumExp, 16 points)
+Consider training a neural network for K-class classication using softmax activation and
+cross-entropy (CE) loss (see Fig. 4).
+Neural Network 
+(K classes) Softmax 
+Figure 4: Diagram of the K-class classication network.
+For a given input xand its one-hot encoded label y2f0;1gK, the network outputs a logits
+(i.e. pre-softmax) vector z= (z1;:::;zK)2RK. Assume that the correct class is c(yc= 1
+andyi= 0 for alli6=c).
+Recall the following denitions:
+•softmax:
+^y= softmax( z) =exp(z1)
+Z;:::;exp(zK)
+Z
+whereZ=KP
+i=1exp(zi) is the normalizing constant.
+•Cross-Entropy Loss
+LCE(^y;y) = KX
+i=1yilog ^yi
+(a)(1 point) What problem would arise if the predicted logits zcontain very large values?
+(Hint: consider evaluating the CE-loss for z=h100000;100000;100000i)
+Solution: Due to the exp function, numerical overow may occur because
+exp(100000) is too large.
+18CS230
+In the following questions, you will express the cross-entropy loss in a dierent way.
+(b)(2 points)
+LogSumExp (LSE), dened below, is an operation commonly encountered in Deep
+Learning:
+LSE(x1;:::;xn) = lognX
+i=1exp(xi) = log(exp( x1) ++ exp(xn)) (1)
+Express the lossLCE(^y;y) in terms of the logits vector zand the LSE function.
+(Hint: ^y= softmax( z))
+Solution:
+LCE(^y;y) = log ^yc
+= logexp(zc)
+Z
+= log(exp(zc)) + log(Z)
+= zc+ LSE( z)
+Thus, LSE( z) zc
+(c)(2 point) Compute the following partial derivative:
+@
+@zjLSE(z)
+Solution:exp(zj)
+PK
+i=1exp(zi)or ^yjor (softmax( z))j
+19CS230
+(d)(2 point) Compute the following partial derivative (for the correct class c):
+@
+@zcLCE(^y;y)
+(Hint: use Part (b))
+Solution: ^yc 1
+(e)(2 point) Compute the following partial derivative (for an incorrect class j6=c):
+@
+@zjLCE(^y;y)
+Solution: ^yj
+(f)(2 points) Using the results of Part (d) and (e), express the following gradient using
+^yandy:
+@
+@zLCE(^y;y)
+Solution: ^y y
+20CS230
+(g)(3 points) Prove the following identity for some xed constant 2R:
+LSE(x1;:::;xn) = LSE(x1 ;:::;xn ) +
+(Hint: exp( a+b) = exp(a) exp(b)).
+Solution:
+LSE(x1;:::;xn) = lognX
+i=1exp(xi)
+= lognX
+i=1exp()exp(xi )
+= log"
+exp()nX
+i=1exp(xi )#
+= log(exp()) + log(nX
+i=1exp(xi ))
+=+ LSE(x1 ;:::;xn )
+(h)(2 points) Explain how the above identity can be used to avoid overow.
+Solution: You can set = maxfx1;:::;xngto compute LSE( x) without overow.
+21CS230
+Extra Page 1/3
+22CS230
+Extra Page 2/3
+23CS230
+Extra Page 3/3
+24CS230
+END OF PAPER
+25
