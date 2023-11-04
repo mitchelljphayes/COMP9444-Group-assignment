@@ -301,6 +301,4 @@ pip-selfcheck.json
 
 # Ignore data files
 data/*/**
-
-models/*/**
-output/*/**
+models/*
