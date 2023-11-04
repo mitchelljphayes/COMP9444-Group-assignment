@@ -58,7 +58,7 @@ but the generator is not generating meaningful output images. What could be the
 reason? (Circle all that apply.)
 2CS230
 (i) The discriminator has poor performance.
-(ii) Your generator is overtting.
+(ii) Your generator is overfitting.
 (iii) Your optimizer is stuck in a saddle point.
 (iv) None of the above.
 Solution: (i)
@@ -90,7 +90,8 @@ Solution: (ii) Increase recall, because we don't want false negatives.
 Question 2 (Short Answers, 28 points)
 The questions in this section can be answered in 3-4 sentences. Please be short and concise
 in your responses.
-(a) Consider an input image of shape 500 5003. You atten this image and use a fully
+(a) Consider an input image of shape 500 5003. You 
+atten this image and use a fully
 connected layer with 100 hidden units.
 (i)(1 point) What is the shape of the weight matrix of this layer?
 Solution: Weight matrix which is 750 ;000100 , giving 75 million.
@@ -102,10 +103,12 @@ this layer have?
 Solution: 55310 and a bias value for each of the 10 lters, giving 760
 parameters.
 (c)(2 points) You forward propagate an input xin your neural network. The output
-probability is ^ y. Explain briey what@^y
+probability is ^ y. Explain brie
+y what@^y
 @xis.
 Solution: The derivative represents how much the output changes when the
-input is changed. In other words, how much the input has inuenced the output.
+input is changed. In other words, how much the input has in
+uenced the output.
 (d)(2 points) Why is it necessary to include non-linearities in a neural network?
 Solution: Without nonlinear activation functions, each layer simply performs a
 linear mapping of the input to the output of the layer. Because linear functions are
@@ -152,7 +155,8 @@ Solution:
 (6) Training loss (or training error)
 (h)(2 point) Look at the grayscale image at the top of the collection of images below.
 Deduce what type of convolutional lter was used to get each of the lower images.
-Explain briey and include the values of these lters. The lters have a shape of (3,3).
+Explain brie
+y and include the values of these lters. The lters have a shape of (3,3).
 7CS230
 Solution: Left image: Vertical edge detector. Filter: [[1,0,-1][1,0,-1][1,0,-1]] Right
 image: Horizontal edge detector. Filter: [[1,1,1][0,0,0][-1,-1,-1]]
@@ -205,11 +209,11 @@ everywhere else
 9CS230
 Question 3 (Loss Functions, 17 points + 3 bonus points)
 Equipped with cutting-edge Deep Learning knowledge, you are working with a biology lab.
-Specically, you're asked to build a classier that predicts the animal type from a given
+Specifically, you're asked to build a classifier that predicts the animal type from a given
 image into four ( ny= 4) classes: dog, cat, iguana, mouse . There's always exactly one
 animal per image. You decide to use cross-entropy loss to train your network. Recall that
-the cross-entropy (CE) loss for a single example is dened as follows:
-LCE(^y;y) = nyP
+the cross-entropy (CE) loss for a single example is defined as follows:
+LCE(^y;y) =nyP
 i=1yilog ^yi
 where ^y= (^y1;:::; ^yny)>represents the predicted probability distribution over the classes
 andy= (y1;:::;yny)>is the ground truth vector, which is zero everywhere except for the
@@ -217,11 +221,11 @@ correct class (e.g. y= (1;0;0;0)>fordog, andy= (0;0;1;0)>foriguana ).
 (a)(2 points) Suppose you're given an example image of an iguana. If the model correctly
 predicts the resulting probability distribution as ^ y= (0:25;0:25;0:3;0:2)>, what is the
 value of the cross-entropy loss? You can give an answer in terms of logarithms.
-Solution: log 0:3
+Solution:log 0:3
 (b)(2 points) After some training, the model now incorrectly predicts mouse with distri-
 butionh0:0;0:0;0:4;0:6ifor the same image. What is the new value of the cross-entropy
 loss for this example?
-Solution: log 0:4
+Solution:log 0:4
 (c)(2 points) Suprisingly, the model achieves lower loss for a misprediction than for a
 correct prediction. Explain what implementation choices led to this phenomenon.
 Solution: This is because our objective is to minimize CE-loss, rather than to
@@ -229,8 +233,8 @@ directly maximize accuracy. While CE-loss is a reasonable proxy to accuracy, the
 is no guarantee that a lower CE loss will lead to higher accuracy.
 (d)(2 points) Given your observation from question (c), you decide to train your neural
 network with the accuracy as the objective instead of the cross-entropy loss. Is this a
-good idea? Give one reason. Note that the accuracy of a model is dened as
-Accuracy =(Number of correctly-classied examples)
+good idea? Give one reason. Note that the accuracy of a model is defined as
+Accuracy =(Number of correctly-classified examples)
 (Total number of examples)
 10CS230
 Solution: It's dicult to directly optimize the accuracy because
@@ -323,8 +327,10 @@ i=1z(i)(2) =1
 mmX
 i=1(z(i) )2
 It then applies a second transformation to get ez= (ez(1);:::;ez(m)) using learned parameters
-and:
-ez(i)=z(i)
+
+and:
+ez(i)=
+z(i)
 norm+
 (a)(1 point) Explain the purpose of in the expression for z(i)
 norm.
@@ -349,7 +355,8 @@ BBB@ 1 1 1 1
  1 1 1 1
  1 1 1 11
 CCCA
-(c)(2 points) Suppose= (1;1;1) and= (0; 10;10). What is ez? Express your
+(c)(2 points) Suppose
+= (1;1;1) and= (0; 10;10). What is ez? Express your
 answer as a matrix with shape (3, 4).
 Solution:
 0
@@ -368,7 +375,8 @@ ability in scale of weights, (v) mitigates vanishing/exploding gradient problems
 (vi) constrains output of each layer to relevant regions of an activation function,
 and/or stabilizes optimization process, (vii) mitigates linear discrepancies between
 batches, (viii) improves expressiveness of the model by including additional learned
-parameters, and, producing improved loss.
+parameters, 
+and, producing improved loss.
 Partial credit was awarded to responses which cited multiple benets from the
 same category.
 Some responses that were intentionally not accepted: (i) symmetry-breaking, (ii)
@@ -453,7 +461,8 @@ In this question, you will implement a fully-connected network. The architecture
 made up for this exercise.
 The code below implements the forward propagation, but some parts are missing. You will
 need to ll the parts between the tags (START CODE HERE) and (END CODE HERE)
-based on the given instructions . Note that we are using only numpy (not tensorow),
+based on the given instructions . Note that we are using only numpy (not tensor
+ow),
 and the relu function has been imported for you.
 import numpy as np
 from utils import relu
@@ -492,14 +501,16 @@ D1 =
 D1 =
 # Step 3: shut down some neurons of A1
 A1 =
-# Step 4: scale the value of neurons that havent been shut down
+# Step 4: scale the value of neurons that haven
+t been shut down
 A1 =
 # BATCHNORM
 # Step 1: compute the vector of means; you can use np.mean(..., axis=...)
 mu =
 # Step 2: compute the vector of variances; you can use np.var(..., axis=...)
 var =
-# Step 3: normalize the activations (dont forget about stability)
+# Step 3: normalize the activations (don
+t forget about stability)
 A1_norm =
 # Step 4: scale and shift
 A2 =
@@ -545,14 +556,16 @@ D1 = np.random.rand(A1.shape[0], A1.shape[1])
 D1 = D1 <= keep_prob
 # Step 3: shut down some neurons of A1
 A1 = D1 * A1
-# Step 4: scale the value of neurons that havent been shut down
+# Step 4: scale the value of neurons that haven
+t been shut down
 A1 = A1 / keep_prob
 # BATCHNORM
 # Step 1: compute the vector of means
 mu = np.mean(A1, axis=1)
 # Step 2: compute the vector of variances
 var = np.var(A1, axis=1)
-# Step 3: normalize the activations (dont forget about stability)
+# Step 3: normalize the activations (don
+t forget about stability)
 A1_norm = (A1 - mu) / np.sqrt(var + epsilon)
 # Step 4: scale and shift
 A2 = gamma * A1_norm + beta
@@ -878,12 +891,14 @@ is small for sigmoid activation function. Hence, we will encounter the vanishing
 gradient problem.
 (c)(2 points) You are given a dataset of 10 10 grayscale images. Your goal is to build
 a 5-class classier. You have to adopt one of the following two options:
-•the input is attened into a 100-dimensional vector, followed by a fully-connected
+•the input is 
+attened into a 100-dimensional vector, followed by a fully-connected
 layer with 5 neurons
 •the input is directly given to a convolutional layer with ve 10 10 lters
 Explain which one you would choose and why.
 Solution: The 2 approaches are the same. But the second one seems better in
-terms of computational costs (no need to atten the input). We accept the answer
+terms of computational costs (no need to 
+atten the input). We accept the answer
 "the 2 approaches are the same".
 5CS230
 (d)(2 points) You are doing full batch gradient descent using the entire training set (not
@@ -1048,7 +1063,8 @@ attacks do not.
 (b)(3 points) How can Alice forge an image xiguana which looks like an iguana but will be
 wrongly classied as a plant by Bob's model? Give an iterative method and explicitly
 mention the loss function.
-Solution: L=jj^y yiguanajj+jjx xplantjj
+Solution: L=jj^y yiguanajj+
+jjx xplantjj
 (c)(3 points) It is possible to add an invisible perturbation to an image x, such that
 ~x=x+is misclassied by a model. Assuming you have access to the target model,
 explain how you would nd .
@@ -1284,7 +1300,8 @@ LCE(^y;y) = KX
 i=1yilog ^yi
 (a)(1 point) What problem would arise if the predicted logits zcontain very large values?
 (Hint: consider evaluating the CE-loss for z=h100000;100000;100000i)
-Solution: Due to the exp function, numerical overow may occur because
+Solution: Due to the exp function, numerical over
+ow may occur because
 exp(100000) is too large.
 18CS230
 In the following questions, you will express the cross-entropy loss in a dierent way.
@@ -1338,8 +1355,10 @@ i=1exp(xi )#
 = log(exp()) + log(nX
 i=1exp(xi ))
 =+ LSE(x1 ;:::;xn )
-(h)(2 points) Explain how the above identity can be used to avoid overow.
-Solution: You can set = maxfx1;:::;xngto compute LSE( x) without overow.
+(h)(2 points) Explain how the above identity can be used to avoid over
+ow.
+Solution: You can set = maxfx1;:::;xngto compute LSE( x) without over
+ow.
 21CS230
 Extra Page 1/3
 22CS230
