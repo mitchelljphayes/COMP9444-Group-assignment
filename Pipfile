@@ -9,6 +9,8 @@ python-dotenv = "*"
 openai = "*"
 pypdf2 = "*"
 pypdf = "*"
+torch = "*"
+datasets = "*"
 
 [dev-packages]
 ipykernel = "*"
