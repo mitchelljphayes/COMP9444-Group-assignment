@@ -1,0 +1,25 @@
+CS230
+(d)(2 points) You are doing full batch gradient descent using the entire training set (not
+stochastic gradient descent). Is it necessary to shue the training data? Explain your
+answer.
+Solution: It is not necessary. Each iteration of full batch gradient descent runs
+through the entire dataset and therefore order of the dataset does not matter.
+(e)(2 points) You would like to train a dog/cat image classier using mini-batch gradient
+descent. You have already split your dataset into train, dev and test sets. The classes
+are balanced. You realize that within the training set, the images are ordered in such a
+way that all the dog images come rst and all the cat images come after. A friend tells
+you: "you absolutely need to shue your training set before the training procedure."
+Is your friend right? Explain.
+Solution: Yes, there is a problem. The optimization is much harder with mini-
+batch gradient descent because the loss function moves by a lot when going from
+the one type of image to another.
+(f)(2 points) You want to evaluate the classier you trained in (e). Your test set
+(Xtest;Ytest) is such that the rst m1images are of dogs, and the remaining images
+are of cats. After shuing XtestandYtest, you evaluate your model on it to obtain a
+classication accuracy a1%. You also evaluate your model on XtestandYtestwithout
+shuing to obtain accuracy a2%. What is the relationship between a1anda2(>,<,
+=,,)? Explain.
+Solution: a1=a2When evaluating on the test set, the only form of calculation
+that you do is a single metric (e.g. accuracy) on the entire test set. The calculation
+of this metric on the entire test set does not depend on the ordering.
+6

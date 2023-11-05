@@ -1,0 +1,28 @@
+CS230
+Calculate the error between the original path and the expert's new path to
+get an estimate of human level error on this task.
+(iii)(3 points) Human level performance is 96% for your task. Your pipeline should
+do a lot better! Assuming one component (among C,PandS) is failing, explain
+how you would identify which one it is.
+Solution: Replace every component in turn with the ground truth. For
+example if you are testing whether Cis failing, supply Swith ground truth
+bounding boxes of all the cars, and see if performance of the overall pipeline
+increases. If it increases signicantly, it is likely that the failing component is
+C.
+(iv)(3 points) You have identied that the failing component is P.Pfails at de-
+tecting pedestrians in 3 distinct settings: at night, when it is snowing, and when
+it is raining. You cannot solve the 3 problems at once. How would you decide
+which of the 3 problems to focus on rst?
+Solution: Do an error analysis. Ascertain how much of your error is due
+to each of the three cases, by using images only from these cases. Then focus
+on the case which contributes the most to your error. You could also choose
+to based your choice in practical situations. If Potato Inc. is in a place which
+has high rainfall, you might want to focus on the errors made on images with
+rain.
+(f)(2 points) After xing the only failing component, your pipeline gets a score of 67%.
+What could be wrong?
+Solution: Each of the modules has been trained independently and on perfect
+outputs from the other components. It is likely that small perturbations/errors
+in the output of previous components is aecting the performance of the other
+components, leading to a snowballing of errors.
+15

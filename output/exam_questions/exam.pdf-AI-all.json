@@ -1,0 +1,457 @@
+[
+  {
+    "question": "Problem 1",
+    "points": 10,
+    "type": "Multiple Choice"
+  },
+  {
+    "question_number": "1",
+    "question_type": "Multiple Choice Questions",
+    "question_text": "Which of the following techniques does NOT prevent a model from overfitting?",
+    "choices": [
+      "Data augmentation",
+      "Dropout",
+      "Early stopping",
+      "None of the above"
+    ],
+    "correct_answer": "None of the above",
+    "score": "10"
+  },
+  {
+    "question_number": "2",
+    "question_type": "Multiple Choice Questions",
+    "question_text": "Consider the following data sets: Xtrain = (x(1);x(2);:::;x(mtrain)); Ytrain = (y(1);y(2);:::;y(mtrain)) Xtest = (x(1);x(2);:::;x(mtest)); Ytest = (y(1);y(2);:::;y(mtest)) You want to normalize your data before training your model. Which of the following propositions are true? (Circle all that apply.)",
+    "choices": [
+      "The normalizing mean and variance computed on the training set, and used to train the model, should be used to normalize test data.",
+      "Test data should be normalized with its own mean and variance before being fed to the network at test time because the test distribution might be different from the train distribution.",
+      "Normalizing the input impacts the landscape of the loss function.",
+      "In imaging, just like for structured data, normalization consists in subtracting the mean from the input and multiplying the result by the standard deviation."
+    ],
+    "correct_answer": [
+      "The normalizing mean and variance computed on the training set, and used to train the model, should be used to normalize test data.",
+      "Normalizing the input impacts the landscape of the loss function."
+    ],
+    "score": "3"
+  },
+  {
+    "questions": [
+      {
+        "question": "(c)(2 points) Which of the following is true, given the optimal learning rate?",
+        "options": [
+          "(i) Batch gradient descent is always guaranteed to converge to the global optimum of a loss function.",
+          "(ii) Stochastic gradient descent is always guaranteed to converge to the global optimum of a loss function.",
+          "(iii) For convex loss functions (i.e. with a bowl shape), batch gradient descent is guaranteed to eventually converge to the global optimum while stochastic gradient descent is not.",
+          "(iv) For convex loss functions (i.e. with a bowl shape), stochastic gradient descent is guaranteed to eventually converge to the global optimum while batch gradient descent is not.",
+          "(v) For convex loss functions (i.e. with a bowl shape), both stochastic gradient descent and batch gradient descent will eventually converge to the global optimum.",
+          "(vi) For convex loss functions (i.e. with a bowl shape), neither stochastic gradient descent nor batch gradient descent are guaranteed to converge to the global optimum."
+        ],
+        "solution": "(iii)"
+      },
+      {
+        "question": "(d)(1 point) You design the following 2-layer fully connected neural network. All activations are sigmoids and your optimizer is stochastic gradient descent. You initialize all the weights and biases to zero and forward propagate an input x2Rn1 in the network. What is the output ^ y?",
+        "options": [
+          "(i) -1",
+          "(ii) 0",
+          "(iii) 0.5",
+          "(iv) 1"
+        ],
+        "solution": "No solution provided in the text."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "number": "(e)",
+        "points": "1",
+        "text": "Consider the model defined in question (d) with parameters initialized with zeros.W[1]denotes the weight matrix of the first layer. You forward propagate a batch of examples, and then backpropagate the gradients and update the parameters. Which of the following statements is true?",
+        "answers": [
+          {
+            "number": "(i)",
+            "text": "Entries of W[1] may be positive or negative"
+          },
+          {
+            "number": "(ii)",
+            "text": "Entries of W[1] are all negative"
+          },
+          {
+            "number": "(iii)",
+            "text": "Entries of W[1] are all positive"
+          },
+          {
+            "number": "(iv)",
+            "text": "Entries of W[1] are all zeros"
+          }
+        ],
+        "solution": "(iii)"
+      },
+      {
+        "number": "(f)",
+        "points": "2",
+        "text": "Consider the layers landl−1 in a fully connected neural network: The forward propagation equations for these layers are: z[l−1]=W[l−1]a[l−2]+b[l−1] a[l−1]=g[l−1](z[l−1])z[l]=W[l]a[l−1]+b[l] a[l]=g[l](z[l])\nWhich of the following propositions is true? Xavier initialization ensures that :",
+        "answers": [
+          {
+            "number": "(i)",
+            "text": "Var(W[l−1]) is the same as Var(W[l])."
+          },
+          {
+            "number": "(ii)",
+            "text": "Var(b[l]) is the same as Var(b[l−1])."
+          },
+          {
+            "number": "(iii)",
+            "text": "Var(a[l]) is the same as Var(a[l−1]), at the end of training."
+          },
+          {
+            "number": "(iv)",
+            "text": "Var(a[l]) is the same as Var(a[l−1]), at the beginning of training."
+          }
+        ],
+        "solution": "(iv)"
+      }
+    ]
+  },
+  {
+    "question_number": "2",
+    "question_type": "Short Answer",
+    "points": "35",
+    "question": "Please write concise answers.",
+    "answers": [
+      {
+        "part": "(a)",
+        "points": "2",
+        "answer": "You are training a logistic regression model. You initialize the parameters with 0's. Is this a good idea? Explain your answer.",
+        "solution": "There is no symmetry problem with this approach. In logistic regression, we have a = Wx + b where a is a scalar and W and x are both vectors. The derivative of the binary cross entropy loss with respect to a single dimension in the weight vector W[i] is a function of x[i], which is in general different than x[j] when i != j."
+      },
+      {
+        "part": "(b)",
+        "points": "2",
+        "answer": "You design a fully connected neural network architecture where all activations are sigmoids. You initialize the weights with large positive numbers. Is this a good idea? Explain your answer.",
+        "solution": "Large W causes Wx to be large. When Wx is large, the gradient is small for sigmoid activation function. Hence, we will encounter the vanishing gradient problem."
+      },
+      {
+        "part": "(c)",
+        "points": "2",
+        "answer": "You are given a dataset of 10x10 grayscale images. Your goal is to build a 5-class classifier. You have to adopt one of the following two options: • the input is flattened into a 100-dimensional vector, followed by a fully-connected layer with 5 neurons • the input is directly given to a convolutional layer with five 10x10 filters Explain which one you would choose and why.",
+        "solution": "The 2 approaches are the same. But the second one seems better in terms of computational costs (no need to flatten the input). We accept the answer 'the 2 approaches are the same'."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "question": "(d)(2 points) You are doing full batch gradient descent using the entire training set (not stochastic gradient descent). Is it necessary to shuffle the training data? Explain your answer.",
+        "answer": "Solution: It is not necessary. Each iteration of full batch gradient descent runs through the entire dataset and therefore order of the dataset does not matter."
+      },
+      {
+        "question": "(e)(2 points) You would like to train a dog/cat image classifier using mini-batch gradient descent. You have already split your dataset into train, dev and test sets. The classes are balanced. You realize that within the training set, the images are ordered in such a way that all the dog images come first and all the cat images come after. A friend tells you: 'you absolutely need to shuffle your training set before the training procedure.' Is your friend right? Explain.",
+        "answer": "Solution: Yes, there is a problem. The optimization is much harder with mini-batch gradient descent because the loss function moves by a lot when going from the one type of image to another."
+      },
+      {
+        "question": "(f)(2 points) You want to evaluate the classifier you trained in (e). Your test set (Xtest;Ytest) is such that the first m1 images are of dogs, and the remaining images are of cats. After shuffling Xtest and Ytest, you evaluate your model on it to obtain a classification accuracy a1%. You also evaluate your model on Xtest and Ytest without shuffling to obtain accuracy a2%. What is the relationship between a1 and a2 (>,)? Explain.",
+        "answer": "Solution: a1 = a2. When evaluating on the test set, the only form of calculation that you do is a single metric (e.g. accuracy) on the entire test set. The calculation of this metric on the entire test set does not depend on the ordering."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "number": "g",
+        "points": "2",
+        "question": "Data augmentation is often used to increase the amount of data you have. Should you apply data augmentation to the test set? Explain why.",
+        "solution": "Both answers are okay but need to be justified. If no, then explain that we want to test on real data only. If yes, then explain in which situation doing data augmentation on test set might make sense (e.g. as an ensemble approach in image classifiers)."
+      },
+      {
+        "number": "h",
+        "points": "2",
+        "question": "Weight sharing allows CNNs to deal with image data without using too many parameters. Does weight sharing increase the bias or the variance of a model?",
+        "solution": "Increases bias."
+      },
+      {
+        "number": "i",
+        "points": "2",
+        "question": "You'd like to train a fully-connected neural network with 5 hidden layers, each with 10 hidden units. The input is 20-dimensional and the output is a scalar. What is the total number of trainable parameters in your network?",
+        "solution": "(20+1)*10 + (10+1)*10*4 + (10+1)*1"
+      },
+      {
+        "number": "j",
+        "points": "3",
+        "question": "Consider the figure below:\nFigure 1: Input of shape (nH, nW, nC) = (10, 10, 1); There are five 4x4 convolutional filters with 'valid' padding and a stride of (2, 2)\nWhat is the output shape after performing the convolution step in Figure 1? Write your answer in the following format: (nH, nW, nC).",
+        "solution": "(h=4, w=4, c=5)"
+      },
+      {
+        "number": "k",
+        "points": "2",
+        "question": "Recall that sigmoid(z) = 1 / (1 + e^(-z)) and tanh(z) = (e^z - e^(-z)) / (e^z + e^(-z)). Calculate d(sigmoid(z))/dz in terms of sigmoid(z) and d(tanh(z))/dz in terms of tanh(z).",
+        "solution": "Gradient for sigmoid: sigmoid(z) * (1 - sigmoid(z))\nGradient for tanh: 1 - tanh^2(z)"
+      }
+    ]
+  },
+  {
+    "Quenstion":[
+      {
+        "question": "(l)(2 points) Assume that before training your neural network the setting is: The data is zero centered. All weights are initialized independently with mean 0 and variance 0.001. The biases are all initialized to 0. Learning rate is small and cannot be tuned. Using the result from (k), explain which activation function between tanh and sigmoid is likely to lead to a higher gradient during the first update.",
+        "answer": "Solution: tanh. During initialization, expected value of z is 0. Derivative of sigmoid w.r.t. z evaluated at zero = 0.5 * 0.5 = 0.25. Derivative of tanh w.r.t. z evaluated at zero = 1. tanh has higher gradient magnitude close to zero."
+      },
+      {
+        "question": "(m) You want to build a 10-class neural network classifier, Given a cat image, you want to classify which of the 10 cat breeds it belongs to.",
+        "answer": "(i)(2 points) What loss function do you use? Introduce the appropriate notation and write down the formula of the loss function. Solution: You would want to use the cross entropy loss given by L = -∑(y_i * log(^y_i)) (ii)(2 points) Assuming you train your network using mini-batch gradient descent with a batch size of 64, what cost function do you use? Introduce the appropriate notation and write down the formula of the cost function. Solution: If there are m training examples, J = (1/m) * ∑L(i) (iii)(3 points) One of your friends has trained a cat vs. non-cat classifier. It performs very well and you want to use transfer learning to build your own model. Explain what additional hyperparameters (due to the transfer learning) you will need to tune. Solution: The parameters you would need to choose are: 1) How many layers of the original network to keep. 2) How many new layers to introduce 3) How many of the layers of the original network would you want to keep frozen while fine-tuning."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "number": "9",
+        "points": "3",
+        "question_text": "Approach 2 involves twice as many parameters as approach 1. Can approach 2 learn more complex models than approach 1?"
+      },
+      {
+        "number": "(n)",
+        "points": "3",
+        "question_text": "A binary classification problem could be solved with the two approaches described below:"
+      },
+      {
+        "number": "9",
+        "points": "3",
+        "question_text": "If yes, give the parameters ( Ws;bs) of a function that can be modeled by approach 2 but not by approach 1."
+      },
+      {
+        "number": "9",
+        "points": "3",
+        "question_text": "If no, show that ( Ws;bs) can always be written in terms of (Wl;bl)."
+      }
+    ],
+    "answers": [
+      {
+        "question_number": "9",
+        "answer_text": "No. For approach 1, the classifier is (w1x+b1) 0:5 which is equivalent to w1x+b1 0."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "Now, for approach 2, define w1^2 as the weights for the first output and w2^2 as the weights for the second output. Similarly, define b1^2 as the bias for the first output and b2^2 as the bias for the second output."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "For approach 2, the classifier is exp(w1^2x+b1^2) exp(w1^2x+b1^2)+exp(w2^2x+b2^2) exp(w2^2x+b2^2) exp(w1^2x+b1^2)+exp(w2^2x+b2^2)."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "Since the denominator is positive and same on both sides, this is equivalent to exp(w12x+b12) exp(w22x+b22)."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "Since exp is a monotonic increasing function, this is equivalent to w12x+b12 w22x+b22."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "This is equivalent to ( w1^2-w2^2)x+ (b1^2-b2^2) 0."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "Given any w2 and b2 in approach 2, we can get the exact same model by setting w1=w1^2-w2^2 and b1=b1^2-b2^2 in approach 1."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "Alternatively, one can argue based on degrees of freedom."
+      },
+      {
+        "question_number": "9",
+        "answer_text": "Note that in this case, we are asking about model complexity, which is independent of loss function."
+      }
+    ]
+  },
+  {
+    "question": "Question 3 (Attacks on Neural Networks, 15 points)",
+    "subquestions": [
+      {
+        "question": "(a)(2 points) Name a type of neural network attack that Alice cannot use against Bob's model, and explain why it cannot be used in this case.",
+        "answer": "White-box attacks\nWhite box attacks require access to the weights of the model whereas black box attacks do not."
+      },
+      {
+        "question": "(b)(3 points) How can Alice forge an image xiguana which looks like an iguana but will be wrongly classified as a plant by Bob's model? Give an iterative method and explicitly mention the loss function.",
+        "answer": "L=jj^y-yiguanajj+¬jjx-xplantjj"
+      },
+      {
+        "question": "(c)(3 points) It is possible to add an invisible perturbation ∆ to an image x, such that ~x=x+∆ is misclassified by a model. Assuming you have access to the target model, explain how you would find ∆.",
+        "answer": "∆ can be chosen using a method such as the Fast Gradient Sign Based Method. It is an iterative method that requires access to the model (a white-box attack)"
+      },
+      {
+        "question": "(d)(2 points) Given that you have obtained ∆, you notice that ||∆||<<1. Explain why even though the adversarial noise has a small magnitude, it can cause a large change in the output of a model.",
+        "answer": "Since the dimensionality of the images is very large, even though the noise is small, it can cause a large swing in the output. To illustrate consider ~x=x+∆. While passing this through a single layer, W~x=Wx+W∆=P ||W∆||. If ||∆|| is very large, this can have a significant contribution."
+      },
+      {
+        "question": "(e)(3 points) Alice doesn't have access to Bob's network. How can she still generate an adversarial example using the method described above?",
+        "answer": "Alice can train her own substitute model using a similar architecture and train it on a labeled dataset. She can then use this substitute model to generate the adversarial example as described in part (b)."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "question_number": "CS230",
+        "question_text": "Solution: Adversarial examples are transferable, and so Alice can use Fast Gradient Sign Based Method on a diferent model, built for the same task (cat vs. non-cat classification), and it is likely that this adversarial example will also be misclassified by Bob's model."
+      },
+      {
+        "question_number": "(f)",
+        "question_text": "(2 points) To defend himself against Alice's attacks, Bob is thinking of using dropout. Dropout randomly shuts down certain neurons of the network, and makes it more robust to changes in the input. Thus, Bob has the intuition that the network will be less vulnerable to adversarial examples. Is Bob correct? Explain why or why not."
+      }
+    ],
+    "answers": [
+      {
+        "question_number": "CS230",
+        "answer_text": "No, dropout isn't used at test time while Alice will forge her adversarial examples by querying a network at test time."
+      }
+    ]
+  },
+  {
+    "question": "Question 4 (Autonomous driving case study, 27 points)",
+    "text": "As the CEO of an autonomous driving company Potato Inc., you are trying to build a pipeline to predict a car's steering angle 2[1;1] from an input image.\n(a) After setting up a camera on the hood of your car, an expert driver in your team has collected the dataset Xin a city where most roads are straight. She always drives in the center of the lane.\n\n(i)(2 points) Describe two problems that can occur if you train a model on Xand test it on real-world data.\n\nSolution: System hasn't seen situations where you're not driving sensibly, or away from the centre of the lane. This can lead to an accumulation of errors if your model output slightly differs from the correct output at a given time step. Also, a majority of outputs from the steering will be 0, if the driver was always in the center of the lane, and most of the roads were straight.\n\n(ii)(3 points) Without collecting new data, how can you help your model gener-alize to real world data? Describe the details of how you would implement the approach.\n\nSolution: Data augmentation. Slight left and right translations of the images, with a corresponding change in steering angle. For example, if you translate an image to the right, add some small quantity to the steering angle (if positive implies steering to the left), so that you're now steering to the left.\n\n(b)(2 points) Give two reasons why you wouldn't use an end-to-end model to predict the steering direction ( ) from the input image.\n\nSolution: 1 - If there's not enough data. 2 - If it is easier to collect data for submodules than end-to-end data. For instance, collecting high variance data while driving a car around with a camera on the hood is costly. Finding images with cars/pedestrians and labelling with bounding boxes might be easier, and helps train \"car detector\" and \"pedestrian detector\" submodules.\n12"
+  },
+  {
+    "questions": [
+      {
+        "question": "(i)(3 points) What data do you need to train the submodules in the pipeline presented in Figure 2?",
+        "answer": "To train the Car Detector, we need to collect Xc(images from a camera hood of a car) and Yc(bounding box labels localizing the cars.)\nTo train the Pedestrian Detector, we need to collect Xp(images from a camera hood of a car) and Yp(bounding box labels localizing the pedestrians.)\nTo train the Path planner, we need to collect Xs(bounding boxes localizing the cars and the pedestrians) and Ys(steering angle.)"
+      },
+      {
+        "question": "(ii)(3 points) Explain how you would collect this data.",
+        "answer": "(Xc;Yc) : Put a camera on the hood of a car, label the bounding boxes by hand. You can also download images from roads online or use online datasets such as COCO or PASCAL VOC.\n(Xp;Yp) : Put a camera on the hood of a car, label the bounding boxes by hand. You can also download images from roads online or use online datasets such as COCO or PASCAL VOC.\n(Xs;Ys) : Put a camera on the hood of a car, label the bounding boxes by hand."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "question": "(d)(2 points) Propose a metric to measure the performance of your pipeline model.",
+        "answer": "Sum of absolute deviations (i.e. L1 distance) between ground truth and predicted steering angle.\nSum of squared errors (i.e. L2 distance) between ground truth and predicted steering angle.\n(not expected) You can also design metrics for submodules. For CandPit might be mAP (/mean IoU)"
+      },
+      {
+        "question": "(e) Assume that you have designed a metric that scores your pipeline between 0% (bad) and 100% (good.) On unseen data from the real world, your entire pipeline gets a score of 54%.\n(i)(2 points) Define Bayes error and human level error. How do these two compare with each other?",
+        "answer": "Solution: Bayes error is a lower bound on the minimum error that can be achieved. Human level error is the error achieved by an expert human on the same task. The Bayes error is human level error."
+      },
+      {
+        "question": "(ii)(2 points) How would you measure human level error for your autonomous driving task?",
+        "answer": "Solution: Possible solution: Create a simulator with the same path followed by the car while recording data, and have an expert try following the path."
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "id": "(iii)",
+        "points": 3,
+        "text": "Human level performance is 96% for your task. Your pipeline should do a lot better! Assuming one component (among C, PandS) is failing, explain how you would identify which one it is.",
+        "solution": "Replace every component in turn with the ground truth. For example if you are testing whether C is failing, supply S with ground truth bounding boxes of all the cars, and see if performance of the overall pipeline increases. If it increases significantly, it is likely that the failing component is C."
+      },
+      {
+        "id": "(iv)",
+        "points": 3,
+        "text": "You have identified that the failing component is P. P fails at detecting pedestrians in 3 distinct settings: at night, when it is snowing, and when it is raining. You cannot solve the 3 problems at once. How would you decide which of the 3 problems to focus on first?",
+        "solution": "Do an error analysis. Ascertain how much of your error is due to each of the three cases, by using images only from these cases. Then focus on the case which contributes the most to your error. You could also choose to based your choice in practical situations. If Potato Inc. is in a place which has high rainfall, you might want to focus on the errors made on images with rain."
+      },
+      {
+        "id": "(f)",
+        "points": 2,
+        "text": "After fixing the only failing component, your pipeline gets a score of 67%. What could be wrong?",
+        "solution": "Each of the modules has been trained independently and on perfect outputs from the other components. It is likely that small perturbations/errors in the output of previous components is affecting the performance of the other components, leading to a snowballing of errors."
+      }
+    ]
+  },
+  {
+    "question": "Question 5 (Traversability Estimation Using GANs, 14 points)",
+    "question_text": "In robot navigation, the traversability problem aims to answer the question: can the robot traverse through a situation?",
+    "figure": "Figure 3: Example of different situations. Left: traversable; Right: non-traversable",
+    "context": "You want to estimate the traversability of a situation for a robot. Traversable data is easy to collect (e.g. going through a corridor) while non-traversable data is very costly (e.g. going down the stairs). You have a large and rich datasetXof traversable images, but no non-traversable images.\nThe question you are trying to answer is: 'Is it possible to train a neural network that classifies whether or not a situation is traversable using only dataset X?' More precisely, if a non-traversable image was fed into the network, you want the network to predict that it is non-traversable. In this part, you will use a Generative Adversarial Network (GAN) to solve this problem.",
+    "subquestions": [
+      {
+        "subquestion": "(a) Before considering the traversability problem, let us do a warm-up question. Consider that you have trained a network fw: Rnx1! Rny1. The parameters of the network are denoted w. Given an input x2Rnx1, the network outputs ^ y=fw(x)2Rny^1. Given an arbitrary output ^ y, you would like to use gradient descent optimization to generate an input x such thatfw(x) = ^y.",
+        "subquestion_parts": [
+          {
+            "part": "(i)(2 points) Write down the formula of the l2loss function you would use.",
+            "solution": "L(x;^y) =kfw(x)^y k2"
+          },
+          {
+            "part": "(ii)(2 points) Write down the update rule of the gradient descent optimizer in terms ofl2norm.",
+            "solution": "16"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "question": "(iii)(2 points) Calculate the gradient of the loss in your update rule in terms of\n@fw(x)\n@w, and@fw(x)\n@x(it is not necessary to use both terms).",
+        "answer": "Solution: xt+1=xt2@fw(x)@xjx=xt T(fw(xt)^y)"
+      },
+      {
+        "question": "(i)(2 points) Consider a new image x. How can you find a code zsuch that the\noutput of the generator G(z) would as close as possible to x?",
+        "answer": "Solution: We can apply the backpropagation technique developed in part\n(a), wherezplays the role of x, andxplays the role of y."
+      },
+      {
+        "question": "(ii)(2 points) Suppose you've found zsuch thatG(z) is the closest possible value to\nxout of all possible z. How can you decide if xrepresents a traversable situation\nor not? Give a qualitative explanation.",
+        "answer": "Solution: We compare G(z) to the image xin the sense that if kG(z)xk2\nis \"big\" then xis non-traversable, and vice versa."
+      },
+      {
+        "question": "(iii)(2 points) Instead of using the method above, Amelia suggests directly running\nxthrough the discriminator D. Amelia believes that if D(x) predicts that it is\na real image, then xis likely a traversable situation. Else, it is likely to be a\nnon-traversable situation. Do you think that Amelia's method would work and\nwhy?",
+        "answer": "Solution: The reason is if the GAN is trained perfectly, which is the case\nhere, then the discriminator cannot tell if a generated image by the generator\nis real or fake, that is, traversable or non-traversable."
+      },
+      {
+        "question": "(c)(2 points) The iterative method developed in part (a) is too slow for your self-driving\napplication. Given ^ y you need to generate x in real time. Come up with a method us-\ning an additional network to generate x faster, e.g., with a single forward propagation.",
+        "answer": "Solution: We can train a second network to spit out the inverse of the network\nin hand."
+      }
+    ]
+  },
+  {
+    "question": "What problem would arise if the predicted logits zcontain very large values?",
+    "solution": "Due to the exp function, numerical overflow may occur because exp(100000) is too large."
+  },
+  {
+    "questions": [
+      {
+        "question": "Express the loss LCE(^y;y) in terms of the logits vector z and the LSE function.",
+        "answer": "LCE(^y;y) = log ^yc = logexp(zc)/Z = zc+ LSE( z)"
+      },
+      {
+        "question": "Compute the following partial derivative: @/@zjLSE(z)",
+        "answer": "exp(zj)/PK i=1exp(zi) or ^yj or (softmax( z))j"
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "number": "(d)",
+        "points": "2 point",
+        "text": "Compute the following partial derivative (for the correct class c):",
+        "answer": "^yc 1"
+      },
+      {
+        "number": "(e)",
+        "points": "2 point",
+        "text": "Compute the following partial derivative (for an incorrect class j6=c):",
+        "answer": "^yj"
+      },
+      {
+        "number": "(f)",
+        "points": "2 points",
+        "text": "Using the results of Part (d) and (e), express the following gradient using ^yandy:",
+        "answer": "^yy"
+      }
+    ]
+  },
+  {
+    "questions": [
+      {
+        "question": "(g)(3 points) Prove the following identity for some fixed constant v in R:",
+        "answer": "LSE(x1;:::;xn) = LSE(x1−v;:::;xn−v) +v",
+        "hint": "Hint: exp(a+b) = exp(a) exp(b)"
+      },
+      {
+        "question": "(h)(2 points) Explain how the above identity can be used to avoid overflow.",
+        "answer": "Solution: You can set v = max{x1;:::;xn} to compute LSE(x) without overflow."
+      }
+    ]
+  }
+]

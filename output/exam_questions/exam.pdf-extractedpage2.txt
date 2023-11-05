@@ -1,0 +1,27 @@
+CS230
+(c)(2 points) Which of the following is true, given the optimal learning rate?
+(i) Batch gradient descent is always guaranteed to converge to the global optimum
+of a loss function.
+(ii) Stochastic gradient descent is always guaranteed to converge to the global opti-
+mum of a loss function.
+(iii) For convex loss functions (i.e. with a bowl shape), batch gradient descent is
+guaranteed to eventually converge to the global optimum while stochastic gradient
+descent is not.
+(iv) For convex loss functions (i.e. with a bowl shape), stochastic gradient descent
+is guaranteed to eventually converge to the global optimum while batch gradient
+descent is not.
+(v) For convex loss functions (i.e. with a bowl shape), both stochastic gradient descent
+and batch gradient descent will eventually converge to the global optimum.
+(vi) For convex loss functions (i.e. with a bowl shape), neither stochastic gradient
+descent nor batch gradient descent are guaranteed to converge to the global opti-
+mum.
+Solution: (iii)
+(d)(1 point) You design the following 2-layer fully connected neural network.
+All activations are sigmoids and your optimizer is stochastic gradient descent. You
+initialize all the weights and biases to zero and forward propagate an input x2Rn1
+in the network. What is the output ^ y?
+(i) -1
+(ii) 0
+(iii) 0.5
+(iv) 1
+3
