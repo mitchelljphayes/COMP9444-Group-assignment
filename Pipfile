@@ -12,6 +12,8 @@ pypdf = "*"
 torch = "*"
 datasets = "*"
 tiktoken = "*"
+mwparserfromhell = "*"
+apache-beam = "*"
 
 [dev-packages]
 ipykernel = "*"
