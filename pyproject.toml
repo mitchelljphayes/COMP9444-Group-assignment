@@ -21,6 +21,8 @@ dependencies = [
     "evaluate>=0.4.1",
     "nltk>=3.8.1",
     "rouge-score>=0.1.2",
+    "trl>=0.7.4",
+    "peft>=0.6.1",
 ]
 requires-python = ">=3.9,<3.11"
 readme = "README.md"
