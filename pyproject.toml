@@ -23,6 +23,9 @@ dependencies = [
     "rouge-score>=0.1.2",
     "trl>=0.7.4",
     "peft>=0.6.1",
+    "bitsandbytes>=0.41.2",
+    "scipy>=1.11.3",
+    "bert-score>=0.3.13",
 ]
 requires-python = ">=3.9,<3.11"
 readme = "README.md"
