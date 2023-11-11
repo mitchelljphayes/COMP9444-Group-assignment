@@ -1,0 +1,8 @@
+{
+  "question_id": "32",
+  "question": "What is the purpose of CS230?",
+  "choices": [],
+  "answer": "To extract and format raw PDF text into JSON",
+  "question_type": "multiple choice",
+  "topic": "CS230"
+}

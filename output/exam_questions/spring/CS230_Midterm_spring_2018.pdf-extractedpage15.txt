@@ -1,0 +1,34 @@
+CS230
+Solution: Normalizing each input of a layer may change what the layer can
+represent. For instance, normalizing the inputs of a sigmoid would constrain them
+to the linear regime of the nonlinearity. ezmakes sure that the transformation
+inserted in the network can represent the identity transform.
+Recall that during training time, the batch normalization layer uses the mini-batch statistics
+to estimate and (2). However, at test time, it uses the moving averages of the mean and
+variance tracked (but not used) during training time.
+(f)(2 points) Why is this approach preferred over using the mini-batch statistics during
+training andat test time?
+Solution: There were two correct answers:
+(1) Moving averages of the mean and variance produce a normalization that's more
+consistent with the transformation the network used to learn during training than
+the mini-batch statistics. You need to support variable batch sizes at test time,
+which includes small batch sizes (as small as a single example). The variabili-
+ty/noisiness between input images means batches with small batch sizes at test
+time will be less likely to have the same mini-batch statistics that produce the
+normalized activations trained on at training time. Using the moving averages of
+mean and variance as estimates of the population statistics addresses this issue.
+To receive full credit, these responses included three components: (i) Mini-batches
+might be small at test time. (ii) Smaller mini-batches mean the mini-batch statis-
+tics are more likely to dier from the mini-batch statistics used at training. (iii)
+Moving averages are better estimates.
+(2) Moving averages of the mean and variance produce a consistent normalization
+for an example, that's independent of the other examples in the batch.
+To receive full credit, these responses included three components: (i) An single
+example might be part of dierent batches at test time. (ii) That example should
+receive the same prediction at test time, independent of the other examples in its
+batch. (iii) Mini-batch statistics vary per batch but moving averages do not.
+Suppose you have the following dataset:
+Description Number of images Example of an image
+Photos of hot dogs 100k
+Photos of not hot dogs 100k
+16

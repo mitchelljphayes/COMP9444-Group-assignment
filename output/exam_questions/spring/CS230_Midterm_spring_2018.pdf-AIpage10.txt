@@ -1,0 +1,26 @@
+{
+    "question_id": "CS230_1",
+    "question": "After tuning the model architecture, why does the cross-entropy loss never reach zero if softmax activation is used?",
+    "choices": [],
+    "answer": "The cross-entropy loss can never be zero if a softmax activation is used because the term nyP i=1 ezi is never equal to ezc, so the loss will never reach zero, although it will get very close to zero at the end of training.",
+    "question_type": "explanation",
+    "topic": "Neural Networks"
+}
+
+{
+    "question_id": "CS230_2",
+    "question": "How can new images be labeled when each example can simultaneously belong to multiple classes?",
+    "choices": [],
+    "answer": "New images can be labeled using multi-hot encoding, where each class is represented by a binary element in a vector. For example, (1;0;0;1) would indicate that the image belongs to the first and fourth classes.",
+    "question_type": "explanation",
+    "topic": "Image Classification"
+}
+
+{
+    "question_id": "CS230_3",
+    "question": "Why is it problematic to retrain a new model with the same architecture (softmax output activation with cross-entropy loss) for chimeras as well as normal animals?",
+    "choices": [],
+    "answer": "Retraining a new model with the same architecture is problematic because the softmax output activation assumes that each example belongs to a single class. However, chimeras can have multiple classes associated with them, making the softmax activation unsuitable for this task.",
+    "question_type": "explanation",
+    "topic": "Neural Networks"
+}

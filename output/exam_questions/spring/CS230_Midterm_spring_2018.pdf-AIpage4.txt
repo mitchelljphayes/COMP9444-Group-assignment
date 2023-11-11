@@ -1,0 +1,48 @@
+{
+    "question_id": "CS230-Q2",
+    "question": "Consider an input image of shape 500x500x3. You flatten this image and use a fully connected layer with 100 hidden units. What is the shape of the weight matrix of this layer?",
+    "choices": [],
+    "answer": "Weight matrix which is 750,000x100, giving 75 million.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "Consider an input image of shape 500x500x3. You flatten this image and use a fully connected layer with 100 hidden units. What is the shape of the corresponding bias vector?",
+    "choices": [],
+    "answer": "100x1",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "Consider an input image of shape 500x500x3. You run this image in a convolutional layer with 10 filters, of kernel size 5x5. How many parameters does this layer have?",
+    "choices": [],
+    "answer": "5x5x3x10 and a bias value for each of the 10 filters, giving 760 parameters.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "You forward propagate an input x in your neural network. The output probability is y^. Explain briefly what y^ represents.",
+    "choices": [],
+    "answer": "The derivative represents how much the output changes when the input is changed. In other words, how much the input has influenced the output.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "Why is it necessary to include non-linearities in a neural network?",
+    "choices": [],
+    "answer": "Without nonlinear activation functions, each layer simply performs a linear mapping of the input to the output of the layer. Because linear functions are closed under composition, this is equivalent to having a single (linear) layer. Thus, no matter how many such layers exist, the network can only learn linear functions.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "The universal approximation theorem states that a neural network with a single hidden layer can approximate any continuous function (with some assumptions on the activation). Give one reason why you would use deep networks with multiple layers.",
+    "choices": [],
+    "answer": "",
+    "question_type": "Short Answer",
+    "topic": ""
+}

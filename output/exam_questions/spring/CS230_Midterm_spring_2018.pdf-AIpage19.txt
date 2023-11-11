@@ -1,0 +1,16 @@
+{
+    "question_id": "CS230-1",
+    "question": "What is the purpose of dropout in neural networks?",
+    "choices": [],
+    "answer": "To prevent overfitting by randomly dropping out neurons during training",
+    "question_type": "Multiple Choice",
+    "topic": "DROPOUT"
+}
+{
+    "question_id": "CS230-2",
+    "question": "What is the purpose of batch normalization in neural networks?",
+    "choices": [],
+    "answer": "To normalize the activations of a previous layer and improve training speed",
+    "question_type": "Multiple Choice",
+    "topic": "BATCHNORM"
+}

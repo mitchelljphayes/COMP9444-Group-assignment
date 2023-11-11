@@ -1,0 +1,8 @@
+CS230
+(b)(2 points) Explain how you would you use this newly trained network to decide
+whether a car in front of your mansion should be allowed to enter.
+Solution: Encode all examples in the database Dusing the newly trained net-
+work. Encode the image of the car waiting in front of the mansion. Use the Nearest
+Neighbors algorithm with a thresholding to decide if this car is in the database or
+not.
+24

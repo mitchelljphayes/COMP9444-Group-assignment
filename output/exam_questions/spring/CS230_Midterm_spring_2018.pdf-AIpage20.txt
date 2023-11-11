@@ -1,0 +1,41 @@
+{
+  "question_id": "1",
+  "question": "What is the purpose of the epsilon parameter in the batch normalization layer in CS230?",
+  "choices": [],
+  "answer": "The epsilon parameter is used for stability during normalization.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "2",
+  "question": "What are the returns of the forward propagation in CS230?",
+  "choices": [],
+  "answer": "The returns of the forward propagation are A2 (output) and cache (information for backward propagation).",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "3",
+  "question": "What is the purpose of the dropout step in the forward propagation in CS230?",
+  "choices": [],
+  "answer": "The purpose of the dropout step is to randomly shut down neurons to prevent overfitting.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "4",
+  "question": "What are the steps involved in the batch normalization process in CS230?",
+  "choices": [],
+  "answer": "The steps involved in the batch normalization are: 1. Compute the vector of means. 2. Compute the vector of variances. 3. Normalize the activations using the means and variances. 4. Scale and shift the normalized activations.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "5",
+  "question": "What is the purpose of the gamma and beta parameters in the batch normalization process in CS230?",
+  "choices": [],
+  "answer": "The purpose of the gamma and beta parameters is to scale and shift the normalized activations.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+}
+}

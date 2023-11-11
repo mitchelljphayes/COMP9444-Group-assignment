@@ -1,0 +1,35 @@
+{
+    "question_id": "3",
+    "question": "Suppose you're given an example image of an iguana. If the model correctly predicts the resulting probability distribution as ^ y= (0:25;0:25;0:3;0:2)>, what is the value of the cross-entropy loss? You can give an answer in terms of logarithms.",
+    "choices": [],
+    "answer": "log 0:3",
+    "question_type": "(a)",
+    "topic": "Loss Functions"
+}
+
+{
+    "question_id": "3",
+    "question": "After some training, the model now incorrectly predicts mouse with distributionh0:0;0:0;0:4;0:6ifor the same image. What is the new value of the cross-entropy loss for this example?",
+    "choices": [],
+    "answer": "log 0:4",
+    "question_type": "(b)",
+    "topic": "Loss Functions"
+}
+
+{
+    "question_id": "3",
+    "question": "Suprisingly, the model achieves lower loss for a misprediction than for a correct prediction. Explain what implementation choices led to this phenomenon.",
+    "choices": [],
+    "answer": "This is because our objective is to minimize CE-loss, rather than to directly maximize accuracy. While CE-loss is a reasonable proxy to accuracy, there is no guarantee that a lower CE loss will lead to higher accuracy.",
+    "question_type": "(c)",
+    "topic": "Loss Functions"
+}
+
+{
+    "question_id": "3",
+    "question": "Given your observation from question (c), you decide to train your neural network with the accuracy as the objective instead of the cross-entropy loss. Is this a good idea? Give one reason. Note that the accuracy of a model is dened as Accuracy =(Number of correctly-classied examples) (Total number of examples)",
+    "choices": [],
+    "answer": "No, it is not a good idea because the accuracy may not be a differentiable objective for optimization. Cross-entropy loss provides gradients that can be used for backpropagation and updating the weights of the neural network.",
+    "question_type": "(d)",
+    "topic": "Loss Functions"
+}

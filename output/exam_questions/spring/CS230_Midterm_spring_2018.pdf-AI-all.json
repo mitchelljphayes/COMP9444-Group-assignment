@@ -1,0 +1,722 @@
+{
+    "question_id": "1",
+    "question": "Multiple Choice",
+    "choices": [],
+    "answer": "14",
+    "question_type": "Multiple Choice",
+    "topic": ""
+}
+{
+  "question_id": "1",
+  "question": "Which of the following is true about max-pooling?",
+  "choices": [
+    "It allows a neuron in a network to have information about features in a larger part of the image, compared to a neuron at the same depth in a network without max pooling.",
+    "It increases the number of parameters when compared to a similar network without max pooling.",
+    "It increases the sensitivity of the network towards the position of features within an image."
+  ],
+  "answer": "i",
+  "question_type": "Multiple Choice",
+  "topic": "CS230"
+}
+{
+  "question_id": "2",
+  "question": "In order to backpropagate through a max-pool layer, you need to pass information about the positions of the max values from the forward pass.",
+  "choices": [
+    "True",
+    "False"
+  ],
+  "answer": "i",
+  "question_type": "Multiple Choice",
+  "topic": "CS230"
+}
+{
+  "question_id": "3",
+  "question": "Consider a simple convolutional neural network with one convolutional layer. Which of the following statements is true about this network? (Check all that apply.)",
+  "choices": [
+    "It is scale invariant.",
+    "It is rotation invariant.",
+    "It is translation invariant.",
+    "All of the above."
+  ],
+  "answer": "iii",
+  "question_type": "Multiple Choice",
+  "topic": "CS230"
+}
+{
+  "question_id": "4",
+  "question": "You are training a Generative Adversarial Network to generate nice iguana images, with mini-batch gradient descent. The generator cost J(G) is extremely low, but the generator is not generating meaningful output images. What could be the reason? (Circle all that apply.)",
+  "choices": [],
+  "answer": "",
+  "question_type": "",
+  "topic": "CS230"
+}
+Here is the extracted and formatted json for the questions and answers from the provided text:
+```
+[
+  {
+    "question_id": "i",
+    "question": "The discriminator has poor performance.",
+    "choices": [],
+    "answer": "None of the above.",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "ii",
+    "question": "Your generator is overfitting.",
+    "choices": [],
+    "answer": "True",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "iii",
+    "question": "Your optimizer is stuck in a saddle point.",
+    "choices": [],
+    "answer": "None of the above.",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "iv",
+    "question": "Mini-batch gradient descent is a better optimizer than full-batch gradient descent to avoid getting stuck in saddle points.",
+    "choices": [
+      "True",
+      "False"
+    ],
+    "answer": "True",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "e",
+    "question": "Using \"neural style transfer\" (as seen in class), you want to generate an RGB image of the Great Wall of China that looks like it was painted by Picasso. The size of your image is 100x100x3 and you are using a pretrained network with 1,000,000 parameters. At every iteration of gradient descent, how many updates do you perform?",
+    "choices": [
+      "10,000",
+      "30,000",
+      "1,000,000",
+      "1,030,000"
+    ],
+    "answer": "30,000",
+    "question_type": "2 points",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "f",
+    "question": "You are building a model to predict the presence (labeled 1) or absence (labeled 0) of a tumor in a brain scan. The goal is to ultimately deploy the model to help doctors in hospitals. Which of these two metrics would you choose to use?",
+    "choices": [
+      "Precision = True positive examples / Total predicted positive examples",
+      "Recall = True positive examples / Total positive examples."
+    ],
+    "answer": "Recall = True positive examples / Total positive examples.",
+    "question_type": "2 points",
+    "topic": "CS230"
+  }
+]
+```
+Please note that the answer format for the questions without options is assumed to be a single string, while the questions with options have the answers as one of the options. The question types for questions (e) and (f) are specified as "2 points".
+{
+    "question_id": "4",
+    "question": "What should we do to increase recall?",
+    "choices": [],
+    "answer": "(ii) Increase recall, because we don't want false negatives.",
+    "question_type": "",
+    "topic": "CS230"
+}
+{
+    "question_id": "CS230-Q2",
+    "question": "Consider an input image of shape 500x500x3. You flatten this image and use a fully connected layer with 100 hidden units. What is the shape of the weight matrix of this layer?",
+    "choices": [],
+    "answer": "Weight matrix which is 750,000x100, giving 75 million.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "Consider an input image of shape 500x500x3. You flatten this image and use a fully connected layer with 100 hidden units. What is the shape of the corresponding bias vector?",
+    "choices": [],
+    "answer": "100x1",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "Consider an input image of shape 500x500x3. You run this image in a convolutional layer with 10 filters, of kernel size 5x5. How many parameters does this layer have?",
+    "choices": [],
+    "answer": "5x5x3x10 and a bias value for each of the 10 filters, giving 760 parameters.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "You forward propagate an input x in your neural network. The output probability is y^. Explain briefly what y^ represents.",
+    "choices": [],
+    "answer": "The derivative represents how much the output changes when the input is changed. In other words, how much the input has influenced the output.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "Why is it necessary to include non-linearities in a neural network?",
+    "choices": [],
+    "answer": "Without nonlinear activation functions, each layer simply performs a linear mapping of the input to the output of the layer. Because linear functions are closed under composition, this is equivalent to having a single (linear) layer. Thus, no matter how many such layers exist, the network can only learn linear functions.",
+    "question_type": "Short Answer",
+    "topic": ""
+},
+{
+    "question_id": "CS230-Q2",
+    "question": "The universal approximation theorem states that a neural network with a single hidden layer can approximate any continuous function (with some assumptions on the activation). Give one reason why you would use deep networks with multiple layers.",
+    "choices": [],
+    "answer": "",
+    "question_type": "Short Answer",
+    "topic": ""
+}
+{
+    "question_id": "f",
+    "question": "Consider a dataset fx(1);x(2);:::;x(m)gwhere each example x(i)contains a sequence of 100 numbers: x(i)= (x(i)<1>;x(i)<2>;:::;x(i)<100>) You have a very accurate (but not perfect) model that predicts x<t+1>from (x<1>;:::;x<t>). Givenx<1>, you want to generate ( x<2>;:::;x<100>) by repeatedly running your model. Your method is:",
+    "choices": [],
+    "answer": "1. Predict ^x<2>fromx<1>\n2. Predict ^x<3>from (x<1>;^x<2>)\n3. ...\n4. Predict ^x<100>from (x<1>;^x<2>;:::;^x<99>)",
+    "question_type": "text",
+    "topic": "CS230"
+}
+{
+    "question_id": "g",
+    "question": "You want to use the gure below to explain the concept of early stopping to a friend. Fill-in the blanks. (1) and (2) describe the axes. (3) and (4) describe values on the vertical and horizontal axis. (5) and (6) describe the curves. Be precise.",
+    "choices": [],
+    "answer": "(1) and (2) describe the axes: (1) = number of iterations/train steps, (2) = loss function value/accuracy\n(3) and (4) describe values on the vertical and horizontal axis: (3) = loss function value/error, (4) = number of iterations/train steps\n(5) and (6) describe the curves: (5) = training loss/accuracy curve, (6) = validation loss/accuracy curve",
+    "question_type": "text",
+    "topic": "CS230"
+}
+{
+    "question_id": "CS230-1",
+    "question": "Look at the grayscale image at the top of the collection of images below. Deduce what type of convolutional filter was used to get each of the lower images. Explain briefly and include the values of these filters. The filters have a shape of (3,3).",
+    "choices": [],
+    "answer": "",
+    "question_type": "open-ended",
+    "topic": "Convolutional Filters"
+}
+
+{
+    "question_id": "CS230-2",
+    "question": "What are the different metrics used to evaluate the performance of a machine learning model during training?",
+    "choices": [
+        "Loss value (or error)",
+        "Number of iterations",
+        "Best validation loss value (or best validation error)",
+        "Optimal stopping point (or early stopping point)",
+        "Validation loss (or validation error)",
+        "Training loss (or training error)"
+    ],
+    "answer": "",
+    "question_type": "multiple-choice",
+    "topic": "Model Evaluation"
+}
+{
+    "question_id": "1",
+    "question": "When the input is 2-dimensional, you can plot the decision boundary of your neural network and clearly see if there is overfitting. How do you check overfitting if the input is 10-dimensional?",
+    "choices": [],
+    "answer": "Compute cost function in the dev and training set. If there is a significant difference, then you have a variance problem.",
+    "question_type": "i",
+    "topic": "CS230"
+}
+{
+    "question_id": "2",
+    "question": "What is the advantage of using Inverted Dropout compared to its older version (\Normal\" dropout)? Mention the difference of implementation.",
+    "choices": [],
+    "answer": "Implementation difference: Add line of code, a[L] == keepprobThe expected value of the activation doesn't decrease with this extra line of code, so the activations do not need to be rescaled at test time.",
+    "question_type": "j",
+    "topic": "CS230"
+}
+{
+    "question_id": "3",
+    "question": "Give a method to fight exploding gradient in fully-connected neural networks.",
+    "choices": [],
+    "answer": "Gradient clipping.",
+    "question_type": "k",
+    "topic": "CS230"
+}
+{
+    "question_id": "4",
+    "question": "You are using an Adam optimizer. Show why the bias correction naturally disappears when the numbers of steps to compute the exponential moving averages gets large.",
+    "choices": [],
+    "answer": "Vt-1 * t -> Vt when t->1",
+    "question_type": "l",
+    "topic": "CS230"
+}
+[
+  {
+    "question_id": "(i)",
+    "question": "You would like to detect the 3x3 cross in Image 1. Hand-engineer a filter to be convolved over Image 1. Given the output of this \"convolved\" operation, the algorithm (?) should give you the position of the cross.",
+    "choices": [],
+    "answer": "0",
+    "question_type": "multiple choice",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "(ii)",
+    "question": "You would like to detect the 3x3 red cross in Image 2 but not the blue cross. Hand-engineer a filter to be convolved over Image 2. Given the output of this \"convolved\" operation, the algorithm (?) should give you the position of the red cross.",
+    "choices": [],
+    "answer": "0",
+    "question_type": "multiple choice",
+    "topic": "CS230"
+  }
+]
+{
+    "question_id": "3",
+    "question": "Suppose you're given an example image of an iguana. If the model correctly predicts the resulting probability distribution as ^ y= (0:25;0:25;0:3;0:2)>, what is the value of the cross-entropy loss? You can give an answer in terms of logarithms.",
+    "choices": [],
+    "answer": "log 0:3",
+    "question_type": "(a)",
+    "topic": "Loss Functions"
+}
+
+{
+    "question_id": "3",
+    "question": "After some training, the model now incorrectly predicts mouse with distributionh0:0;0:0;0:4;0:6ifor the same image. What is the new value of the cross-entropy loss for this example?",
+    "choices": [],
+    "answer": "log 0:4",
+    "question_type": "(b)",
+    "topic": "Loss Functions"
+}
+
+{
+    "question_id": "3",
+    "question": "Suprisingly, the model achieves lower loss for a misprediction than for a correct prediction. Explain what implementation choices led to this phenomenon.",
+    "choices": [],
+    "answer": "This is because our objective is to minimize CE-loss, rather than to directly maximize accuracy. While CE-loss is a reasonable proxy to accuracy, there is no guarantee that a lower CE loss will lead to higher accuracy.",
+    "question_type": "(c)",
+    "topic": "Loss Functions"
+}
+
+{
+    "question_id": "3",
+    "question": "Given your observation from question (c), you decide to train your neural network with the accuracy as the objective instead of the cross-entropy loss. Is this a good idea? Give one reason. Note that the accuracy of a model is dened as Accuracy =(Number of correctly-classied examples) (Total number of examples)",
+    "choices": [],
+    "answer": "No, it is not a good idea because the accuracy may not be a differentiable objective for optimization. Cross-entropy loss provides gradients that can be used for backpropagation and updating the weights of the neural network.",
+    "question_type": "(d)",
+    "topic": "Loss Functions"
+}
+{
+    "question_id": "CS230_1",
+    "question": "After tuning the model architecture, why does the cross-entropy loss never reach zero if softmax activation is used?",
+    "choices": [],
+    "answer": "The cross-entropy loss can never be zero if a softmax activation is used because the term nyP i=1 ezi is never equal to ezc, so the loss will never reach zero, although it will get very close to zero at the end of training.",
+    "question_type": "explanation",
+    "topic": "Neural Networks"
+}
+
+{
+    "question_id": "CS230_2",
+    "question": "How can new images be labeled when each example can simultaneously belong to multiple classes?",
+    "choices": [],
+    "answer": "New images can be labeled using multi-hot encoding, where each class is represented by a binary element in a vector. For example, (1;0;0;1) would indicate that the image belongs to the first and fourth classes.",
+    "question_type": "explanation",
+    "topic": "Image Classification"
+}
+
+{
+    "question_id": "CS230_3",
+    "question": "Why is it problematic to retrain a new model with the same architecture (softmax output activation with cross-entropy loss) for chimeras as well as normal animals?",
+    "choices": [],
+    "answer": "Retraining a new model with the same architecture is problematic because the softmax output activation assumes that each example belongs to a single class. However, chimeras can have multiple classes associated with them, making the softmax activation unsuitable for this task.",
+    "question_type": "explanation",
+    "topic": "Neural Networks"
+}
+{
+    "question_id": "CS230_q1",
+    "question": "Propose a different activation function for the last layer and a loss function that are better suited for this multi-class labeling task.",
+    "choices": [],
+    "answer": "We can formulate this as n independent logistic regression tasks, each trying to predict whether the example belongs to the corresponding class or not. Then the loss can simply be the average of n logistic losses over all classes.",
+    "question_type": "short-answer",
+    "topic": "activation function, loss function"
+}
+
+{
+    "question_id": "CS230_q2",
+    "question": "Prove the following lower bound on the cross-entropy loss for an example with L correct classes.",
+    "choices": [],
+    "answer": "The lower bound is L log(L).",
+    "question_type": "short-answer",
+    "topic": "cross-entropy loss"
+}
+{
+    "question_id": "CS230_4",
+    "question": "In this question, you will explore the importance of good balance between positive and negative labeled examples within a mini-batch, especially when your network includes batch normalization layers. Recall the batch normalization layer takes values z= (z(1);:::;z(m)) as input and computes znorm= (z(1) norm;:::;z(m) norm) according to: z(i) norm=z(i) p (2) +where=1 mmX i=1z(i)(2) =1 mmX i=1(z(i) )2 It then applies a second transformation to get ez= (ez(1);:::;ez(m)) using learned parameters and : ez(i)= z(i) norm+ ",
+    "choices": [],
+    "answer": "(a)(1 point) Explain the purpose of in the expression for z(i) norm.",
+    "question_type": "multiple_choice",
+    "topic": "Batch Norm"
+},
+{
+    "question_id": "CS230_4_solution",
+    "question": "",
+    "choices": [],
+    "answer": "It prevents division by 0 for features with variance 0.",
+    "question_type": "solution",
+    "topic": "Batch Norm"
+},
+{
+    "question_id": "CS230_5",
+    "question": "You want to use a neural network with batch normalization layers to build a classifier that can distinguish a hot dog from not a hot dog. (For the rest of this question, assume = 0.)",
+    "choices": [],
+    "answer": "",
+    "question_type": "multiple_choice",
+    "topic": "Batch Norm"
+}
+{
+    "question_id": "CS230_b_2",
+    "question": "What is z_norm? Express your answer as a matrix with shape (3, 4).",
+    "choices": [],
+    "answer": "14",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}
+[
+    {
+        "question_id": "0",
+        "question": "(c)(2 points) Suppose = (1;1;1) and= (0;\u000010;10). What is ez? Express your answer as a matrix with shape (3, 4).",
+        "choices": [],
+        "answer": "BBB@\u00001 1 1\u00001\n\u00001 1 1\u00001\n\u00001 1 1\u000011\nCCCA",
+        "question_type": "(c)",
+        "topic": "CS230"
+    },
+    {
+        "question_id": "1",
+        "question": "(d)(2 points) Give 2 benets of using a batch normalization layer.",
+        "choices": [],
+        "answer": "Solution: We accept any of these: (i) accelerates learning by reducing covariate\nshift, decoupling dependence of layers, and/or allowing for higher learning rates/\ndeeper networks, (ii) accelerates learning by normalizing contours of output dis-\ndistribution to be more uniform across dimensions, (iii) Regularizes by using batch\nstatistics as noisy estimates of the mean and variance for normalization (reducing\nlikelihood of overtting), (iv) mitigates poor weights initialization and/or vari-\nability in scale of weights, (v) mitigates vanishing/exploding gradient problems,\n(vi) constrains output of each layer to relevant regions of an activation function,\nand/or stabilizes optimization process, (vii) mitigates linear discrepancies between\nbatches, (viii) improves expressiveness of the model by including additional learned\nparameters, \rnand, producing improved loss.\nPartial credit was awarded to responses which cited multiple benets from the\nsame category.\nSome responses that were intentionally not accepted: (i) symmetry-breaking, (ii)\nadds noise (without mentioning regularization), (iii) normalizes input distribution\n(without mentioning accelerated training), (iv) adds stability (without mentioning\noptimization process), (v) faster (without mentioning learning or training) (vi)\nreduces variance (without mentioning of what)",
+        "question_type": "(d)",
+        "topic": "CS230"
+    },
+    {
+        "question_id": "2",
+        "question": "(e)(2 points) Explain what would go wrong if the batch normalization layer only applied\nthe rst transformation ( znorm).",
+        "choices": [],
+        "answer": "15",
+        "question_type": "(e)",
+        "topic": "CS230"
+    }
+]
+[
+  {
+    "question_id": "f",
+    "question": "Why is this approach preferred over using the mini-batch statistics during training and at test time?",
+    "choices": [
+      "Moving averages of the mean and variance produce a normalization that's more consistent with the transformation the network used to learn during training than the mini-batch statistics.",
+      "Moving averages of the mean and variance produce a consistent normalization for an example, that's independent of the other examples in the batch."
+    ],
+    "answer": "Moving averages of the mean and variance produce a normalization that's more consistent with the transformation the network used to learn during training than the mini-batch statistics.",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+  }
+]
+{
+    "question_id": "g",
+    "question": "Explain why inclusion of the batch normalization layer causes a discrepancy between training error and testing error when mini-batches are constructed with poor mixing.",
+    "choices": [],
+    "answer": "During training, batches on average get normalized according to a statistic drawn from each of the distributions; however, at test time, batches get normalized according to the mean of both of the distributions, which never occurred during training. This leads to a discrepancy between training error and testing error.",
+    "question_type": "Short answer",
+    "topic": "Batch normalization"
+}
+{
+    "question_id": "18",
+    "question": "Rubric +1 for mentioning the moving averages are different from the mini-batch statistics. +1 for describing how the moving averages are different from the mini-batch statistics (as in the figure above or using the example numbers provided). +1 for describing this is caused by the way we constructed the mini-batches. +1 for describing how this causes a disparity in training/testing.",
+    "choices": [],
+    "answer": "",
+    "question_type": "",
+    "topic": ""
+}
+{
+    "question_id": "5",
+    "question": "In this question, you will implement a fully-connected network. The architecture is LINEAR\n!RELU!DROPOUT!BATCHNORM . This is a dummy architecture that has been\nmade up for this exercise.\nThe code below implements the forward propagation, but some parts are missing. You will\nneed to ll the parts between the tags (START CODE HERE) and (END CODE HERE)\nbased on the given instructions . Note that we are using only numpy (not tensor\now),\nand the relu function has been imported for you.\n\nimport numpy as np\nfrom utils import relu\ndef forward_propagation_with_dropout_and_batch_norm(X, parameters, keep_prob = 0.5):\n\"\"\"\nImplements the forward propagation: LINEAR -> RELU -> DROPOUT -> BATCHNORM.\nArguments:\nX -- input data of shape (n_x, m)\nparameters -- python dictionary containing your parameters:\nW -- weight matrix of shape (n_y, n_x)\nb -- bias vector of shape (n_y, 1)\nkeep_prob -- probability of keeping a neuron active during drop-out, scalar\ngamma -- shifting parameter of the batch normalization layer, scalar\nbeta -- scaling parameter of the batch normalization layer, scalar\nepsilon -- stability parameter of the batch normalization layer, scalar\nReturns:\nA2 -- output of the forward propagation\ncache -- tuple, information stored for computing the backward propagation\n\"\"\"\n# retrieve parameters\nW = parameters[\"W\"]\nb = parameters[\"b\"]\ngamma = parameters[\"gamma\"]\nbeta = parameters[\"beta\"]\nepsilon = parameters[\"epsilon\"]\n### START CODE HERE ###\n# LINEAR\nZ1 =\n# RELU\nA1 =",
+    "choices": [],
+    "answer": "Z1 and A1",
+    "question_type": "coding",
+    "topic": "Numpy"
+}
+{
+    "question_id": "CS230-1",
+    "question": "What is the purpose of dropout in neural networks?",
+    "choices": [],
+    "answer": "To prevent overfitting by randomly dropping out neurons during training",
+    "question_type": "Multiple Choice",
+    "topic": "DROPOUT"
+}
+{
+    "question_id": "CS230-2",
+    "question": "What is the purpose of batch normalization in neural networks?",
+    "choices": [],
+    "answer": "To normalize the activations of a previous layer and improve training speed",
+    "question_type": "Multiple Choice",
+    "topic": "BATCHNORM"
+}
+{
+  "question_id": "1",
+  "question": "What is the purpose of the epsilon parameter in the batch normalization layer in CS230?",
+  "choices": [],
+  "answer": "The epsilon parameter is used for stability during normalization.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "2",
+  "question": "What are the returns of the forward propagation in CS230?",
+  "choices": [],
+  "answer": "The returns of the forward propagation are A2 (output) and cache (information for backward propagation).",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "3",
+  "question": "What is the purpose of the dropout step in the forward propagation in CS230?",
+  "choices": [],
+  "answer": "The purpose of the dropout step is to randomly shut down neurons to prevent overfitting.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "4",
+  "question": "What are the steps involved in the batch normalization process in CS230?",
+  "choices": [],
+  "answer": "The steps involved in the batch normalization are: 1. Compute the vector of means. 2. Compute the vector of variances. 3. Normalize the activations using the means and variances. 4. Scale and shift the normalized activations.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+},
+{
+  "question_id": "5",
+  "question": "What is the purpose of the gamma and beta parameters in the batch normalization process in CS230?",
+  "choices": [],
+  "answer": "The purpose of the gamma and beta parameters is to scale and shift the normalized activations.",
+  "question_type": "multiple_choice",
+  "topic": "CS230"
+}
+}
+{
+    "question_id": "A2",
+    "question": "What is cache?",
+    "choices": [],
+    "answer": "Cache is a smaller, faster memory component that stores copies of data from frequently used main memory locations.",
+    "question_type": "definition",
+    "topic": "CS230"
+}
+{
+    "question_id": "6",
+    "question": "Who let the cars in?",
+    "choices": [],
+    "answer": "",
+    "question_type": "short_answer",
+    "topic": "CS230"
+}
+
+{
+    "question_id": "6(a)",
+    "question": "You pick a pair of (different) unseen images of the same car and compute the loss L. The loss is extremely low, but your model performs poorly when deployed. What could be a possible problem with your approach?",
+    "choices": [],
+    "answer": "Using pairs causes all encodings to be clustered tightly in the embedding space. Cannot differentiate between different objects. Having the same encoding for all objects gives minimum MSE.",
+    "question_type": "short_answer",
+    "topic": "CS230"
+}
+{
+    "question_id": "CS230(b)",
+    "question": "Explain how you would you use this newly trained network to decide whether a car in front of your mansion should be allowed to enter.",
+    "choices": [],
+    "answer": "Encode all examples in the database D using the newly trained network. Encode the image of the car waiting in front of the mansion. Use the Nearest Neighbors algorithm with a thresholding to decide if this car is in the database or not.",
+    "question_type": "explanation",
+    "topic": "CS230"
+}
+{
+    "question_id": "7",
+    "question": "An X-neuron, as opposed to a neuron, takes vectors as input, and outputs vectors. There are three stages in the forward propagation for an X-neuron.",
+    "choices": [],
+    "answer": "25",
+    "question_type": "X-Network",
+    "topic": ""
+}
+{
+    "question_id": "CS230-1",
+    "question": "Given that all X-neurons in your network output a vector of shape ( D;1), what is the dimension of W[2] for a single X-neuron in layer 2 of your X-network?",
+    "choices": [],
+    "answer": "DxD",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}
+
+{
+    "question_id": "CS230-2",
+    "question": "Given that all X-neurons in your network output a vector of shape ( D;1), what is the dimension of W[1] for a single X-neuron in layer 1 of your network?",
+    "choices": [],
+    "answer": "Dxnx",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}
+
+{
+    "question_id": "CS230-3",
+    "question": "For the jth X-neuron of the 2nd layer, how many weights (c[l]ij) does it have in its stage 2?",
+    "choices": [],
+    "answer": "26",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "1",
+    "question": "How would you vectorize this sum as a matrix product?",
+    "choices": [],
+    "answer": "Stack all ^ujjiin matrix that is Dn[1]multiply with vector c[2]i which isn[1]1",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "2",
+    "question": "What is the dimension of the output of stage 2 of the jthX-neuron?",
+    "choices": [],
+    "answer": "D1.",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "3",
+    "question": "What is the dimension of this gradient?",
+    "choices": [],
+    "answer": "Dimension (D, 1)",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "4",
+    "question": "Given this derivative, write the derivative@L\n@s[2]\n1in terms of@L\n@a[2]\n1and\na[2]\n1?",
+    "choices": [],
+    "answer": "@L\n@a[2]\n1Ja[2]\n1J(1 a[2]\n1)",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "5",
+    "question": "Using the derivative calculated in question (d), write down the gradient\n@L\n@W[2]\n1i.",
+    "choices": [],
+    "answer": "c1i\n@L\n@a[2]\n1J(1 a[2]\n1)Ja[2]\n1)\na[1]T\ni",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "6",
+    "question": "You decide to use your X-network to predict if an image contains a falafel or not. The falafel is a type of food, and this is a binary classication application. Given an image, you run it through your X-network, and use the output activation a[3]1 to make a prediction. You do this by using the L2 norm of the output as a measure of probability of the presence of a falafel. You dene the loss function for one training example as follows:L=ymax(0;m+ jja[3]1jj)2+(1 y) max(0;jja[3]1jj m )2You have set = 1,m = 0:1 andm+= 0:9 (they are hyperparameters). Here, yis the label which tells you whether the image truly has a falafel ( y= 1) or not ( y= 0).",
+    "choices": [],
+    "answer": "",
+    "question_type": "",
+    "topic": "CS230"
+}
+{
+    "question_id": "7",
+    "question": "What is the value of y?",
+    "choices": [],
+    "answer": "The label which tells you whether the image truly has a falafel (y= 1) or not (y= 0)",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "f",
+    "question": "Draw the graph of Lagainstjja[3] assuming the picture contains a falafel.",
+    "choices": [],
+    "answer": "Solution not provided",
+    "question_type": "graph",
+    "topic": "CS230"
+}
+{
+    "question_id": "g(i)",
+    "question": "What is the maximum value the loss can have?",
+    "choices": [],
+    "answer": "0.12",
+    "question_type": "calculation",
+    "topic": "CS230"
+}
+{
+    "question_id": "g(ii)",
+    "question": "What is the minimum value of the loss and when is this minimum reached?",
+    "choices": [],
+    "answer": "The minimum value is 0 and it is reached when jja[3] 1jj is less than 0.1.",
+    "question_type": "text",
+    "topic": "CS230"
+}
+[
+    {
+        "question_id": "Q8",
+        "question": "Let's say you have a website with a lot of traffic. You would like to build a network that computes the probability of a user clicking on a given advertisement on your website. This is a supervised learning setting. What dataset do you need to train such a network?",
+        "choices": [],
+        "answer": "Pairs (~ x;y) such that: {~ x: Features of the user + advertisement {y: Binary label (0/1)",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    },
+    {
+        "question_id": "Q8b",
+        "question": "Choose an appropriate cost function for the problem and give the formula of the cost.",
+        "choices": [],
+        "answer": "Pm i=1(yilog(^yi) + (1-yi)log(1-^yi)) Summation over all training examples.",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    },
+    {
+        "question_id": "Q8c",
+        "question": "Your website sells sport footwear and you have already collected a dataset of 1 million examples from past visits. Your friend, who works in the high fashion industry, offers to let you use their dataset as it has similar descriptors. However, you are concerned about the impact of this different distribution dataset in the performance of your predictive system. Explain how you would use your friend's dataset.",
+        "choices": [],
+        "answer": "Training set. Reasons include: {Neural networks are very data intensive. Therefore, opportunities to increase the dataset should not be missed. {The new data in the training set could help the neural network to learn better lower level features (as you have more data) {Using the new data in the dev/test set would change the goal/target of the optimization process. Thus, the optimized system would not perform well with real world data.",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    },
+    {
+        "question_id": "Q8d",
+        "question": "How would you assess the impact of the new dataset?",
+        "choices": [],
+        "answer": "Split the training set in a new training set + train-dev set (made exclusively of old training examples). Measure the difference of accuracy between the new training set and train-dev set. If there is a significant difference, then the distribution mismatch between the old and new images is a problem.",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    }
+]
+{
+    "question_id": "(e)",
+    "question": "Initially, you decide to build a fully connected neural network for the problem. This baseline model would have L hidden layers, one input layer and an output layer. The number of neurons in the lth layer isn[l]. Write down the number of parameters of this model as a function of L and n[l] for l = 0, ..., L. Note: The input layer is considered to be layer number 0",
+    "choices": [],
+    "answer": "PL\ni=0(n[l+1] * (n[l] + n[l+1])) = PL\ni=0(n[l+1] * (n[l] + 1))",
+    "question_type": "short answer",
+    "topic": "CS230"
+}
+{
+    "question_id": "(f)",
+    "question": "Based on the information provided in the graph below, what type of problem will you encounter as the number of hidden layer approaches 10? Mention possible solutions to this problem.",
+    "choices": [],
+    "answer": "Overfitting problem. Possible solutions are: \n- Regularization: Parameter norm penalties (L2/L1), Dropout. \n- Reduce complexity of the neural network (decrease number of neurons and hidden layers) \n- Increase the training dataset. Data Augmentation/GANs",
+    "question_type": "short answer",
+    "topic": "CS230"
+}
+{
+    "question_id": "CS230-31",
+    "question": "",
+    "choices": [],
+    "answer": "",
+    "question_type": "",
+    "topic": ""
+}
+{
+  "question_id": "32",
+  "question": "What is the purpose of CS230?",
+  "choices": [],
+  "answer": "To extract and format raw PDF text into JSON",
+  "question_type": "multiple choice",
+  "topic": "CS230"
+}
+{
+    "question_id": "33",
+    "question": "What is the format of the extracted data after processing the raw PDF text?",
+    "choices": [],
+    "answer": "json",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}
+{
+    "question_id": "34",
+    "question": "",
+    "choices": [],
+    "answer": "",
+    "question_type": "",
+    "topic": "CS230"
+}

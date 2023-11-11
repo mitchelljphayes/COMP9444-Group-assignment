@@ -1,0 +1,18 @@
+CS230
+(e)(2 points) Initially, you decide to build a fully connected neural network for the
+problem. This baseline model would have Lhidden layers, one input layer and an
+output layer. The number of neurons in the lthlayer isn[l]. Write down the number
+of parameters of this model as a function of Landn[l]forl= 0:::L.
+Note: The input layer is considered to be layer number 0
+Solution:PL
+i=0(n[l+1]n[l]+n[l+1]) =PL
+i=0(n[l+1](n[l]+ 1))
+(f)(2 points) Based on the information provided in the graph below, what type of prob-
+lem will you encounter as the number of hidden layer approaches 10? Mention possible
+solutions to this problem.
+Solution: Overtting problem. Possible solutions are:
+{Regularization: Parameter norm penalties (L2/L1), Dropout.
+{Reduce complexity of the neural network (decrease number of neurons and
+hidden layers)
+{Increase the training dataset. Data Augmentation/GANs
+30

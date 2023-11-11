@@ -1,0 +1,8 @@
+{
+    "question_id": "CS230_b_2",
+    "question": "What is z_norm? Express your answer as a matrix with shape (3, 4).",
+    "choices": [],
+    "answer": "14",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}

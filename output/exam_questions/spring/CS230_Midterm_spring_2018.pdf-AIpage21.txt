@@ -1,0 +1,8 @@
+{
+    "question_id": "A2",
+    "question": "What is cache?",
+    "choices": [],
+    "answer": "Cache is a smaller, faster memory component that stores copies of data from frequently used main memory locations.",
+    "question_type": "definition",
+    "topic": "CS230"
+}

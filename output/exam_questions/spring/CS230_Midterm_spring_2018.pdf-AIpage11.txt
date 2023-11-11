@@ -1,0 +1,17 @@
+{
+    "question_id": "CS230_q1",
+    "question": "Propose a different activation function for the last layer and a loss function that are better suited for this multi-class labeling task.",
+    "choices": [],
+    "answer": "We can formulate this as n independent logistic regression tasks, each trying to predict whether the example belongs to the corresponding class or not. Then the loss can simply be the average of n logistic losses over all classes.",
+    "question_type": "short-answer",
+    "topic": "activation function, loss function"
+}
+
+{
+    "question_id": "CS230_q2",
+    "question": "Prove the following lower bound on the cross-entropy loss for an example with L correct classes.",
+    "choices": [],
+    "answer": "The lower bound is L log(L).",
+    "question_type": "short-answer",
+    "topic": "cross-entropy loss"
+}

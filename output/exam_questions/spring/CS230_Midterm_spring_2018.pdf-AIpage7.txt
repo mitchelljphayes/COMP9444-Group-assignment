@@ -1,0 +1,32 @@
+{
+    "question_id": "1",
+    "question": "When the input is 2-dimensional, you can plot the decision boundary of your neural network and clearly see if there is overfitting. How do you check overfitting if the input is 10-dimensional?",
+    "choices": [],
+    "answer": "Compute cost function in the dev and training set. If there is a significant difference, then you have a variance problem.",
+    "question_type": "i",
+    "topic": "CS230"
+}
+{
+    "question_id": "2",
+    "question": "What is the advantage of using Inverted Dropout compared to its older version (\Normal\" dropout)? Mention the difference of implementation.",
+    "choices": [],
+    "answer": "Implementation difference: Add line of code, a[L] == keepprobThe expected value of the activation doesn't decrease with this extra line of code, so the activations do not need to be rescaled at test time.",
+    "question_type": "j",
+    "topic": "CS230"
+}
+{
+    "question_id": "3",
+    "question": "Give a method to fight exploding gradient in fully-connected neural networks.",
+    "choices": [],
+    "answer": "Gradient clipping.",
+    "question_type": "k",
+    "topic": "CS230"
+}
+{
+    "question_id": "4",
+    "question": "You are using an Adam optimizer. Show why the bias correction naturally disappears when the numbers of steps to compute the exponential moving averages gets large.",
+    "choices": [],
+    "answer": "Vt-1 * t -> Vt when t->1",
+    "question_type": "l",
+    "topic": "CS230"
+}

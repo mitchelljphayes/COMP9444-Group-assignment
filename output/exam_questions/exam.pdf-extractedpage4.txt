@@ -1,26 +1,0 @@
-CS230
-Question 2 (Short Answer Questions, 35 points)
-Please write concise answers.
-(a)(2 points) You are training a logistic regression model. You initialize the parameters
-with 0's. Is this a good idea? Explain your answer.
-Solution: There is no symmetry problem with this approach. In logistic regres-
-sion, we have a=Wx+bwhereais a scalar and Wandxare both vectors. The
-derivative of the binary cross entropy loss with respect to a single dimension in the
-weight vector W[i] is a function of x[i], which is in general dierent than x[j] when
-i6=j.
-(b)(2 points) You design a fully connected neural network architecture where all acti-
-vations are sigmoids. You initialize the weights with large positive numbers. Is this a
-good idea? Explain your answer.
-Solution: LargeWcausesWxto be large. When Wxis large, the gradient
-is small for sigmoid activation function. Hence, we will encounter the vanishing
-gradient problem.
-(c)(2 points) You are given a dataset of 10 10 grayscale images. Your goal is to build
-a 5-class classier. You have to adopt one of the following two options:
-•the input is attened into a 100-dimensional vector, followed by a fully-connected
-layer with 5 neurons
-•the input is directly given to a convolutional layer with ve 10 10 lters
-Explain which one you would choose and why.
-Solution: The 2 approaches are the same. But the second one seems better in
-terms of computational costs (no need to atten the input). We accept the answer
-"the 2 approaches are the same".
-5

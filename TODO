@@ -1,0 +1,12 @@
+# TODO:
+
+- [ ] Create training text files from NN text books
+- [ ] Create eval dataset from Stanford Exams
+- [ ] Fine-tune GPT2 on training texts
+- [ ] Fine-tune llama2 on training texts
+- [ ] Create Rag Model with llama2 based on training texts
+- [ ] Create eval loader for all models
+- [ ] Create Presentation Slides
+- [ ] DO PRESENTATION
+- [ ] Write report
+- [ ] Clean up Notebook (Most Marks)

@@ -1,0 +1,19 @@
+CS230
+Consider the following 3-layer X-network, made of X-neurons exclusively.
+Figure 5: The input is a vector xof shape (nx;1), which is duplicated and given to every
+X-neuron of the rst layer. The X-network consists of three layers in which layer 1 has
+n[1]X-neurons, layer 2 has n[2]X-neurons, and layer 3 has a single X-neuron. Although for
+simplicity we did not draw all arrows, every layer is fully-connected to the next one.
+(a) Given that all X-neurons in your network output a vector of shape ( D;1):
+(i)(2 points) What is the dimension of W[2]
+ji, for a single X-neuron in layer 2 of your
+X-network?
+Solution: DD
+(ii)(2 points) What is the dimension of W[1]
+ji, for a single X-neuron in layer 1 of your
+network?
+Solution: Dnx
+(b)(2 points) For thejthX-neuron of the 2ndlayer, how many weights ( c[l]
+ij) does it have
+in its stage 2?
+26

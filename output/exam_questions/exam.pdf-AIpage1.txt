@@ -1,27 +1,0 @@
-CS230
-Question 1 (Multiple Choice Questions, 10 points)
-For each of the following questions, circle the letter of your choice. There is only ONE correct
-choice unless explicitly mentioned. No explanation is required. There is no penalty for a
-wrong answer.
-(a)(1 point) Which of the following techniques does NOT prevent a model from overt-
-ting?
-(i) Data augmentation
-(ii) Dropout
-(iii) Early stopping
-(iv) None of the above
-Solution: (iv)
-(b)(3 points) Consider the following data sets:
-•Xtrain= (x(1);x(2);:::;x(mtrain));Ytrain= (y(1);y(2);:::;y(mtrain))
-•Xtest= (x(1);x(2);:::;x(mtest));Ytest= (y(1);y(2);:::;y(mtest))
-You want to normalize your data before training your model. Which of the following
-propositions are true? (Circle all that apply.)
-(i) The normalizing mean and variance computed on the training set, and used to
-train the model, should be used to normalize test data.
-(ii) Test data should be normalized with its own mean and variance before being fed
-to the network at test time because the test distribution might be dierent from
-the train distribution.
-(iii) Normalizing the input impacts the landscape of the loss function.
-(iv) In imaging, just like for structured data, normalization consists in subtracting the
-mean from the input and multiplying the result by the standard deviation.
-Solution: (i) and (iii)
-2

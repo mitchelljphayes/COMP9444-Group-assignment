@@ -1,0 +1,16 @@
+{
+    "question_id": "f",
+    "question": "Consider a dataset fx(1);x(2);:::;x(m)gwhere each example x(i)contains a sequence of 100 numbers: x(i)= (x(i)<1>;x(i)<2>;:::;x(i)<100>) You have a very accurate (but not perfect) model that predicts x<t+1>from (x<1>;:::;x<t>). Givenx<1>, you want to generate ( x<2>;:::;x<100>) by repeatedly running your model. Your method is:",
+    "choices": [],
+    "answer": "1. Predict ^x<2>fromx<1>\n2. Predict ^x<3>from (x<1>;^x<2>)\n3. ...\n4. Predict ^x<100>from (x<1>;^x<2>;:::;^x<99>)",
+    "question_type": "text",
+    "topic": "CS230"
+}
+{
+    "question_id": "g",
+    "question": "You want to use the gure below to explain the concept of early stopping to a friend. Fill-in the blanks. (1) and (2) describe the axes. (3) and (4) describe values on the vertical and horizontal axis. (5) and (6) describe the curves. Be precise.",
+    "choices": [],
+    "answer": "(1) and (2) describe the axes: (1) = number of iterations/train steps, (2) = loss function value/accuracy\n(3) and (4) describe values on the vertical and horizontal axis: (3) = loss function value/error, (4) = number of iterations/train steps\n(5) and (6) describe the curves: (5) = training loss/accuracy curve, (6) = validation loss/accuracy curve",
+    "question_type": "text",
+    "topic": "CS230"
+}

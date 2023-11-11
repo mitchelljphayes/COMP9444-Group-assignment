@@ -1,0 +1,8 @@
+{
+    "question_id": "7",
+    "question": "An X-neuron, as opposed to a neuron, takes vectors as input, and outputs vectors. There are three stages in the forward propagation for an X-neuron.",
+    "choices": [],
+    "answer": "25",
+    "question_type": "X-Network",
+    "topic": ""
+}

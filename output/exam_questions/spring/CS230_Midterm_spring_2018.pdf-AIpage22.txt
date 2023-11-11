@@ -1,0 +1,17 @@
+{
+    "question_id": "6",
+    "question": "Who let the cars in?",
+    "choices": [],
+    "answer": "",
+    "question_type": "short_answer",
+    "topic": "CS230"
+}
+
+{
+    "question_id": "6(a)",
+    "question": "You pick a pair of (different) unseen images of the same car and compute the loss L. The loss is extremely low, but your model performs poorly when deployed. What could be a possible problem with your approach?",
+    "choices": [],
+    "answer": "Using pairs causes all encodings to be clustered tightly in the embedding space. Cannot differentiate between different objects. Having the same encoding for all objects gives minimum MSE.",
+    "question_type": "short_answer",
+    "topic": "CS230"
+}

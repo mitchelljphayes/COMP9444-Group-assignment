@@ -1,0 +1,8 @@
+{
+    "question_id": "4",
+    "question": "What should we do to increase recall?",
+    "choices": [],
+    "answer": "(ii) Increase recall, because we don't want false negatives.",
+    "question_type": "",
+    "topic": "CS230"
+}

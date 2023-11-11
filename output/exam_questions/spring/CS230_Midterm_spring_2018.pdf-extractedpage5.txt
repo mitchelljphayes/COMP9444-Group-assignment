@@ -1,0 +1,28 @@
+CS230
+Solution: While a neural network with a single hidden layer can represent any
+continuous function, the size of the hidden layer required to do so is prohibitively
+large for most problems. Also, having multiple layers allows the network to rep-
+resent highly nonlinear (e.g. more than what a single sigmoid can represent) with
+fewer number of parameters than a shallow network can.
+(f)(3 points) Consider a dataset fx(1);x(2);:::;x(m)gwhere each example x(i)contains
+a sequence of 100 numbers:
+x(i)= (x(i)<1>;x(i)<2>;:::;x(i)<100>)
+You have a very accurate (but not perfect) model that predicts x<t+1>from (x<1>;:::;x<t>).
+Givenx<1>, you want to generate ( x<2>;:::;x<100>) by repeatedly running your model.
+Your method is:
+1. Predict ^x<2>fromx<1>
+2. Predict ^x<3>from (x<1>;^x<2>)
+3. ...
+4. Predict ^x<100>from (x<1>;^x<2>;:::;^x<99>)
+The resulting ^ x<100>turns out to be very dierent from the true x<100>. Explain why.
+Solution: (Training/Test mismatch on sequence prediction)
+There is a mismatch between training data and test data. During training, the
+network took inhx1;:::;xtias input to predict xt+1. In test time, however, most
+of the input ( x2;:::;xt) are what the model generated. And because the model is
+not perfect, the input distribution changes from the real distribution. And this drift
+from the training data distribution becomes worse because the error compounds
+over 100 steps.
+(g)(3 points) You want to use the gure below to explain the concept of early stopping
+to a friend. Fill-in the blanks. (1) and (2) describe the axes. (3) and (4) describe
+values on the vertical and horizontal axis. (5) and (6) describe the curves. Be precise.
+6

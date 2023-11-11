@@ -1,0 +1,18 @@
+[
+  {
+    "question_id": "(i)",
+    "question": "You would like to detect the 3x3 cross in Image 1. Hand-engineer a filter to be convolved over Image 1. Given the output of this \"convolved\" operation, the algorithm (?) should give you the position of the cross.",
+    "choices": [],
+    "answer": "0",
+    "question_type": "multiple choice",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "(ii)",
+    "question": "You would like to detect the 3x3 red cross in Image 2 but not the blue cross. Hand-engineer a filter to be convolved over Image 2. Given the output of this \"convolved\" operation, the algorithm (?) should give you the position of the red cross.",
+    "choices": [],
+    "answer": "0",
+    "question_type": "multiple choice",
+    "topic": "CS230"
+  }
+]

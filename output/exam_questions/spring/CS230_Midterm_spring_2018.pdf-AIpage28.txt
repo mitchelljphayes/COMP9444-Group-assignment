@@ -1,0 +1,34 @@
+[
+    {
+        "question_id": "Q8",
+        "question": "Let's say you have a website with a lot of traffic. You would like to build a network that computes the probability of a user clicking on a given advertisement on your website. This is a supervised learning setting. What dataset do you need to train such a network?",
+        "choices": [],
+        "answer": "Pairs (~ x;y) such that: {~ x: Features of the user + advertisement {y: Binary label (0/1)",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    },
+    {
+        "question_id": "Q8b",
+        "question": "Choose an appropriate cost function for the problem and give the formula of the cost.",
+        "choices": [],
+        "answer": "Pm i=1(yilog(^yi) + (1-yi)log(1-^yi)) Summation over all training examples.",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    },
+    {
+        "question_id": "Q8c",
+        "question": "Your website sells sport footwear and you have already collected a dataset of 1 million examples from past visits. Your friend, who works in the high fashion industry, offers to let you use their dataset as it has similar descriptors. However, you are concerned about the impact of this different distribution dataset in the performance of your predictive system. Explain how you would use your friend's dataset.",
+        "choices": [],
+        "answer": "Training set. Reasons include: {Neural networks are very data intensive. Therefore, opportunities to increase the dataset should not be missed. {The new data in the training set could help the neural network to learn better lower level features (as you have more data) {Using the new data in the dev/test set would change the goal/target of the optimization process. Thus, the optimized system would not perform well with real world data.",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    },
+    {
+        "question_id": "Q8d",
+        "question": "How would you assess the impact of the new dataset?",
+        "choices": [],
+        "answer": "Split the training set in a new training set + train-dev set (made exclusively of old training examples). Measure the difference of accuracy between the new training set and train-dev set. If there is a significant difference, then the distribution mismatch between the old and new images is a problem.",
+        "question_type": "Practical case study",
+        "topic": "Online advertising"
+    }
+]

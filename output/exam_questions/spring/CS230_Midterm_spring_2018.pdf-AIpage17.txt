@@ -1,0 +1,8 @@
+{
+    "question_id": "18",
+    "question": "Rubric +1 for mentioning the moving averages are different from the mini-batch statistics. +1 for describing how the moving averages are different from the mini-batch statistics (as in the figure above or using the example numbers provided). +1 for describing this is caused by the way we constructed the mini-batches. +1 for describing how this causes a disparity in training/testing.",
+    "choices": [],
+    "answer": "",
+    "question_type": "",
+    "topic": ""
+}

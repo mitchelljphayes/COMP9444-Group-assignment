@@ -1,0 +1,8 @@
+{
+    "question_id": "g",
+    "question": "Explain why inclusion of the batch normalization layer causes a discrepancy between training error and testing error when mini-batches are constructed with poor mixing.",
+    "choices": [],
+    "answer": "During training, batches on average get normalized according to a statistic drawn from each of the distributions; however, at test time, batches get normalized according to the mean of both of the distributions, which never occurred during training. This leads to a discrepancy between training error and testing error.",
+    "question_type": "Short answer",
+    "topic": "Batch normalization"
+}

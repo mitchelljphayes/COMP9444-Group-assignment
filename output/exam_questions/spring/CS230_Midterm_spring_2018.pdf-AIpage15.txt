@@ -1,0 +1,13 @@
+[
+  {
+    "question_id": "f",
+    "question": "Why is this approach preferred over using the mini-batch statistics during training and at test time?",
+    "choices": [
+      "Moving averages of the mean and variance produce a normalization that's more consistent with the transformation the network used to learn during training than the mini-batch statistics.",
+      "Moving averages of the mean and variance produce a consistent normalization for an example, that's independent of the other examples in the batch."
+    ],
+    "answer": "Moving averages of the mean and variance produce a normalization that's more consistent with the transformation the network used to learn during training than the mini-batch statistics.",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+  }
+]

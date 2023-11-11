@@ -1,0 +1,24 @@
+{
+    "question_id": "CS230-1",
+    "question": "Look at the grayscale image at the top of the collection of images below. Deduce what type of convolutional filter was used to get each of the lower images. Explain briefly and include the values of these filters. The filters have a shape of (3,3).",
+    "choices": [],
+    "answer": "",
+    "question_type": "open-ended",
+    "topic": "Convolutional Filters"
+}
+
+{
+    "question_id": "CS230-2",
+    "question": "What are the different metrics used to evaluate the performance of a machine learning model during training?",
+    "choices": [
+        "Loss value (or error)",
+        "Number of iterations",
+        "Best validation loss value (or best validation error)",
+        "Optimal stopping point (or early stopping point)",
+        "Validation loss (or validation error)",
+        "Training loss (or training error)"
+    ],
+    "answer": "",
+    "question_type": "multiple-choice",
+    "topic": "Model Evaluation"
+}

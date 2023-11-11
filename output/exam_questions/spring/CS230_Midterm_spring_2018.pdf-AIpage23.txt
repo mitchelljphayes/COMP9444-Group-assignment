@@ -1,0 +1,8 @@
+{
+    "question_id": "CS230(b)",
+    "question": "Explain how you would you use this newly trained network to decide whether a car in front of your mansion should be allowed to enter.",
+    "choices": [],
+    "answer": "Encode all examples in the database D using the newly trained network. Encode the image of the car waiting in front of the mansion. Use the Nearest Neighbors algorithm with a thresholding to decide if this car is in the database or not.",
+    "question_type": "explanation",
+    "topic": "CS230"
+}

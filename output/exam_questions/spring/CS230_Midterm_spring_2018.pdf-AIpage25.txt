@@ -1,0 +1,26 @@
+{
+    "question_id": "CS230-1",
+    "question": "Given that all X-neurons in your network output a vector of shape ( D;1), what is the dimension of W[2] for a single X-neuron in layer 2 of your X-network?",
+    "choices": [],
+    "answer": "DxD",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}
+
+{
+    "question_id": "CS230-2",
+    "question": "Given that all X-neurons in your network output a vector of shape ( D;1), what is the dimension of W[1] for a single X-neuron in layer 1 of your network?",
+    "choices": [],
+    "answer": "Dxnx",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}
+
+{
+    "question_id": "CS230-3",
+    "question": "For the jth X-neuron of the 2nd layer, how many weights (c[l]ij) does it have in its stage 2?",
+    "choices": [],
+    "answer": "26",
+    "question_type": "multiple_choice",
+    "topic": "CS230"
+}

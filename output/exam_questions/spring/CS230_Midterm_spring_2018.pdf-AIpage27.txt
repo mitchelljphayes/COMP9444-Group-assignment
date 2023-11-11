@@ -1,0 +1,24 @@
+{
+    "question_id": "f",
+    "question": "Draw the graph of Lagainstjja[3] assuming the picture contains a falafel.",
+    "choices": [],
+    "answer": "Solution not provided",
+    "question_type": "graph",
+    "topic": "CS230"
+}
+{
+    "question_id": "g(i)",
+    "question": "What is the maximum value the loss can have?",
+    "choices": [],
+    "answer": "0.12",
+    "question_type": "calculation",
+    "topic": "CS230"
+}
+{
+    "question_id": "g(ii)",
+    "question": "What is the minimum value of the loss and when is this minimum reached?",
+    "choices": [],
+    "answer": "The minimum value is 0 and it is reached when jja[3] 1jj is less than 0.1.",
+    "question_type": "text",
+    "topic": "CS230"
+}

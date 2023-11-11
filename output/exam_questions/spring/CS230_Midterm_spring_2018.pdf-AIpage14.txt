@@ -1,0 +1,26 @@
+[
+    {
+        "question_id": "0",
+        "question": "(c)(2 points) Suppose = (1;1;1) and= (0;\u000010;10). What is ez? Express your answer as a matrix with shape (3, 4).",
+        "choices": [],
+        "answer": "BBB@\u00001 1 1\u00001\n\u00001 1 1\u00001\n\u00001 1 1\u000011\nCCCA",
+        "question_type": "(c)",
+        "topic": "CS230"
+    },
+    {
+        "question_id": "1",
+        "question": "(d)(2 points) Give 2 benets of using a batch normalization layer.",
+        "choices": [],
+        "answer": "Solution: We accept any of these: (i) accelerates learning by reducing covariate\nshift, decoupling dependence of layers, and/or allowing for higher learning rates/\ndeeper networks, (ii) accelerates learning by normalizing contours of output dis-\ndistribution to be more uniform across dimensions, (iii) Regularizes by using batch\nstatistics as noisy estimates of the mean and variance for normalization (reducing\nlikelihood of overtting), (iv) mitigates poor weights initialization and/or vari-\nability in scale of weights, (v) mitigates vanishing/exploding gradient problems,\n(vi) constrains output of each layer to relevant regions of an activation function,\nand/or stabilizes optimization process, (vii) mitigates linear discrepancies between\nbatches, (viii) improves expressiveness of the model by including additional learned\nparameters, \rnand, producing improved loss.\nPartial credit was awarded to responses which cited multiple benets from the\nsame category.\nSome responses that were intentionally not accepted: (i) symmetry-breaking, (ii)\nadds noise (without mentioning regularization), (iii) normalizes input distribution\n(without mentioning accelerated training), (iv) adds stability (without mentioning\noptimization process), (v) faster (without mentioning learning or training) (vi)\nreduces variance (without mentioning of what)",
+        "question_type": "(d)",
+        "topic": "CS230"
+    },
+    {
+        "question_id": "2",
+        "question": "(e)(2 points) Explain what would go wrong if the batch normalization layer only applied\nthe rst transformation ( znorm).",
+        "choices": [],
+        "answer": "15",
+        "question_type": "(e)",
+        "topic": "CS230"
+    }
+]

@@ -1,0 +1,8 @@
+{
+    "question_id": "33",
+    "question": "What is the format of the extracted data after processing the raw PDF text?",
+    "choices": [],
+    "answer": "json",
+    "question_type": "Multiple Choice",
+    "topic": "CS230"
+}

@@ -1,0 +1,30 @@
+CS230
+Question 2 (Short Answers, 28 points)
+The questions in this section can be answered in 3-4 sentences. Please be short and concise
+in your responses.
+(a) Consider an input image of shape 500 5003. You atten this image and use a fully
+connected layer with 100 hidden units.
+(i)(1 point) What is the shape of the weight matrix of this layer?
+Solution: Weight matrix which is 750 ;000100 , giving 75 million.
+(ii)(1 point) What is the shape of the corresponding bias vector?
+Solution: 1001
+(b)(2 points) Consider an input image of shape 500 5003. You run this image in
+a convolutional layer with 10 lters, of kernel size 5 5. How many parameters does
+this layer have?
+Solution: 55310 and a bias value for each of the 10 lters, giving 760
+parameters.
+(c)(2 points) You forward propagate an input xin your neural network. The output
+probability is ^ y. Explain briey what@^y
+@xis.
+Solution: The derivative represents how much the output changes when the
+input is changed. In other words, how much the input has inuenced the output.
+(d)(2 points) Why is it necessary to include non-linearities in a neural network?
+Solution: Without nonlinear activation functions, each layer simply performs a
+linear mapping of the input to the output of the layer. Because linear functions are
+closed under composition, this is equivalent to having a single (linear) layer. Thus,
+no matter how many such layers exist, the network can only learn linear functions.
+(e)(2 points) The universal approximation theorem states that a neural network with a
+single hidden layer can approximate any continuous function (with some assumptions
+on the activation). Give one reason why you would use deep networks with multiple
+layers.
+5

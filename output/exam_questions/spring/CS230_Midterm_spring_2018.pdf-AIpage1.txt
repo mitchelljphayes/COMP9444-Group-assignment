@@ -1,0 +1,44 @@
+{
+  "question_id": "1",
+  "question": "Which of the following is true about max-pooling?",
+  "choices": [
+    "It allows a neuron in a network to have information about features in a larger part of the image, compared to a neuron at the same depth in a network without max pooling.",
+    "It increases the number of parameters when compared to a similar network without max pooling.",
+    "It increases the sensitivity of the network towards the position of features within an image."
+  ],
+  "answer": "i",
+  "question_type": "Multiple Choice",
+  "topic": "CS230"
+}
+{
+  "question_id": "2",
+  "question": "In order to backpropagate through a max-pool layer, you need to pass information about the positions of the max values from the forward pass.",
+  "choices": [
+    "True",
+    "False"
+  ],
+  "answer": "i",
+  "question_type": "Multiple Choice",
+  "topic": "CS230"
+}
+{
+  "question_id": "3",
+  "question": "Consider a simple convolutional neural network with one convolutional layer. Which of the following statements is true about this network? (Check all that apply.)",
+  "choices": [
+    "It is scale invariant.",
+    "It is rotation invariant.",
+    "It is translation invariant.",
+    "All of the above."
+  ],
+  "answer": "iii",
+  "question_type": "Multiple Choice",
+  "topic": "CS230"
+}
+{
+  "question_id": "4",
+  "question": "You are training a Generative Adversarial Network to generate nice iguana images, with mini-batch gradient descent. The generator cost J(G) is extremely low, but the generator is not generating meaningful output images. What could be the reason? (Circle all that apply.)",
+  "choices": [],
+  "answer": "",
+  "question_type": "",
+  "topic": "CS230"
+}

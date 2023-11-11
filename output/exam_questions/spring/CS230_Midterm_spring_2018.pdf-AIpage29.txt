@@ -1,0 +1,16 @@
+{
+    "question_id": "(e)",
+    "question": "Initially, you decide to build a fully connected neural network for the problem. This baseline model would have L hidden layers, one input layer and an output layer. The number of neurons in the lth layer isn[l]. Write down the number of parameters of this model as a function of L and n[l] for l = 0, ..., L. Note: The input layer is considered to be layer number 0",
+    "choices": [],
+    "answer": "PL\ni=0(n[l+1] * (n[l] + n[l+1])) = PL\ni=0(n[l+1] * (n[l] + 1))",
+    "question_type": "short answer",
+    "topic": "CS230"
+}
+{
+    "question_id": "(f)",
+    "question": "Based on the information provided in the graph below, what type of problem will you encounter as the number of hidden layer approaches 10? Mention possible solutions to this problem.",
+    "choices": [],
+    "answer": "Overfitting problem. Possible solutions are: \n- Regularization: Parameter norm penalties (L2/L1), Dropout. \n- Reduce complexity of the neural network (decrease number of neurons and hidden layers) \n- Increase the training dataset. Data Augmentation/GANs",
+    "question_type": "short answer",
+    "topic": "CS230"
+}

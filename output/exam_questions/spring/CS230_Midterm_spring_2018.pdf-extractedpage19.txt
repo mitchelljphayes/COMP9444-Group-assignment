@@ -1,0 +1,37 @@
+CS230
+# DROPOUT
+# Step 1: initialize matrix D1 = np.random.rand(..., ...)
+D1 =
+# Step 2: convert entries of D1 to 0 or 1 (using keep_prob as the threshold)
+D1 =
+# Step 3: shut down some neurons of A1
+A1 =
+# Step 4: scale the value of neurons that havent been shut down
+A1 =
+# BATCHNORM
+# Step 1: compute the vector of means; you can use np.mean(..., axis=...)
+mu =
+# Step 2: compute the vector of variances; you can use np.var(..., axis=...)
+var =
+# Step 3: normalize the activations (dont forget about stability)
+A1_norm =
+# Step 4: scale and shift
+A2 =
+### END CODE HERE ###
+cache = (Z1, D1, A1, W, b, A1_norm, mu, var, gamma, beta, epsilon)
+return A2, cache
+Solution:
+import numpy as np
+from utils import relu
+def forward_propagation_with_dropout_and_batch_norm(X, parameters, keep_prob = 0.5):
+"""
+Implements the forward propagation: LINEAR -> RELU -> DROPOUT -> BATCHNORM.
+Arguments:
+X -- input data of shape (n_x, m)
+parameters -- python dictionary containing your parameters:
+W -- weight matrix of shape (n_y, n_x)
+b -- bias vector of shape (n_y, 1)
+keep_prob -- probability of keeping a neuron active during drop-out, scalar
+gamma -- shifting parameter of the batch normalization layer, scalar
+beta -- scaling parameter of the batch normalization layer, scalar
+20

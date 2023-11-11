@@ -1,12 +1,0 @@
-CS230
-Solution: Adversarial examples are transferable, and so Alice can use Fast
-Gradient Sign Based Method on a dierent model, built for the same task (cat vs.
-non-cat classication), and it is likely that this adversarial example will also be
-misclassied by Bob's model.
-(f)(2 points) To defend himself against Alice's attacks, Bob is thinking of using dropout.
-Dropout randomly shuts down certain neurons of the network, and makes it more
-robust to changes in the input. Thus, Bob has the intuition that the network will be
-less vulnerable to adversarial examples. Is Bob correct? Explain why or why not.
-Solution: No, dropout isn't used at test time while Alice will forge her adversarial
-examples by querying a network at test time.
-11

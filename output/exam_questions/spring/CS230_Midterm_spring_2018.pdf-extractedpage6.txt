@@ -1,0 +1,12 @@
+CS230
+Solution:
+(1) Loss value (or error)
+(2) Number of iterations
+(3) Best validation loss value (or best validation error)
+(4) Optimal stopping point (or early stopping point)
+(5) Validation loss (or validation error)
+(6) Training loss (or training error)
+(h)(2 point) Look at the grayscale image at the top of the collection of images below.
+Deduce what type of convolutional lter was used to get each of the lower images.
+Explain briey and include the values of these lters. The lters have a shape of (3,3).
+7

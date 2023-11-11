@@ -1,0 +1,29 @@
+CS230
+(i) The discriminator has poor performance.
+(ii) Your generator is overtting.
+(iii) Your optimizer is stuck in a saddle point.
+(iv) None of the above.
+Solution: (i)
+(e)(2 points) Mini-batch gradient descent is a better optimizer than full-batch gradient
+descent to avoid getting stuck in saddle points.
+(i) True
+(ii) False
+Solution: (i)
+(f)(2 points) Using "neural style transfer" (as seen in class), you want to generate an
+RGB image of the Great Wall of China that looks like it was painted by Picasso. The
+size of your image is 100x100x3 and you are using a pretrained network with 1,000,000
+parameters. At every iteration of gradient descent, how many updates do you perform?
+(i) 10,000
+(ii) 30,000
+(iii) 1,000,000
+(iv) 1,030,000
+Solution: (ii) You only update the image, i.e. 10,000 pixels and each pixel has
+3 channels.
+(g)(2 points) You are building a model to predict the presence (labeled 1) or absence
+(labeled 0) of a tumor in a brain scan. The goal is to ultimately deploy the model to
+help doctors in hospitals. Which of these two metrics would you choose to use?
+(i) Precision =True positive examples
+Total predicted positive examples
+(ii) Recall =True positive examples
+Total positive examples.
+3

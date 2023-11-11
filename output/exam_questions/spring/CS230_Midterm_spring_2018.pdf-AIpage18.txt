@@ -1,0 +1,8 @@
+{
+    "question_id": "5",
+    "question": "In this question, you will implement a fully-connected network. The architecture is LINEAR\n!RELU!DROPOUT!BATCHNORM . This is a dummy architecture that has been\nmade up for this exercise.\nThe code below implements the forward propagation, but some parts are missing. You will\nneed to ll the parts between the tags (START CODE HERE) and (END CODE HERE)\nbased on the given instructions . Note that we are using only numpy (not tensor\now),\nand the relu function has been imported for you.\n\nimport numpy as np\nfrom utils import relu\ndef forward_propagation_with_dropout_and_batch_norm(X, parameters, keep_prob = 0.5):\n\"\"\"\nImplements the forward propagation: LINEAR -> RELU -> DROPOUT -> BATCHNORM.\nArguments:\nX -- input data of shape (n_x, m)\nparameters -- python dictionary containing your parameters:\nW -- weight matrix of shape (n_y, n_x)\nb -- bias vector of shape (n_y, 1)\nkeep_prob -- probability of keeping a neuron active during drop-out, scalar\ngamma -- shifting parameter of the batch normalization layer, scalar\nbeta -- scaling parameter of the batch normalization layer, scalar\nepsilon -- stability parameter of the batch normalization layer, scalar\nReturns:\nA2 -- output of the forward propagation\ncache -- tuple, information stored for computing the backward propagation\n\"\"\"\n# retrieve parameters\nW = parameters[\"W\"]\nb = parameters[\"b\"]\ngamma = parameters[\"gamma\"]\nbeta = parameters[\"beta\"]\nepsilon = parameters[\"epsilon\"]\n### START CODE HERE ###\n# LINEAR\nZ1 =\n# RELU\nA1 =",
+    "choices": [],
+    "answer": "Z1 and A1",
+    "question_type": "coding",
+    "topic": "Numpy"
+}

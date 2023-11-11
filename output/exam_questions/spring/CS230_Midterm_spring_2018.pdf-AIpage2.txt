@@ -1,0 +1,65 @@
+Here is the extracted and formatted json for the questions and answers from the provided text:
+```
+[
+  {
+    "question_id": "i",
+    "question": "The discriminator has poor performance.",
+    "choices": [],
+    "answer": "None of the above.",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "ii",
+    "question": "Your generator is overfitting.",
+    "choices": [],
+    "answer": "True",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "iii",
+    "question": "Your optimizer is stuck in a saddle point.",
+    "choices": [],
+    "answer": "None of the above.",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "iv",
+    "question": "Mini-batch gradient descent is a better optimizer than full-batch gradient descent to avoid getting stuck in saddle points.",
+    "choices": [
+      "True",
+      "False"
+    ],
+    "answer": "True",
+    "question_type": "",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "e",
+    "question": "Using \"neural style transfer\" (as seen in class), you want to generate an RGB image of the Great Wall of China that looks like it was painted by Picasso. The size of your image is 100x100x3 and you are using a pretrained network with 1,000,000 parameters. At every iteration of gradient descent, how many updates do you perform?",
+    "choices": [
+      "10,000",
+      "30,000",
+      "1,000,000",
+      "1,030,000"
+    ],
+    "answer": "30,000",
+    "question_type": "2 points",
+    "topic": "CS230"
+  },
+  {
+    "question_id": "f",
+    "question": "You are building a model to predict the presence (labeled 1) or absence (labeled 0) of a tumor in a brain scan. The goal is to ultimately deploy the model to help doctors in hospitals. Which of these two metrics would you choose to use?",
+    "choices": [
+      "Precision = True positive examples / Total predicted positive examples",
+      "Recall = True positive examples / Total positive examples."
+    ],
+    "answer": "Recall = True positive examples / Total positive examples.",
+    "question_type": "2 points",
+    "topic": "CS230"
+  }
+]
+```
+Please note that the answer format for the questions without options is assumed to be a single string, while the questions with options have the answers as one of the options. The question types for questions (e) and (f) are specified as "2 points".
