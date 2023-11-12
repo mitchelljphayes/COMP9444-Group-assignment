@@ -5,7 +5,7 @@
 groups = ["default", "notebooks"]
 strategy = ["cross_platform"]
 lock_version = "4.4"
-content_hash = "sha256:5d651d7e59179de5c72c4f963192eced91b124d2142e5009d4fe91d444f6c686"
+content_hash = "sha256:26b2399a610cc7f7c91b591a2575d853d928f475363e82e1c39b9451e5477da8"
 
 [[package]]
 name = "absl-py"
