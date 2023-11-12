@@ -1,0 +1,1962 @@
+﻿Data Science and Machine Learning Mathematical and Statistical Methods 
+Dirk P. Kroese, Zdravko I. Botev, Thomas Taimre, Radislav Vaisman 30th October 2023
+To my wife and daughters: Lesley, Elise, and Jessica — DPK 
+To Sarah, Sofia, and my parents 
+— ZIB 
+To my grandparents: Arno, Harry, Juta, and Maila — TT 
+To Valerie 
+— RV
+CONTENTS 
+Preface xiii Notation xvii 
+1 Importing, Summarizing, and Visualizing Data 1 1.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 1 1.2 Structuring Features According to Type . . . . . . . . . . . . . . . . . . 3 1.3 Summary Tables . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 6 1.4 Summary Statistics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7 1.5 Visualizing Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8 
+1.5.1 Plotting Qualitative Variables . . . . . . . . . . . . . . . . . . . . 9 1.5.2 Plotting Quantitative Variables . . . . . . . . . . . . . . . . . . . 9 1.5.3 Data Visualization in a Bivariate Setting . . . . . . . . . . . . . . 12 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 15 
+2 Statistical Learning 19 2.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 19 2.2 Supervised and Unsupervised Learning . . . . . . . . . . . . . . . . . . . 20 2.3 Training and Test Loss . . . . . . . . . . . . . . . . . . . . . . . . . . . 23 2.4 Tradeoffs in Statistical Learning . . . . . . . . . . . . . . . . . . . . . . 31 2.5 Estimating Risk . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 
+2.5.1 In-Sample Risk . . . . . . . . . . . . . . . . . . . . . . . . . . . 35 2.5.2 Cross-Validation . . . . . . . . . . . . . . . . . . . . . . . . . . 37 2.6 Modeling Data . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 40 2.7 Multivariate Normal Models . . . . . . . . . . . . . . . . . . . . . . . . 44 2.8 Normal Linear Models . . . . . . . . . . . . . . . . . . . . . . . . . . . 46 2.9 Bayesian Learning . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 47 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 58 
+3 Monte Carlo Methods 67 3.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 67 3.2 Monte Carlo Sampling . . . . . . . . . . . . . . . . . . . . . . . . . . . 68 
+3.2.1 Generating Random Numbers . . . . . . . . . . . . . . . . . . . 68 3.2.2 Simulating Random Variables . . . . . . . . . . . . . . . . . . . 69 3.2.3 Simulating Random Vectors and Processes . . . . . . . . . . . . . 74 3.2.4 Resampling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 76 3.2.5 Markov Chain Monte Carlo . . . . . . . . . . . . . . . . . . . . . 78 3.3 Monte Carlo Estimation . . . . . . . . . . . . . . . . . . . . . . . . . . . 85 
+vii
+viii Contents 
+3.3.1 Crude Monte Carlo . . . . . . . . . . . . . . . . . . . . . . . . . 85 
+3.3.2 Bootstrap Method . . . . . . . . . . . . . . . . . . . . . . . . . . 88 
+3.3.3 Variance Reduction . . . . . . . . . . . . . . . . . . . . . . . . . 92 
+3.4 Monte Carlo for Optimization . . . . . . . . . . . . . . . . . . . . . . . . 96 3.4.1 Simulated Annealing . . . . . . . . . . . . . . . . . . . . . . . . 96 
+3.4.2 Cross-Entropy Method . . . . . . . . . . . . . . . . . . . . . . . 100 
+3.4.3 Splitting for Optimization . . . . . . . . . . . . . . . . . . . . . . 103 
+3.4.4 Noisy Optimization . . . . . . . . . . . . . . . . . . . . . . . . . 105 
+Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 113 
+4 Unsupervised Learning 121 4.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 121 4.2 Risk and Loss in Unsupervised Learning . . . . . . . . . . . . . . . . . . 122 4.3 Expectation–Maximization (EM) Algorithm . . . . . . . . . . . . . . . . 128 4.4 Empirical Distribution and Density Estimation . . . . . . . . . . . . . . . 131 4.5 Clustering via Mixture Models . . . . . . . . . . . . . . . . . . . . . . . 135 4.5.1 Mixture Models . . . . . . . . . . . . . . . . . . . . . . . . . . . 135 
+4.5.2 EM Algorithm for Mixture Models . . . . . . . . . . . . . . . . . 137 
+4.6 Clustering via Vector Quantization . . . . . . . . . . . . . . . . . . . . . 142 4.6.1 K-Means . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 144 
+4.6.2 Clustering via Continuous Multiextremal Optimization . . . . . . 146 
+4.7 Hierarchical Clustering . . . . . . . . . . . . . . . . . . . . . . . . . . . 147 4.8 Principal Component Analysis (PCA) . . . . . . . . . . . . . . . . . . . 153 4.8.1 Motivation: Principal Axes of an Ellipsoid . . . . . . . . . . . . . 153 
+4.8.2 PCA and Singular Value Decomposition (SVD) . . . . . . . . . . 155 
+Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 160 
+5 Regression 167 5.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 167 5.2 Linear Regression . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 169 5.3 Analysis via Linear Models . . . . . . . . . . . . . . . . . . . . . . . . . 171 5.3.1 Parameter Estimation . . . . . . . . . . . . . . . . . . . . . . . . 171 
+5.3.2 Model Selection and Prediction . . . . . . . . . . . . . . . . . . . 172 
+5.3.3 Cross-Validation and Predictive Residual Sum of Squares . . . . . 173 
+5.3.4 In-Sample Risk and Akaike Information Criterion . . . . . . . . . 175 
+5.3.5 Categorical Features . . . . . . . . . . . . . . . . . . . . . . . . 177 
+5.3.6 Nested Models . . . . . . . . . . . . . . . . . . . . . . . . . . . 180 
+5.3.7 Coefficient of Determination . . . . . . . . . . . . . . . . . . . . 181 
+5.4 Inference for Normal Linear Models . . . . . . . . . . . . . . . . . . . . 182 5.4.1 Comparing Two Normal Linear Models . . . . . . . . . . . . . . 183 
+5.4.2 Confidence and Prediction Intervals . . . . . . . . . . . . . . . . 186 
+5.5 Nonlinear Regression Models . . . . . . . . . . . . . . . . . . . . . . . . 188 5.6 Linear Models in Python . . . . . . . . . . . . . . . . . . . . . . . . . . 191 5.6.1 Modeling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 191 
+5.6.2 Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 193 
+5.6.3 Analysis of Variance (ANOVA) . . . . . . . . . . . . . . . . . . 195
+Contents ix 
+5.6.4 Confidence and Prediction Intervals . . . . . . . . . . . . . . . . 198 
+5.6.5 Model Validation . . . . . . . . . . . . . . . . . . . . . . . . . . 198 
+5.6.6 Variable Selection . . . . . . . . . . . . . . . . . . . . . . . . . . 199 
+5.7 Generalized Linear Models . . . . . . . . . . . . . . . . . . . . . . . . . 204 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 207 
+6 Regularization and Kernel Methods 215 6.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 215 6.2 Regularization . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 216 6.3 Reproducing Kernel Hilbert Spaces . . . . . . . . . . . . . . . . . . . . . 222 6.4 Construction of Reproducing Kernels . . . . . . . . . . . . . . . . . . . . 224 6.4.1 Reproducing Kernels via Feature Mapping . . . . . . . . . . . . . 224 
+6.4.2 Kernels from Characteristic Functions . . . . . . . . . . . . . . . 225 
+6.4.3 Reproducing Kernels Using Orthonormal Features . . . . . . . . 227 
+6.4.4 Kernels from Kernels . . . . . . . . . . . . . . . . . . . . . . . . 229 
+6.5 Representer Theorem . . . . . . . . . . . . . . . . . . . . . . . . . . . . 230 6.6 Smoothing Cubic Splines . . . . . . . . . . . . . . . . . . . . . . . . . . 235 6.7 Gaussian Process Regression . . . . . . . . . . . . . . . . . . . . . . . . 238 6.8 Kernel PCA . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 242 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 245 
+7 Classification 251 7.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 251 7.2 Classification Metrics . . . . . . . . . . . . . . . . . . . . . . . . . . . . 253 7.3 Classification via Bayes’ Rule . . . . . . . . . . . . . . . . . . . . . . . 257 7.4 Linear and Quadratic Discriminant Analysis . . . . . . . . . . . . . . . . 259 7.5 Logistic Regression and Softmax Classification . . . . . . . . . . . . . . 266 7.6 K-Nearest Neighbors Classification . . . . . . . . . . . . . . . . . . . . . 268 7.7 Support Vector Machine . . . . . . . . . . . . . . . . . . . . . . . . . . . 269 7.8 Classification with Scikit-Learn . . . . . . . . . . . . . . . . . . . . . . . 277 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 279 
+8 Decision Trees and Ensemble Methods 287 8.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 287 8.2 Top-Down Construction of Decision Trees . . . . . . . . . . . . . . . . . 289 8.2.1 Regional Prediction Functions . . . . . . . . . . . . . . . . . . . 290 
+8.2.2 Splitting Rules . . . . . . . . . . . . . . . . . . . . . . . . . . . 291 
+8.2.3 Termination Criterion . . . . . . . . . . . . . . . . . . . . . . . . 292 
+8.2.4 Basic Implementation . . . . . . . . . . . . . . . . . . . . . . . . 294 
+8.3 Additional Considerations . . . . . . . . . . . . . . . . . . . . . . . . . . 298 8.3.1 Binary Versus Non-Binary Trees . . . . . . . . . . . . . . . . . . 298 
+8.3.2 Data Preprocessing . . . . . . . . . . . . . . . . . . . . . . . . . 298 
+8.3.3 Alternative Splitting Rules . . . . . . . . . . . . . . . . . . . . . 298 
+8.3.4 Categorical Variables . . . . . . . . . . . . . . . . . . . . . . . . 299 
+8.3.5 Missing Values . . . . . . . . . . . . . . . . . . . . . . . . . . . 299 
+8.4 Controlling the Tree Shape . . . . . . . . . . . . . . . . . . . . . . . . . 300 8.4.1 Cost-Complexity Pruning . . . . . . . . . . . . . . . . . . . . . . 303
+x Contents 
+8.4.2 Advantages and Limitations of Decision Trees . . . . . . . . . . . 304 
+8.5 Bootstrap Aggregation . . . . . . . . . . . . . . . . . . . . . . . . . . . 305 8.6 Random Forests . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 309 8.7 Boosting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 313 Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 321 
+9 Deep Learning 323 9.1 Introduction . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 323 9.2 Feed-Forward Neural Networks . . . . . . . . . . . . . . . . . . . . . . . 326 9.3 Back-Propagation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 330 9.4 Methods for Training . . . . . . . . . . . . . . . . . . . . . . . . . . . . 334 9.4.1 Steepest Descent . . . . . . . . . . . . . . . . . . . . . . . . . . 334 
+9.4.2 Levenberg–Marquardt Method . . . . . . . . . . . . . . . . . . . 335 
+9.4.3 Limited-Memory BFGS Method . . . . . . . . . . . . . . . . . . 336 
+9.4.4 Adaptive Gradient Methods . . . . . . . . . . . . . . . . . . . . . 338 
+9.5 Examples in Python . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 340 9.5.1 Simple Polynomial Regression . . . . . . . . . . . . . . . . . . . 340 
+9.5.2 Image Classification . . . . . . . . . . . . . . . . . . . . . . . . 344 
+Exercises . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 348 
+A Linear Algebra and Functional Analysis 355 A.1 Vector Spaces, Bases, and Matrices . . . . . . . . . . . . . . . . . . . . . 355 A.2 Inner Product . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 360 A.3 Complex Vectors and Matrices . . . . . . . . . . . . . . . . . . . . . . . 361 A.4 Orthogonal Projections . . . . . . . . . . . . . . . . . . . . . . . . . . . 362 A.5 Eigenvalues and Eigenvectors . . . . . . . . . . . . . . . . . . . . . . . . 363 A.5.1 Left- and Right-Eigenvectors . . . . . . . . . . . . . . . . . . . . 364 
+A.6 Matrix Decompositions . . . . . . . . . . . . . . . . . . . . . . . . . . . 368 A.6.1 (P)LU Decomposition . . . . . . . . . . . . . . . . . . . . . . . 368 
+A.6.2 Woodbury Identity . . . . . . . . . . . . . . . . . . . . . . . . . 370 
+A.6.3 Cholesky Decomposition . . . . . . . . . . . . . . . . . . . . . . 373 
+A.6.4 QR Decomposition and the Gram–Schmidt Procedure . . . . . . . 375 
+A.6.5 Singular Value Decomposition . . . . . . . . . . . . . . . . . . . 376 
+A.6.6 Solving Structured Matrix Equations . . . . . . . . . . . . . . . . 379 
+A.7 Functional Analysis . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 384 A.8 Fourier Transforms . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 390 A.8.1 Discrete Fourier Transform . . . . . . . . . . . . . . . . . . . . . 392 
+A.8.2 Fast Fourier Transform . . . . . . . . . . . . . . . . . . . . . . . 394 
+B Multivariate Differentiation and Optimization 397 B.1 Multivariate Differentiation . . . . . . . . . . . . . . . . . . . . . . . . . 397 B.1.1 Taylor Expansion . . . . . . . . . . . . . . . . . . . . . . . . . . 400 
+B.1.2 Chain Rule . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 400 
+B.2 Optimization Theory . . . . . . . . . . . . . . . . . . . . . . . . . . . . 402 B.2.1 Convexity and Optimization . . . . . . . . . . . . . . . . . . . . 403 
+B.2.2 Lagrangian Method . . . . . . . . . . . . . . . . . . . . . . . . . 406 
+B.2.3 Duality . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 407
+Contents xi 
+B.3 Numerical Root-Finding and Minimization . . . . . . . . . . . . . . . . . 408 B.3.1 Newton-Like Methods . . . . . . . . . . . . . . . . . . . . . . . 409 
+B.3.2 Quasi-Newton Methods . . . . . . . . . . . . . . . . . . . . . . . 411 
+B.3.3 Normal Approximation Method . . . . . . . . . . . . . . . . . . 413 
+B.3.4 Nonlinear Least Squares . . . . . . . . . . . . . . . . . . . . . . 414 
+B.4 Constrained Minimization via Penalty Functions . . . . . . . . . . . . . . 415 
+C Probability and Statistics 421 C.1 Random Experiments and Probability Spaces . . . . . . . . . . . . . . . 421 C.2 Random Variables and Probability Distributions . . . . . . . . . . . . . . 422 C.3 Expectation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 426 C.4 Joint Distributions . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 427 C.5 Conditioning and Independence . . . . . . . . . . . . . . . . . . . . . . . 428 C.5.1 Conditional Probability . . . . . . . . . . . . . . . . . . . . . . . 428 
+C.5.2 Independence . . . . . . . . . . . . . . . . . . . . . . . . . . . . 428 
+C.5.3 Expectation and Covariance . . . . . . . . . . . . . . . . . . . . 429 
+C.5.4 Conditional Density and Conditional Expectation . . . . . . . . . 431 
+C.6 Functions of Random Variables . . . . . . . . . . . . . . . . . . . . . . . 431 C.7 Multivariate Normal Distribution . . . . . . . . . . . . . . . . . . . . . . 434 C.8 Convergence of Random Variables . . . . . . . . . . . . . . . . . . . . . 439 C.9 Law of Large Numbers and Central Limit Theorem . . . . . . . . . . . . 445 C.10 Markov Chains . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 451 C.11 Statistics . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 453 C.12 Estimation . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 454 C.12.1 Method of Moments . . . . . . . . . . . . . . . . . . . . . . . . 455 
+C.12.2 Maximum Likelihood Method . . . . . . . . . . . . . . . . . . . 456 
+C.13 Confidence Intervals . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 457 C.14 Hypothesis Testing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 458 
+D Python Primer 463 D.1 Getting Started . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 463 D.2 Python Objects . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 465 D.3 Types and Operators . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 466 D.4 Functions and Methods . . . . . . . . . . . . . . . . . . . . . . . . . . . 468 D.5 Modules . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 469 D.6 Flow Control . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 471 D.7 Iteration . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 472 D.8 Classes . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 473 D.9 Files . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 475 D.10 NumPy . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 478 D.10.1 Creating and Shaping Arrays . . . . . . . . . . . . . . . . . . . . 478 
+D.10.2 Slicing . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 480 
+D.10.3 Array Operations . . . . . . . . . . . . . . . . . . . . . . . . . . 480 
+D.10.4 Random Numbers . . . . . . . . . . . . . . . . . . . . . . . . . . 482 
+D.11 Matplotlib . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 483 D.11.1 Creating a Basic Plot . . . . . . . . . . . . . . . . . . . . . . . . 483
+xii Contents 
+D.12 Pandas . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 485 D.12.1 Series and DataFrame . . . . . . . . . . . . . . . . . . . . . . . . 485 
+D.12.2 Manipulating Data Frames . . . . . . . . . . . . . . . . . . . . . 487 
+D.12.3 Extracting Information . . . . . . . . . . . . . . . . . . . . . . . 488 
+D.12.4 Plotting . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 490 
+D.13 Scikit-learn . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 490 D.13.1 Partitioning the Data . . . . . . . . . . . . . . . . . . . . . . . . 491 
+D.13.2 Standardization . . . . . . . . . . . . . . . . . . . . . . . . . . . 491 
+D.13.3 Fitting and Prediction . . . . . . . . . . . . . . . . . . . . . . . . 492 
+D.13.4 Testing the Model . . . . . . . . . . . . . . . . . . . . . . . . . . 492 
+D.14 System Calls, URL Access, and Speed-Up . . . . . . . . . . . . . . . . . 493 Bibliography 495 Index 503
+PREFACE 
+In our present world of automation, cloud computing, algorithms, artificial intelligence, and big data, few topics are as relevant as data science and machine learning. Their recent popularity lies not only in their applicability to real-life questions, but also in their natural blending of many different disciplines, including mathematics, statistics, computer science, engineering, science, and finance. 
+To someone starting to learn these topics, the multitude of computational techniques and mathematical ideas may seem overwhelming. Some may be satisfied with only learn ing how to use off-the-shelf recipes to apply to practical situations. But what if the assump tions of the black-box recipe are violated? Can we still trust the results? How should the algorithm be adapted? To be able to truly understand data science and machine learning it is important to appreciate the underlying mathematics and statistics, as well as the resulting algorithms. 
+The purpose of this book is to provide an accessible, yet comprehensive, account of data science and machine learning. It is intended for anyone interested in gaining a better understanding of the mathematics and statistics that underpin the rich variety of ideas and machine learning algorithms in data science. Our viewpoint is that computer languages come and go, but the underlying key ideas and algorithms will remain forever and will form the basis for future developments. 
+Before we turn to a description of the topics in this book, we would like to say a few words about its philosophy. This book resulted from various courses in data science and machine learning at the Universities of Queensland and New South Wales, Australia. When we taught these courses, we noticed that students were eager to learn not only how to apply algorithms but also to understand how these algorithms actually work. However, many existing textbooks assumed either too much background knowledge (e.g., measure theory and functional analysis) or too little (everything is a black box), and the information overload from often disjointed and contradictory internet sources made it more difficult for students to gradually build up their knowledge and understanding. We therefore wanted to write a book about data science and machine learning that can be read as a linear story, with a substantial “backstory” in the appendices. The main narrative starts very simply and builds up gradually to quite an advanced level. The backstory contains all the necessary 
+xiii
+xiv Preface 
+background, as well as additional information, from linear algebra and functional analysis (Appendix A), multivariate differentiation and optimization (Appendix B), and probability and statistics (Appendix C). Moreover, to make the abstract ideas come alive, we believe it is important that the reader sees actual implementations of the algorithms, directly trans lated from the theory. After some deliberation we have chosen Python as our programming language. It is freely available and has been adopted as the programming language of choice for many practitioners in data science and machine learning. It has many useful packages for data manipulation (often ported from R) and has been designed to be easy to program. A gentle introduction to Python is given in Appendix D. 
+To keep the book manageable in size we had to be selective in our choice of topics. Important ideas and connections between various concepts are highlighted via keywords keywords and page references (indicated by a ☞) in the margin. Key definitions and theorems are highlighted in boxes. Whenever feasible we provide proofs of theorems. Finally, we place great importance on notation. It is often the case that once a consistent and concise system of notation is in place, seemingly difficult ideas suddenly become obvious. We use differ ent fonts to distinguish between different types of objects. Vectors are denoted by letters in boldface italics, x, X, and matrices by uppercase letters in boldface roman font, A, K. We also distinguish between random vectors and their values by using upper and lower case letters, e.g., X (random vector) and x (its value or outcome). Sets are usually denoted by calligraphic letters G, H. The symbols for probability and expectation are P and E, respect ively. Distributions are indicated by sans serif font, as in Bin and Gamma; exceptions are the ubiquitous notations N and U for the normal and uniform distributions. A summary of 
+☞ xvii the most important symbols and abbreviations is given on Pages xvii–xxi. Data science provides the language and techniques necessary for understanding and dealing with data. It involves the design, collection, analysis, and interpretation of nu merical data, with the aim of extracting patterns and other useful information. Machine learning, which is closely related to data science, deals with the design of algorithms and computer resources to learn from data. The organization of the book follows roughly the typical steps in a data science project: Gathering data to gain information about a research question; cleaning, summarization, and visualization of the data; modeling and analysis of the data; translating decisions about the model into decisions and predictions about the re search question. As this is a mathematics and statistics oriented book, most emphasis will be on modeling and analysis. 
+We start in Chapter 1 with the reading, structuring, summarization, and visualization of data using the data manipulation package pandas in Python. Although the material covered in this chapter requires no mathematical knowledge, it forms an obvious starting point for data science: to better understand the nature of the available data. In Chapter 2, we introduce the main ingredients of statistical learning. We distinguish between supervised and unsupervised learning techniques, and discuss how we can assess the predictive per formance of (un)supervised learning methods. An important part of statistical learning is the modeling of data. We introduce various useful models in data science including linear, multivariate Gaussian, and Bayesian models. Many algorithms in machine learning and data science make use of Monte Carlo techniques, which is the topic of Chapter 3. Monte Carlo can be used for simulation, estimation, and optimization. Chapter 4 is concerned with unsupervised learning, where we discuss techniques such as density estimation, clus tering, and principal component analysis. We then turn our attention to supervised learning
+Preface xv 
+in Chapter 5, and explain the ideas behind a broad class of regression models. Therein, we also describe how Python’s statsmodels package can be used to define and analyze linear models. Chapter 6 builds upon the previous regression chapter by developing the power ful concepts of kernel methods and regularization, which allow the fundamental ideas of Chapter 5 to be expanded in an elegant way, using the theory of reproducing kernel Hilbert spaces. In Chapter 7, we proceed with the classification task, which also belongs to the supervised learning framework, and consider various methods for classification, including Bayes classification, linear and quadratic discriminant analysis, K-nearest neighbors, and support vector machines. In Chapter 8 we consider versatile methods for regression and classification that make use of tree structures. Finally, in Chapter 9, we consider the work ings of neural networks and deep learning, and show that these learning algorithms have a simple mathematical interpretation. An extensive range of exercises is provided at the end of each chapter. 
+Python code and data sets for each chapter can be downloaded from the GitHub site: https://github.com/DSML-book   
+Acknowledgments 
+Some of the Python code for Chapters 1 and 5 was adapted from [73]. We thank Benoit Liquet for making this available, and Lauren Jones for translating the R code into Python. We thank all who through their comments, feedback, and suggestions have contributed to this book, including Qibin Duan, Luke Taylor, Rémi Mouzayek, Harry Goodman, Bryce Stansfield, Ryan Tongs, Dillon Steyl, Bill Rudd, Nan Ye, Christian Hirsch, Chris van der Heide, Sarat Moka, Aapeli Vuorinen, Joshua Ross, Giang Nguyen, and the anonymous referees. David Grubbs deserves a special accollade for his professionalism and attention to detail in his role as Editor for this book. 
+The book was test-run during the 2019 Summer School of the Australian Mathemat ical Sciences Institute. More than 80 bright upper-undergraduate (Honours) students used the book for the course Mathematical Methods for Machine Learning, taught by Zdravko Botev. We are grateful for the valuable feedback that they provided. 
+Our special thanks go out to Robert Salomone, Liam Berry, Robin Carrick, and Sam Daley, who commented in great detail on earlier versions of the entire book and wrote and improved our Python code. Their enthusiasm, perceptiveness, and kind assistance have been invaluable. 
+Of course, none of this work would have been possible without the loving support, patience, and encouragement from our families, and we thank them with all our hearts. This book was financially supported by the Australian Research Council Centre of Excellence for Mathematical & Statistical Frontiers, under grant number CE140100049. 
+Dirk Kroese, Zdravko Botev, 
+Thomas Taimre, and Radislav Vaisman 
+Brisbane and Sydney
+xvi
+NOTATION 
+We could, of course, use any notation we want; do not laugh at notations; invent them, they are powerful. In fact, mathematics is, to a large extent, in vention of better notations. 
+Richard P. Feynman 
+We have tried to use a notation system that is, in order of importance, simple, descript ive, consistent, and compatible with historical choices. Achieving all of these goals all of the time would be impossible, but we hope that our notation helps to quickly recognize the type or “flavor” of certain mathematical objects (vectors, matrices, random vectors, probability measures, etc.) and clarify intricate ideas. 
+We make use of various typographical aids, and it will be beneficial for the reader to be aware of some of these. 
+• Boldface font is used to indicate composite objects, such as column vectors x = [x1, . . . , xn]>and matrices X = [xi j]. Note also the difference between the upright bold font for matrices and the slanted bold font for vectors. 
+• Random variables are generally specified with upper case roman letters X, Y, Z and their outcomes with lower case letters x, y,z. Random vectors are thus denoted in upper case slanted bold font: X = [X1, . . . , Xn]>. 
+• Sets of vectors are generally written in calligraphic font, such as X, but the set of real numbers uses the common blackboard bold font R. Expectation and probability also use the latter font. 
+• Probability distributions use a sans serif font, such as Bin and Gamma. Exceptions to this rule are the “standard” notations N and U for the normal and uniform distributions. 
+• We often omit brackets when it is clear what the argument is of a function or operator. For example, we prefer EX2to E[X2]. 
+xvii
+xviii Notation 
+• We employ color to emphasize that certain words refer to a dataset, function, or package in Python. All code is written in typewriter font. To be compatible with past notation choices, we introduced a special blue symbol X for the model (design) matrix of a linear model. 
+• Important notation such as T, g, g∗is often defined in a mnemonic way, such as T for “training”, g for “guess”, g∗for the “star” (that is, optimal) guess, and ` for “loss”. 
+• We will occasionally use a Bayesian notation convention in which the same symbol is used to denote different (conditional) probability densities. In particular, instead of writing fX(x) and fX | Y (x | y) for the probability density function (pdf) of X and the conditional pdf of X given Y, we simply write f(x) and f(x | y). This particular style of notation can be of great descriptive value, despite its apparent ambiguity. 
+General font/notation rules 
+x scalar 
+x vector 
+X random vector 
+X matrix 
+X set 
+bx estimate or approximation 
+x∗ optimal 
+x average 
+Common mathematical symbols 
+∀ for all 
+∃ there exists 
+∝ is proportional to 
+⊥ is perpendicular to 
+∼ is distributed as 
+iid∼, ∼iid are independent and identically distributed as 
+approx. 
+∼ is approximately distributed as 
+∇f gradient of f 
+∇2f Hessian of f 
+f ∈ Cpf has continuous derivatives of order p 
+≈ is approximately 
+' is asymptotically 
+  is much smaller than 
+⊕ direct sum
+Notation xix 
+  elementwise product 
+∩ intersection 
+∪ union 
+:=, =: is defined as 
+a.s. 
+−→ converges almost surely to 
+d 
+−→ converges in distribution to 
+P 
+−→ converges in probability to 
+Lp 
+−→ converges in Lp-norm to 
+k · k Euclidean norm 
+dxe smallest integer larger than x 
+bxc largest integer smaller than x 
+x+ max{x, 0} 
+Matrix/vector notation 
+A>, x>transpose of matrix A or vector x 
+A−1inverse of matrix A 
+A+ pseudo-inverse of matrix A 
+A−> inverse of matrix A> or transpose of A−1 
+A   0 matrix A is positive definite 
+A   0 matrix A is positive semidefinite 
+dim(x) dimension of vector x 
+det(A) determinant of matrix A 
+|A| absolute value of the determinant of matrix A 
+tr(A) trace of matrix A 
+Reserved letters and words 
+C set of complex numbers 
+d differential symbol 
+E expectation 
+e the number 2.71828 . . . 
+f probability density (discrete or continuous) 
+g prediction function 
+1{A} or 1A indicator function of set A 
+i the square root of −1 
+` risk: expected loss
+xx Notation 
+Loss loss function 
+ln (natural) logarithm 
+N set of natural numbers {0, 1, . . .} 
+O big-O order symbol: f(x) = O(g(x)) if | f(x)| 6 αg(x) for some constant α as x → a 
+o little-o order symbol: f(x) = o(g(x)) if f(x)/g(x) → 0 as x → a 
+P probability measure 
+π the number 3.14159 . . . 
+R set of real numbers (one-dimensional Euclidean space) 
+Rn n-dimensional Euclidean space 
+R+ positive real line: [0, ∞) 
+τ deterministic training set 
+T random training set 
+X model (design) matrix 
+Z set of integers {. . . , −1, 0, 1, . . .} 
+Probability distributions 
+Ber Bernoulli 
+Beta beta 
+Bin binomial 
+Exp exponential 
+Geom geometric 
+Gamma gamma 
+F Fisher–Snedecor F 
+N normal or Gaussian 
+Pareto Pareto 
+Poi Poisson 
+t Student’s t 
+U uniform 
+Abbreviations and acronyms 
+cdf cumulative distribution function 
+CMC crude Monte Carlo 
+CE cross-entropy 
+EM expectation–maximization 
+GP Gaussian process 
+KDE Kernel density estimate/estimator
+Notation xxi 
+KL Kullback–Leibler 
+KKT Karush–Kuhn–Tucker 
+iid independent and identically distributed 
+MAP maximum a posteriori 
+MCMC Markov chain Monte Carlo 
+MLE maximum likelihood estimator/estimate 
+OOB out-of-bag 
+PCA principal component analysis 
+pdf probability density function (discrete or continuous) 
+SVD singular value decomposition
+xxii
+CHAPTER 1 
+IMPORTING, SUMMARIZING, AND 
+VISUALIZING DATA 
+This chapter describes where to find useful data sets, how to load them into Python, and how to (re)structure the data. We also discuss various ways in which the data can be summarized via tables and figures. Which type of plots and numerical summaries are appropriate depends on the type of the variable(s) in play. Readers unfamiliar with Python are advised to read Appendix D first. 
+1.1 Introduction 
+Data comes in many shapes and forms, but can generally be thought of as being the result of some random experiment — an experiment whose outcome cannot be determined in advance, but whose workings are still subject to analysis. Data from a random experiment are often stored in a table or spreadsheet. A statistical convention is to denote variables — often called features — as columns and the individual items (or units) as rows. It is useful features 
+to think of three types of columns in such a spreadsheet: 
+1. The first column is usually an identifier or index column, where each unit/row is given a unique name or ID. 
+2. Certain columns (features) can correspond to the design of the experiment, specify ing, for example, to which experimental group the unit belongs. Often the entries in these columns are deterministic; that is, they stay the same if the experiment were to be repeated. 
+3. Other columns represent the observed measurements of the experiment. Usually, these measurements exhibit variability; that is, they would change if the experiment were to be repeated. 
+There are many data sets available from the Internet and in software packages. A well known repository of data sets is the Machine Learning Repository maintained by the Uni versity of California at Irvine (UCI), found at https://archive.ics.uci.edu/. 
+1
+2 1.1. Introduction 
+These data sets are typically stored in a CSV (comma separated values) format, which can be easily read into Python. For example, to access the abalone data set from this web site with Python, download the file to your working directory, import the pandas package via 
+import pandas as pd 
+and read in the data as follows: 
+abalone = pd.read_csv('abalone.data',header = None) 
+It is important to add header = None, as this lets Python know that the first line of the CSV does not contain the names of the features, as it assumes so by default. The data set was originally used to predict the age of abalone from physical measurements, such as shell weight and diameter. 
+Another useful repository of over 1000 data sets from various packages in the R pro gramming language, collected by Vincent Arel-Bundock, can be found at: 
+https://vincentarelbundock.github.io/Rdatasets/datasets.html. 
+For example, to read Fisher’s famous iris data set from R’s datasets package into Py thon, type: 
+urlprefix = 'https://vincentarelbundock.github.io/Rdatasets/csv/' dataname = 'datasets/iris.csv' 
+iris = pd. read_csv ( urlprefix + dataname ) 
+The iris data set contains four physical measurements (sepal/petal length/width) on 50 specimens (each) of 3 species of iris: setosa, versicolor, and virginica. Note that in this case the headers are included. The output of read_csv is a DataFrame object, which is 
+☞ 485 pandas’s implementation of a spreadsheet; see Section D.12.1. The DataFrame method head gives the first few rows of the DataFrame, including the feature names. The number of rows can be passed as an argument and is 5 by default. For the iris DataFrame, we have: 
+iris.head () 
+Unnamed: 0 Sepal.Length ... Petal.Width Species 0 1 5.1 ... 0.2 setosa 1 2 4.9 ... 0.2 setosa 2 3 4.7 ... 0.2 setosa 3 4 4.6 ... 0.2 setosa 4 5 5.0 ... 0.2 setosa 
+[5 rows x 6 columns]
+	
+
+
+
+The names of the features can be obtained via the columns attribute of the DataFrame object, as in iris.columns. Note that the first column is a duplicate index column, whose name (assigned by pandas) is 'Unnamed: 0'. We can drop this column and reassign the iris object as follows: 
+iris = iris.drop('Unnamed: 0',1)
+Chapter 1. Importing, Summarizing, and Visualizing Data 3 
+The data for each feature (corresponding to its specific name) can be accessed by using Python’s slicing notation []. For example, the object iris[’Sepal.Length’] contains the 150 sepal lengths. 
+The first three rows of the abalone data set from the UCI repository can be found as follows: 
+abalone.head (3) 
+0 1 2 3 4 5 6 7 8 0 M 0.455 0.365 0.095 0.5140 0.2245 0.1010 0.150 15 1 M 0.350 0.265 0.090 0.2255 0.0995 0.0485 0.070 7 2 F 0.530 0.420 0.135 0.6770 0.2565 0.1415 0.210 9
+	
+
+
+
+Here, the missing headers have been assigned according to the order of the natural numbers. The names should correspond to Sex, Length, Diameter, Height, Whole weight, Shucked weight, Viscera weight, Shell weight, and Rings, as described in the file with the name abalone.names on the UCI website. We can manually add the names of the features to the DataFrame by reassigning the columns attribute, as in: 
+abalone.columns = ['Sex', 'Length', 'Diameter', 'Height', 
+'Whole weight','Shucked weight', 'Viscera weight', 'Shell weight', 'Rings'] 
+1.2 Structuring Features According to Type 
+We can generally classify features as either quantitative or qualitative. Quantitative features Quantitative possess “numerical quantity”, such as height, age, number of births, etc., and can either be continuous or discrete. Continuous quantitative features take values in a continuous range of possible values, such as height, voltage, or crop yield; such features capture the idea that measurements can always be made more precisely. Discrete quantitative features have a countable number of possibilities, such as a count. 
+In contrast, qualitative features do not have a numerical meaning, but their possible qualitative values can be divided into a fixed number of categories, such as {M,F} for gender or {blue, black, brown, green} for eye color. For this reason such features are also called categorical. categorical A simple rule of thumb is: if it does not make sense to average the data, it is categorical. For example, it does not make sense to average eye colors. Of course it is still possible to represent categorical data with numbers, such as 1 = blue, 2 = black, 3 = brown, but such numbers carry no quantitative meaning. Categorical features are often called factors. factors 
+When manipulating, summarizing, and displaying data, it is important to correctly spe cify the type of the variables (features). We illustrate this using the nutrition_elderly data set from [73], which contains the results of a study involving nutritional measure ments of thirteen features (columns) for 226 elderly individuals (rows). The data set can be obtained from: 
+http://www.biostatisticien.eu/springeR/nutrition_elderly.xls. 
+Excel files can be read directly into pandas via the read_excel method:
+4 1.2. Structuring Features According to Type 
+xls = 'http://www.biostatisticien.eu/springeR/nutrition_elderly.xls' nutri = pd. read_excel (xls) 
+This creates a DataFrame object nutri. The first three rows are as follows: 
+pd. set_option ('display.max_columns', 8) # to fit display 
+nutri.head (3) 
+gender situation tea ... cooked_fruit_veg chocol fat 0 2 1 0 ... 4 5 6 1 2 1 1 ... 5 1 4 2 2 1 0 ... 2 5 4 
+[3 rows x 13 columns]
+	
+
+
+
+You can check the type (or structure) of the variables via the info method of nutri. 
+nutri.info () 
+<class 'pandas.core.frame.DataFrame '> 
+RangeIndex : 226 entries , 0 to 225 
+Data columns (total 13 columns ): 
+gender 226 non -null int64 
+situation 226 non -null int64 
+tea 226 non -null int64 
+coffee 226 non -null int64 
+height 226 non -null int64 
+weight 226 non -null int64 
+age 226 non -null int64 
+meat 226 non -null int64 
+fish 226 non -null int64 
+raw_fruit 226 non -null int64 
+cooked_fruit_veg 226 non -null int64 
+chocol 226 non -null int64 
+fat 226 non -null int64 
+dtypes: int64 (13) 
+memory usage: 23.0 KB
+	
+
+
+
+All 13 features in nutri are (at the moment) interpreted by Python as quantitative variables, indeed as integers, simply because they have been entered as whole numbers. The meaning of these numbers becomes clear when we consider the description of the features, given in Table 1.2. Table 1.1 shows how the variable types should be classified. 
+Table 1.1: The feature types for the data frame nutri. 
+Qualitative gender, situation, fat 
+meat, fish, raw_fruit, cooked_fruit_veg, chocol 
+Discrete quantitative tea, coffee 
+Continuous quantitative height, weight, age 
+Note that the categories of the qualitative features in the second row of Table 1.1, meat, . . . , chocol have a natural order. Such qualitative features are sometimes called ordinal, in
+Chapter 1. Importing, Summarizing, and Visualizing Data 5 
+Table 1.2: Description of the variables in the nutritional study [73]. 
+Feature Description Unit or Coding 
+gender Gender 1=Male; 2=Female 
+1=Single 
+situation Family status 
+2=Living with spouse 3=Living with family 4=Living with someone else 
+tea Daily consumption of tea Number of cups coffee Daily consumption of coffee Number of cups height Height cm weight Weight (actually: mass) kg age Age at date of interview Years 0=Never 
+1=Less than once a week 
+meat Consumption of meat 
+2=Once a week 3=2–3 times a week 4=4–6 times a week 5=Every day 
+fish Consumption of fish As in meat raw_fruit Consumption of raw fruits As in meat cooked_fruit_veg Consumption of cooked As in meat fruits and vegetables chocol Consumption of chocolate As in meat 1=Butter 
+2=Margarine 
+3=Peanut oil 
+fat 
+Type of fat used 4=Sunflower oil 
+for cooking 5=Olive oil 
+6=Mix of vegetable oils (e.g., Isio4) 
+7=Colza oil 
+8=Duck or goose fat 
+contrast to qualitative features without order, which are called nominal. We will not make such a distinction in this book. 
+We can modify the Python value and type for each categorical feature, using the replace and astype methods. For categorical features, such as gender, we can replace the value 1 with 'Male' and 2 with 'Female', and change the type to 'category' as follows. 
+DICT = {1:'Male', 2:'Female'} # dictionary specifies replacement nutri['gender'] = nutri['gender']. replace(DICT).astype('category') 
+The structure of the other categorical-type features can be changed in a similar way. Continuous features such as height should have type float: 
+nutri['height'] = nutri['height']. astype(float)
+6 1.3. Summary Tables 
+We can repeat this for the other variables (see Exercise 2) and save this modified data frame as a CSV file, by using the pandas method to_csv. 
+nutri.to_csv('nutri.csv',index=False) 
+1.3 Summary Tables 
+It is often useful to summarize a large spreadsheet of data in a more condensed form. A table of counts or a table of frequencies makes it easier to gain insight into the underlying distribution of a variable, especially if the data are qualitative. Such tables can be obtained with the methods describe and value_counts. 
+As a first example, we load the nutri DataFrame, which we restructured and saved (see previous section) as 'nutri.csv', and then construct a summary for the feature (column) 'fat'. 
+nutri = pd.read_csv('nutri.csv') 
+nutri['fat']. describe () 
+count 226 
+unique 8 
+top sunflower 
+freq 68 
+Name: fat , dtype: object
+	
+
+
+
+We see that there are 8 different types of fat used and that sunflower has the highest count, with 68 out of 226 individuals using this type of cooking fat. The method value_counts gives the counts for the different fat types. 
+nutri['fat']. value_counts () 
+sunflower 68 
+peanut 48 
+olive 40 
+margarine 27 
+Isio4 23 
+butter 15 
+duck 4 
+colza 1 
+Name: fat , dtype: int64
+	
+
+
+
+Column labels are also attributes of a DataFrame, and nutri.fat, for example, is exactly the same object as nutri['fat'].  
+Chapter 1. Importing, Summarizing, and Visualizing Data 7 
+It is also possible to use crosstab to cross tabulate between two or more variables,cross tabulate giving a contingency table: 
+pd.crosstab (nutri.gender , nutri. situation ) 
+situation Couple Family Single 
+gender 
+Female 56 7 78 
+Male 63 2 20
+	
+
+
+
+We see, for example, that the proportion of single men is substantially smaller than the proportion of single women in the data set of elderly people. To add row and column totals to a table, use margins=True. 
+pd.crosstab (nutri.gender , nutri.situation , margins=True) 
+situation Couple Family Single All 
+gender 
+Female 56 7 78 141 
+Male 63 2 20 85 
+All 119 9 98 226
+	
+
+
+
+1.4 Summary Statistics 
+In the following, x = [x1, . . . , xn]>is a column vector of n numbers. For our nutri data, the vector x could, for example, correspond to the heights of the n = 226 individuals. 
+The sample mean of x, denoted by x, is simply the average of the data values: sample mean x =1nXni=1xi. 
+Using the mean method in Python for the nutri data, we have, for instance: 
+nutri['height']. mean () 
+163.96017699115043
+	
+
+
+
+The p-sample quantile (0 < p < 1) of x is a value x such that at least a fraction p of the sample quantile data is less than or equal to x and at least a fraction 1− p of the data is greater than or equal to x. The sample median is the sample 0.5-quantile. The p-sample quantile is also called sample median the 100 × p percentile. The 25, 50, and 75 sample percentiles are called the first, second, and third quartiles of the data. For the nutri data they are obtained as follows. quartiles 
+nutri['height']. quantile (q=[0.25 ,0.5 ,0.75])
+0.25 157.0 
+0.50 163.0 
+0.75 170.0
+	
+
+
+
+8 1.5. Visualizing Data 
+The sample mean and median give information about the location of the data, while the distance between sample quantiles (say the 0.1 and 0.9 quantiles) gives some indication of the dispersion (spread) of the data. Other measures for dispersion are the sample range, sample rangemaxixi − minixi, the sample variance 
+sample variance 
+s2 =1 n − 1 
+Xn i=1 
+(xi − x )2, (1.1) 
+sample 
+standard deviation 
+and the sample standard deviation s =√s2. For the nutri data, the range (in cm) is: 
+☞ 455nutri['height'].max() - nutri['height'].min() 
+48.0
+	
+
+
+
+The variance (in cm2) is: 
+round(nutri['height']. var (), 2) # round to two decimal places 
+81.06
+	
+
+
+
+And the standard deviation can be found via: 
+round(nutri['height']. std (), 2) 
+9.0
+	
+
+
+
+We already encountered the describe method in the previous section for summarizing qualitative features, via the most frequent count and the number of unique elements. When applied to a quantitative feature, it returns instead the minimum, maximum, mean, and the three quartiles. For example, the 'height' feature in the nutri data has the following summary statistics. 
+nutri['height']. describe () 
+count 226.000000 
+mean 163.960177 
+std 9.003368 
+min 140.000000 
+25\% 157.000000 
+50\% 163.000000 
+75\% 170.000000 
+max 188.000000 
+Name: height , dtype: float64
+	
+
+
+
+1.5 Visualizing Data 
+In this section we describe various methods for visualizing data. The main point we would like to make is that the way in which variables are visualized should always be adapted to the variable types; for example, qualitative data should be plotted differently from quantit ative data.
+Chapter 1. Importing, Summarizing, and Visualizing Data 9 
+For the rest of this section, it is assumed that matplotlib.pyplot, pandas, and numpy, have been imported in the Python code as follows.   
+import matplotlib .pyplot as plt 
+import pandas as pd 
+import numpy as np 
+1.5.1 Plotting Qualitative Variables 
+Suppose we wish to display graphically how many elderly people are living by themselves, as a couple, with family, or other. Recall that the data are given in the situation column of our nutri data. Assuming that we already restructured the data, as in Section 1.2, we ☞ 3 can make a barplot of the number of people in each category via the plt.bar function ofbarplot the standard matplotlib plotting library. The inputs are the x-axis positions, heights, and widths of each bar respectively. 
+width = 0.35 # the width of the bars 
+x = [0, 0.8, 1.6] # the bar positions on x-axis 
+situation_counts =nutri['situation']. value_counts () 
+plt.bar(x, situation_counts , width , edgecolor = 'black') 
+plt.xticks(x, situation_counts .index) 
+plt.show () 
+125 
+100 
+75 
+50 
+25 
+0 
+Couple Single Family 
+Figure 1.1: Barplot for the qualitative variable 'situation'. 
+1.5.2 Plotting Quantitative Variables 
+We now present a few useful methods for visualizing quantitative data, again using the nutri data set. We will first focus on continuous features (e.g., 'age') and then add some specific graphs related to discrete features (e.g., 'tea'). The aim is to describe the variab ility present in a single feature. This typically involves a central tendency, where observa tions tend to gather around, with fewer observations further away. The main aspects of the distribution are the location (or center) of the variability, the spread of the variability (how far the values extend from the center), and the shape of the variability; e.g., whether or not values are spread symmetrically on either side of the center.
+10 1.5. Visualizing Data 
+1.5.2.1 Boxplot 
+A boxplot can be viewed as a graphical representation of the five-number summary of boxplotthe data consisting of the minimum, maximum, and the first, second, and third quartiles. Figure 1.2 gives a boxplot for the 'age' feature of the nutri data. 
+plt.boxplot(nutri['age'],widths=width ,vert=False) 
+plt.xlabel('age') 
+plt.show () 
+The widths parameter determines the width of the boxplot, which is by default plotted vertically. Setting vert=False plots the boxplot horizontally, as in Figure 1.2. 
+1 
+65 70 75 80 85 90 
+age 
+Figure 1.2: Boxplot for 'age'. 
+The box is drawn from the first quartile (Q1) to the third quartile (Q3). The vertical line inside the box signifies the location of the median. So-called “whiskers” extend to either side of the box. The size of the box is called the interquartile range: IQR = Q3 − Q1. The left whisker extends to the largest of (a) the minimum of the data and (b) Q1 − 1.5 IQR. Similarly, the right whisker extends to the smallest of (a) the maximum of the data and (b) Q3 + 1.5 IQR. Any data point outside the whiskers is indicated by a small hollow dot, indicating a suspicious or deviant point (outlier). Note that a boxplot may also be used for discrete quantitative features. 
+1.5.2.2 Histogram 
+A histogram is a common graphical representation of the distribution of a quantitative histogramfeature. We start by breaking the range of the values into a number of bins or classes. We tally the counts of the values falling in each bin and then make the plot by drawing rectangles whose bases are the bin intervals and whose heights are the counts. In Python we can use the function plt.hist. For example, Figure 1.3 shows a histogram of the 226 ages in nutri, constructed via the following Python code. 
+weights = np. ones_like (nutri.age)/nutri.age.count () 
+plt.hist(nutri.age ,bins =9, weights=weights , facecolor ='cyan', 
+edgecolor ='black', linewidth =1) 
+plt.xlabel('age') 
+plt.ylabel('Proportion of Total') 
+plt.show ()
+Chapter 1. Importing, Summarizing, and Visualizing Data 11 
+Here 9 bins were used. Rather than using raw counts (the default), the vertical axis here gives the percentage in each class, defined by count 
+total . This is achieved by choosing the 
+“weights” parameter to be equal to the vector with entries 1/266, with length 226. Various plotting parameters have also been changed. 
+0.20 
+l 
+a
+t
+o
+T 
+f
+o
+ 
+n
+o
+it
+r
+o
+p
+o
+r
+P
+0.15 
+0.10 
+0.05 
+0.00 
+65 70 75 80 85 90 age 
+Figure 1.3: Histogram of 'age'. 
+Histograms can also be used for discrete features, although it may be necessary to explicitly specify the bins and placement of the ticks on the axes. 
+1.5.2.3 Empirical Cumulative Distribution Function 
+The empirical cumulative distribution function, denoted by Fn, is a step function whichempirical 
+jumps an amount k/n at observation values, where k is the number of tied observations at that value. For observations x1, . . . , xn, Fn(x) is the fraction of observations less than or equal to x, i.e., 
+n=1nXni=11 {xi 6 x} , (1.2) 
+Fn(x) =number of xi 6 x 
+cumulative distribution function 
+where 1 denotes the indicator function; that is, 1 {xi 6 x} is equal to 1 when xi 6 x and 0 indicator otherwise. To produce a plot of the empirical cumulative distribution function we can use the plt.step function. The result for the age data is shown in Figure 1.4. The empirical cumulative distribution function for a discrete quantitative variable is obtained in the same way. 
+x = np.sort(nutri.age) 
+y = np.linspace (0,1,len(nutri.age)) 
+plt.xlabel('age') 
+plt.ylabel('Fn(x)') 
+plt.step(x,y) 
+plt.xlim(x.min(),x.max()) 
+plt.show ()
+12 1.5. Visualizing Data 
+1.0 
+0.8 
+0.6 
+) 
+x
+(
+n
+F
+0.4 
+0.2 
+0.0 
+65 70 75 80 85 90 
+age 
+Figure 1.4: Plot of the empirical distribution function for the continuous quantitative fea ture 'age'. 
+1.5.3 Data Visualization in a Bivariate Setting 
+In this section, we present a few useful visual aids to explore relationships between two features. The graphical representation will depend on the type of the two features. 
+1.5.3.1 Two-way Plots for Two Categorical Variables 
+Comparing barplots for two categorical variables involves introducing subplots to the fig ure. Figure 1.5 visualizes the contingency table of Section 1.3, which cross-tabulates the family status (situation) with the gender of the elderly people. It simply shows two barplots next to each other in the same figure. 
+s t
+n
+u
+o
+C
+80 
+Male 
+Female 
+60 
+40 
+20 
+0 
+Couple Family Single Figure 1.5: Barplot for two categorical variables.
+Chapter 1. Importing, Summarizing, and Visualizing Data 13 
+The figure was made using the seaborn package, which was specifically designed to simplify statistical visualization tasks. 
+import seaborn as sns 
+sns. countplot (x='situation', hue = 'gender', data=nutri , 
+hue_order = ['Male', 'Female'], palette = ['SkyBlue','Pink'], 
+saturation = 1, edgecolor ='black') 
+plt.legend(loc='upper center') 
+plt.xlabel('') 
+plt.ylabel('Counts') 
+plt.show () 
+1.5.3.2 Plots for Two Quantitative Variables 
+We can visualize patterns between two quantitative features using a scatterplot. This can be scatterplot done with plt.scatter. The following code produces a scatterplot of 'weight' against 'height' for the nutri data. 
+plt.scatter(nutri.height , nutri.weight , s=12, marker='o') 
+plt.xlabel('height') 
+plt.ylabel('weight') 
+plt.show () 
+90 
+80 
+t h
+g
+i
+e
+w
+70 
+60 
+50 
+40 
+140 150 160 170 180 190 height 
+Figure 1.6: Scatterplot of 'weight' against 'height'. 
+The next Python code illustrates that it is possible to produce highly sophisticated scat ter plots, such as in Figure 1.7. The figure shows the birth weights (mass) of babies whose mothers smoked (blue triangles) or not (red circles). In addition, straight lines were fitted to the two groups, suggesting that birth weight decreases with age when the mother smokes, but increases when the mother does not smoke! The question is whether these trends are statistically significant or due to chance. We will revisit this data set later on in the book. ☞ 199
+14 1.5. Visualizing Data 
+urlprefix = 'https://vincentarelbundock.github.io/Rdatasets/csv/' dataname = 'MASS/birthwt.csv' 
+bwt = pd.read_csv( urlprefix + dataname) 
+bwt = bwt.drop('Unnamed: 0',1) #drop unnamed column 
+styles = {0: ['o','red'], 1: ['^','blue']} 
+for k in styles: 
+grp = bwt[bwt.smoke ==k] 
+m,b = np.polyfit(grp.age , grp.bwt , 1) # fit a straight line 
+plt.scatter(grp.age , grp.bwt , c=styles[k][1] , s=15, linewidth =0, marker = styles[k][0]) 
+plt.plot(grp.age , m*grp.age + b, '-', color=styles[k][1]) 
+plt.xlabel('age') 
+plt.ylabel('birth weight (g)') 
+plt.legend (['non-smokers','smokers'],prop ={'size':8}, 
+loc =(0.5 ,0.8)) 
+plt.show () 
+6000 
+non-smokers 
+) 
+g
+( 
+t
+h
+g
+i
+e
+w
+ 
+h
+t
+r
+i
+b
+5000 4000 3000 2000 1000 0 
+smokers 
+10 15 20 25 30 35 40 45 50 
+age 
+Figure 1.7: Birth weight against age for smoking and non-smoking mothers. 
+1.5.3.3 Plots for One Qualitative and One Quantitative Variable 
+In this setting, it is interesting to draw boxplots of the quantitative feature for each level of the categorical feature. Assuming the variables are structured correctly, the function plt.boxplot can be used to produce Figure 1.8, using the following code: 
+males = nutri[nutri.gender == 'Male'] 
+females = nutri[nutri.gender == 'Female'] 
+plt.boxplot ([ males.coffee ,females.coffee],notch=True ,widths =(0.5 ,0.5)) 
+plt.xlabel('gender') 
+plt.ylabel('coffee') 
+plt.xticks ([1 ,2] ,['Male','Female']) 
+plt.show ()
+Chapter 1. Importing, Summarizing, and Visualizing Data 15 
+5 
+4 
+3 
+e 
+e
+f
+f
+oc
+2 
+1 
+0 
+Male Female 
+gender 
+Figure 1.8: Boxplots of a quantitative feature 'coffee' as a function of the levels of a categorical feature 'gender'. Note that we used a different, “notched”, style boxplot this time. 
+Further Reading 
+The focus in this book is on the mathematical and statistical analysis of data, and for the rest of the book we assume that the data is available in a suitable form for analysis. How ever, a large part of practical data science involves the cleaning of data; that is, putting it into a form that is amenable to analysis with standard software packages. Standard Py thon modules such as numpy and pandas can be used to reformat rows, rename columns, remove faulty outliers, merge rows, and so on. McKinney, the creator of pandas, gives many practical case studies in [84]. Effective data visualization techniques are beautifully illustrated in [65]. 
+Exercises 
+Before you attempt these exercises, make sure you have up-to-date versions of the relevant Python packages, specifically matplotlib, pandas, and seaborn. An easy way to ensure this is to update packages via the Anaconda Navigator, as explained in Appendix D. 
+1. Visit the UCI Repository https://archive.ics.uci.edu/. Read the description of the data and download the Mushroom data set agaricus-lepiota.data. Using pandas, read the data into a DataFrame called mushroom, via read_csv. 
+(a) How many features are in this data set? 
+(b) What are the initial names and types of the features? 
+(c) Rename the first feature (index 0) to 'edibility' and the sixth feature (index 5) to 'odor' [Hint: the column names in pandas are immutable; so individual columns cannot be modified directly. However it is possible to assign the entire column names list via mushroom.columns = newcols. ]
+16 Exercises 
+(d) The 6th column lists the various odors of the mushrooms: encoded as 'a', 'c', . . . . Replace these with the names 'almond', 'creosote', etc. (categories correspond ing to each letter can be found on the website). Also replace the 'edibility' cat egories 'e' and 'p' with 'edible' and 'poisonous'. 
+(e) Make a contingency table cross-tabulating 'edibility' and 'odor'. 
+(f) Which mushroom odors should be avoided, when gathering mushrooms for consump tion? 
+(g) What proportion of odorless mushroom samples were safe to eat? 
+2. Change the type and value of variables in the nutri data set according to Table 1.2 and save the data as a CSV file. The modified data should have eight categorical features, three floats, and two integer features. 
+3. It frequently happens that a table with data needs to be restructured before the data can be analyzed using standard statistical software. As an example, consider the test scores in Table 1.3 of 5 students before and after specialized tuition. 
+Table 1.3: Student scores. 
+Student Before After 
+1 75 85 
+2 30 50 
+3 100 100 
+4 50 52 
+5 60 65 
+This is not in the standard format described in Section 1.1. In particular, the student scores are divided over two columns, whereas the standard format requires that they are collected in one column, e.g., labelled 'Score'. Reformat (by hand) the table in standard format, using three features: 
+• 'Score', taking continuous values, 
+• 'Time', taking values 'Before' and 'After', 
+• 'Student', taking values from 1 to 5. 
+Useful methods for reshaping tables in pandas are melt, stack, and unstack. 
+4. Create a similar barplot as in Figure 1.5, but now plot the corresponding proportions of males and females in each of the three situation categories. That is, the heights of the bars should sum up to 1 for both barplots with the same ’gender’ value. [Hint: seaborn does not have this functionality built in, instead you need to first create a contingency table and use matplotlib.pyplot to produce the figure.] 
+☞ 2 5. The iris data set, mentioned in Section 1.1, contains various features, including 'Petal.Length' and 'Sepal.Length', of three species of iris: setosa, versicolor, and virginica.
+Chapter 1. Importing, Summarizing, and Visualizing Data 17 (a) Load the data set into a pandas DataFrame object. 
+(b) Using matplotlib.pyplot, produce boxplots of 'Petal.Length' for each the three species, in one figure. 
+(c) Make a histogram with 20 bins for 'Petal.Length'. 
+(d) Produce a similar scatterplot for 'Sepal.Length' against 'Petal.Length' to that of the left plot in Figure 1.9. Note that the points should be colored according to the ’Species’ feature as per the legend in the right plot of the figure. 
+(e) Using the kdeplot method of the seaborn package, reproduce the right plot of Figure 1.9, where kernel density plots for 'Petal.Length' are given. ☞ 131 
+8 
+7 
+h 
+t
+g
+n
+e
+6 
+L
+.
+l
+a
+2.5 
+2.0 
+1.5 
+y 
+t
+i
+s
+n
+e
+setosa 
+versicolor virginica 
+D
+p
+e
+S
+5 
+1 2 3 4 5 6 7 Petal.Length 
+1.0 
+0.5 
+0.0 
+2 4 6 8 
+Petal.Length 
+Figure 1.9: Left: scatterplot of 'Sepal.Length' against 'Petal.Length'. Right: kernel density estimates of 'Petal.Length' for the three species of iris. 
+6. Import the data set EuStockMarkets from the same website as the iris data set above. The data set contains the daily closing prices of four European stock indices during the 1990s, for 260 working days per year. 
+(a) Create a vector of times (working days) for the stock prices, between 1991.496 and 1998.646 with increments of 1/260. 
+(b) Reproduce Figure 1.10. [Hint: Use a dictionary to map column names (stock indices) to colors.]
+18 Exercises 9000 
+8000 7000 6000 5000 4000 3000 2000 1000 0 
+DAX SMI 
+CAC FTSE 
+1991 1992 1993 1994 1995 1996 1997 1998 1999 
+Figure 1.10: Closing stock indices for various European stock markets. 
+7. Consider the KASANDR data set from the UCI Machine Learning Repository, which can be downloaded from 
+https://archive.ics.uci.edu/ml/machine-learning-databases/00385/de .tar.bz2. 
+This archive file has a size of 900Mb, so it may take a while to download. Uncompressing the file (e.g., via 7-Zip) yields a directory de containing two large CSV files: test_de.csv and train_de.csv, with sizes 372Mb and 3Gb, respectively. Such large data files can still be processed efficiently in pandas, provided there is enough memory. The files contain records of user information from Kelkoo web logs in Germany as well as meta-data on users, offers, and merchants. The data sets have 7 attributes and 1919561 and 15844717 rows, respectively. The data sets are anonymized via hex strings. 
+(a) Load train_de.csv into a pandas DataFrame object de, using read_csv('train_de.csv', delimiter = '\t'). 
+If not enough memory is available, load test_de.csv instead. Note that entries are separated here by tabs, not commas. Time how long it takes for the file to load, using the time package. (It took 38 seconds for train_de.csv to load on one of our computers.) 
+(b) How many unique users and merchants are in this data set? 
+8. Visualizing data involving more than two features requires careful design, which is often more of an art than a science. 
+(a) Go to Vincent Arel-Bundocks’s website (URL given in Section 1.1) and read the Orange data set into a pandas DataFrame object called orange. Remove its first (unnamed) column. 
+(b) The data set contains the circumferences of 5 orange trees at various stages in their development. Find the names of the features. 
+(c) In Python, import seaborn and visualize the growth curves (circumference against age) of the trees, using the regplot and FacetGrid methods.
+CHAPTER 2 
+STATISTICAL LEARNING 
+The purpose of this chapter is to introduce the reader to some common concepts and themes in statistical learning. We discuss the difference between supervised and unsupervised learning, and how we can assess the predictive performance of supervised learning. We also examine the central role that the linear and Gaussian properties play in the modeling of data. We conclude with a section on Bayesian learning. The required probability and statistics background is given in Appendix C. 
+2.1 Introduction 
+Although structuring and visualizing data are important aspects of data science, the main challenge lies in the mathematical analysis of the data. When the goal is to interpret the model and quantify the uncertainty in the data, this analysis is usually referred to as stat istical learning. In contrast, when the emphasis is on making predictions using large-scalestatistical 
+data, then it is common to speak about machine learning or data mining. learning 
+There are two major goals for modeling data: 1) to accurately predict some future quantity of interest, given some observed data, and 2) to discover unusual or interesting patterns in the data. To achieve these goals, one must rely on knowledge from three im portant pillars of the mathematical sciences. 
+Function approximation. Building a mathematical model for data usually means under standing how one data variable depends on another data variable. The most natural way to represent the relationship between variables is via a mathematical function or map. We usually assume that this mathematical function is not completely known, but can be approximated well given enough computing power and data. Thus, data scientists have to understand how best to approximate and represent functions using the least amount of computer processing and memory. 
+Optimization. Given a class of mathematical models, we wish to find the best possible model in that class. This requires some kind of efficient search or optimization pro cedure. The optimization step can be viewed as a process of fitting or calibrating a function to observed data. This step usually requires knowledge of optimization algorithms and efficient computer coding or programming. 
+19
+machine 
+learning data mining 
+20 2.2. Supervised and Unsupervised Learning 
+Probability and Statistics. In general, the data used to fit the model is viewed as a realiz ation of a random process or numerical vector, whose probability law determines the accuracy with which we can predict future observations. Thus, in order to quantify the uncertainty inherent in making predictions about the future, and the sources of er ror in the model, data scientists need a firm grasp of probability theory and statistical inference. 
+2.2 Supervised and Unsupervised Learning 
+feature Given an input or feature vector x, one of the main goals of machine learning is to predict response an output or response variable y. For example, x could be a digitized signature and y a binary variable that indicates whether the signature is genuine or false. Another example is where x represents the weight and smoking habits of an expecting mother and y the birth weight of the baby. The data science attempt at this prediction is encoded in a mathematical function, which takes as an input x and outputs a guess g(x) 
+prediction function g, called the prediction function 
+for y (denoted by by, for example). In a sense, g encompasses all the information about the relationship between the variables x and y, excluding the effects of chance and randomness in nature. 
+In regression problems, the response variable y can take any real value. In contrast, regressionwhen y can only lie in a finite set, say y ∈ {0, . . . , c − 1}, then predicting y is conceptually the same as classifying the input x into one of c categories, and so prediction becomes a classification classification problem. 
+We can measure the accuracy of a prediction by with respect to a given response y by loss function using some loss function Loss(y,by). In a regression setting the usual choice is the squared error loss (y−by)2. In the case of classification, the zero–one (also written 0–1) loss function Loss(y,by) = 1{y , by} is often used, which incurs a loss of 1 whenever the predicted class by is not equal to the class y. Later on in this book, we will encounter various other useful loss functions, such as the cross-entropy and hinge loss functions (see, e.g., Chapter 7). 
+The word error is often used as a measure of distance between a “true” object y and some approximation by thereof. If y is real-valued, the absolute error |y − by| and the squared error (y−by)2are both well-established error concepts, as are the norm ky−byk and squared norm ky−byk2for vectors. The squared error (y−by)2is just one example of a loss function.   
+It is unlikely that any mathematical function g will be able to make accurate predictions for all possible pairs (x, y) one may encounter in Nature. One reason for this is that, even with the same input x, the output y may be different, depending on chance circumstances or randomness. For this reason, we adopt a probabilistic approach and assume that each pair (x, y) is the outcome of a random pair (X, Y) that has some joint probability density f(x, y). We then assess the predictive performance via the expected loss, usually called the risk risk, for g: 
+`(g) = E Loss(Y, g(X)). (2.1) 
+For example, in the classification case with zero–one loss function the risk is equal to the probability of incorrect classification: `(g) = P[Y , g(X)]. In this context, the prediction
+Chapter 2. Statistical Learning 21 
+function g is called a classifier. Given the distribution of (X, Y) and any loss function, we classifier can in principle find the best possible g∗:= argming E Loss(Y, g(X)) that yields the smallest risk `∗:= `(g∗). We will see in Chapter 7 that in the classification case with y ∈ {0, . . . , c−1} ☞ 251 and `(g) = P[Y , g(X)], we have 
+g∗(x) = argmax y∈{0,...,c−1} 
+f(y | x), 
+where f(y | x) = P[Y = y | X = x] is the conditional probability of Y = y given X = x. As already mentioned, for regression the most widely-used loss function is the squared error loss. In this setting, the optimal prediction function g∗is often called the regression function. The following theorem specifies its exact form.regression 
+function 
+Theorem 2.1: Optimal Prediction Function for Squared-Error Loss 
+For the squared-error loss Loss(y,by) = (y −by)2, the optimal prediction function g∗is equal to the conditional expectation of Y given X = x: 
+g∗(x) = E[Y | X = x]. 
+Proof: Let g∗(x) = E[Y | X = x]. For any function g, the squared-error risk satisfies E(Y − g(X))2 = E[(Y − g∗(X) + g∗(X) − g(X))2] 
+= E(Y − g∗(X))2 + 2E[(Y − g∗(X))(g∗(X) − g(X))] + E(g∗(X) − g(X))2 
+> E(Y − g∗(X))2 + 2E[(Y − g∗(X))(g∗(X) − g(X))] 
+= E(Y − g∗(X))2 + 2E {(g∗(X) − g(X))E[Y − g∗(X) | X]} . 
+In the last equation we used the tower property. By the definition of the conditional expect- ☞ 431 ation, we have E[Y − g∗(X) | X] = 0. It follows that E(Y − g(X))2 > E(Y − g∗(X))2, showing that g∗ yields the smallest squared-error risk.   
+One consequence of Theorem 2.1 is that, conditional on X = x, the (random) response Y can be written as 
+Y = g∗(x) + ε(x), (2.2) 
+where ε(x) can be viewed as the random deviation of the response from its conditional mean at x. This random deviation satisfies E ε(x) = 0. Further, the conditional variance of the response Y at x can be written as Var ε(x) = v2(x) for some unknown positive function v. Note that, in general, the probability distribution of ε(x) is unspecified. 
+Since, the optimal prediction function g∗ depends on the typically unknown joint distri bution of (X, Y), it is not available in practice. Instead, all that we have available is a finite number of (usually) independent realizations from the joint density f(x, y). We denote this sample by T = {(X1, Y1), . . . ,(Xn, Yn)} and call it the training set (T is a mnemonic for training set 
+training) with n examples. It will be important to distinguish between a random training set T and its (deterministic) outcome {(x1, y1), . . . ,(xn, yn)}. We will use the notation τ for the latter. We will also add the subscript n in τn when we wish to emphasize the size of the training set. 
+Our goal is thus to “learn” the unknown g∗ using the n examples in the training set T. Let us denote by gT the best (by some criterion) approximation for g∗that we can construct
+22 2.2. Supervised and Unsupervised Learning 
+from T. Note that gT is a random function. A particular outcome is denoted by gτ. It is learner often useful to think of a teacher–learner metaphor, whereby the function gT is a learner who learns the unknown functional relationship g∗: x 7→ y from the training data T. We can imagine a “teacher” who provides n examples of the true relationship between the output Yi and the input Xi for i = 1, . . . , n, and thus “trains” the learner gT to predict the output of a new input X, for which the correct output Y is not provided by the teacher (is unknown). 
+learning, because one tries to learn the functional 
+supervised The above setting is called supervised learning 
+relationship between the feature vector x and response y in the presence of a teacher who provides n examples. It is common to speak of “explaining” or predicting y on the basis of explanatory x, where x is a vector of explanatory variables 
+variables. 
+An example of supervised learning is email spam detection. The goal is to train the learner gT to accurately predict whether any future email, as represented by the feature vector x, is spam or not. The training data consists of the feature vectors of a number of different email examples as well as the corresponding labels (spam or not spam). For instance, a feature vector could consist of the number of times sales-pitch words like “free”, “sale”, or “miss out” occur within a given email. 
+As seen from the above discussion, most questions of interest in supervised learning can be answered if we know the conditional pdf f(y | x), because we can then in principle work out the function value g∗(x). 
+learningmakes no distinction between response and explan atory variables, and the objective is simply to learn the structure of the unknown distribu 
+unsupervised In contrast, unsupervised learning 
+tion of the data. In other words, we need to learn f(x). In this case the guess g(x) is an approximation of f(x) and the risk is of the form 
+`(g) = E Loss(f(X), g(X)). 
+An example of unsupervised learning is when we wish to analyze the purchasing be haviors of the customers of a grocery shop that has a total of, say, a hundred items on sale. A feature vector here could be a binary vector x ∈ {0, 1}100 representing the items bought by a customer on a visit to the shop (a 1 in the k-th position if a customer bought item k ∈ {1, . . . , 100} and a 0 otherwise). Based on a training set τ = {x1, . . . , xn}, we wish to find any interesting or unusual purchasing patterns. In general, it is difficult to know if an unsupervised learner is doing a good job, because there is no teacher to provide examples of accurate predictions. 
+The main methodologies for unsupervised learning include clustering, principal com- ☞ 121 ponent analysis, and kernel density estimation, which will be discussed in Chapter 4. In the next three sections we will focus on supervised learning. The main super vised learning methodologies are regression and classification, to be discussed in detail in ☞ 167 Chapters 5 and 7. More advanced supervised learning techniques, including reproducing ☞ 251 kernel Hilbert spaces, tree methods, and deep learning, will be discussed in Chapters 6, 8, and 9.
+Chapter 2. Statistical Learning 23 2.3 Training and Test Loss 
+Given an arbitrary prediction function g, it is typically not possible to compute its risk `(g) in (2.1). However, using the training sample T, we can approximate `(g) via the empirical (sample average) risk 
+`T (g) =1nXni=1Loss(Yi, g(Xi)), (2.3) 
+which we call the training loss. The training loss is thus an unbiased estimator of the risk training loss (the expected loss) for a prediction function g, based on the training data. 
+To approximate the optimal prediction function g∗(the minimizer of the risk `(g)) we first select a suitable collection of approximating functions G and then take our learner to be the function in G that minimizes the training loss; that is, 
+gGT= argmin g∈G 
+`T (g). (2.4) 
+For example, the simplest and most useful G is the set of linear functions of x; that is, the set of all functions g : x 7→ β>x for some real-valued vector β. 
+We suppress the superscript G when it is clear which function class is used. Note that minimizing the training loss over all possible functions g (rather than over all g ∈ G) does not lead to a meaningful optimization problem, as any function g for which g(Xi) = Yi for all i gives minimal training loss. In particular, for a squared-error loss, the training loss will be 0. Unfortunately, such functions have a poor ability to predict new (that is, independent from T) pairs of data. This poor generalization performance is called overfitting. overfitting 
+By choosing g a function that predicts the training data exactly (and is, for example, 0 otherwise), the squared-error training loss is zero. Minimizing the training loss is not the ultimate goal!   
+The prediction accuracy of new pairs of data is measured by the generalization risk generalization 
+of 
+risk 
+the learner. For a fixed training set τ it is defined as 
+`(gGτ) = E Loss(Y, gGτ(X)), (2.5) 
+where (X, Y) is distributed according to f(x, y). In the discrete case the generalization risk is therefore: `(gGτ ) =Px,y Loss(y, gGτ (x))f(x, y) (replace the sum with an integral for the continuous case). The situation is illustrated in Figure 2.1, where the distribution of (X, Y) is indicated by the red dots. The training set (points in the shaded regions) determines a fixed prediction function shown as a straight line. Three possible outcomes of (X, Y) are shown (black dots). The amount of loss for each point is shown as the length of the dashed lines. The generalization risk is the average loss over all possible pairs (x, y), weighted by the corresponding f(x, y).
+24 2.3. Training and Test Loss 
+y 
+y 
+y 
+x xx 
+Figure 2.1: The generalization risk for a fixed training set is the weighted-average loss over all possible pairs (x, y). 
+For a random training set T, the generalization risk is thus a random variable that depends on T (and G). If we average the generalization risk over all possible instances of 
+expected T, we obtain the expected generalization risk 
+: 
+generalization 
+risk 
+E `(gGT) = E Loss(Y, gGT(X)), (2.6) 
+where (X, Y) in the expectation above is independent of T. In the discrete case, we have E`(gGT) =Px,y,x1,y1,...,xn,ynLoss(y, gGτ (x))f(x, y)f(x1, y1) · · · f(xn, yn). Figure 2.2 gives an il lustration. 
+y 
+x 
+y 
+y 
+x x 
+Figure 2.2: The expected generalization risk is the weighted-average loss over all possible pairs (x, y) and over all training sets. 
+For any outcome τ of the training data, we can estimate the generalization risk without bias by taking the sample average 
+`T0(gGτ) :=1n0nX0 
+i=1 
+where {(X01, Y01), . . . ,(X0n0, Y0n0)} =: T0 
+Loss(Y0i, gGτ(X0i)), (2.7) 
+test sample is a so-called test sample. The test sample is com pletely separate from T, but is drawn in the same way as T; that is, via independent draws from f(x, y), for some sample size n0 
+test loss . We call the estimator (2.7) the test loss. For a ran dom training set T we can define `T0(gGT) similarly. It is then crucial to assume that T is independent of T0. Table 2.1 summarizes the main definitions and notation for supervised learning.
+Chapter 2. Statistical Learning 25 
+Table 2.1: Summary of definitions for supervised learning. 
+x Fixed explanatory (feature) vector. 
+X Random explanatory (feature) vector. 
+y Fixed (real-valued) response. 
+Y Random response. 
+f(x, y) Joint pdf of X and Y, evaluated at (x, y). 
+f(y | x) Conditional pdf of Y given X = x, evaluated at y. 
+τ or τn Fixed training data {(xi, yi), i = 1, . . . , n}. 
+T or Tn Random training data {(Xi, Yi), i = 1, . . . , n}. 
+X Matrix of explanatory variables, with n rows x>i, i = 1, . . . , n and dim(x) feature columns; one of the features may be the 
+constant 1. 
+y Vector of response variables (y1, . . . , yn)>. 
+g Prediction (guess) function. 
+Loss(y,by) Loss incurred when predicting response y with by. 
+`(g) Risk for prediction function g; that is, E Loss(Y, g(X)). 
+g∗ Optimal prediction function; that is, argming`(g). 
+gG Optimal prediction function in function class G; that is, argming∈G `(g). 
+`τ(g) Training loss for prediction function g; that is, the sample av erage estimate of `(g) based on a fixed training sample τ. 
+`T (g) The same as `τ(g), but now for a random training sample T. 
+gGτ or gτ The learner: argming∈G `τ(g). That is, the optimal prediction function based on a fixed training set τ and function class G. 
+We suppress the superscript G if the function class is implicit. 
+gGTor gT The learner, where we have replaced τ with a random training set T. 
+To compare the predictive performance of various learners in the function class G, as measured by the test loss, we can use the same fixed training set τ and test set τ0for all learners. When there is an abundance of data, the “overall” data set is usually (randomly) divided into a training and test set, as depicted in Figure 2.3. We then use the training data to construct various learners gG1 
+τ, gG2 
+τ, . . ., and use the test data to select the best (with the 
+smallest test loss) among these learners. In this context the test set is called the validation set. Once the best learner has been chosen, a third “test” set can be used to assess the validation set predictive performance of the best learner. The training, validation, and test sets can again be obtained from the overall data set via a random allocation. When the overall data set is of modest size, it is customary to perform the validation phase (model selection) on the training set only, using cross-validation. This is the topic of Section 2.5.2. ☞ 37
+26 2.3. Training and Test Loss          
+                 
+        
+              
+                   
+     
+Figure 2.3: Statistical learning algorithms often require the data to be divided into training and test data. If the latter is used for model selection, a third set is needed for testing the performance of the selected model. 
+We next consider a concrete example that illustrates the concepts introduced so far. 
+Example 2.1 (Polynomial Regression) In what follows, it will appear that we have ar bitrarily replaced the symbols x, g, G with u, h, H, respectively. The reason for this switch of notation will become clear at the end of the example. 
+The data (depicted as dots) in Figure 2.4 are n = 100 points (ui, yi), i = 1, . . . , n drawn from iid random points (Ui, Yi), i = 1, . . . , n, where the {Ui} are uniformly distributed on the interval (0, 1) and, given Ui = ui, the random variable Yi has a normal distribution with expectation 10 − 140ui + 400u2i − 250u3iand variance `∗ = 25. This is an example of a 
+polynomial polynomial regression model 
+. Using a squared-error loss, the optimal prediction function 
+regression model 
+h∗(u) = E[Y | U = u] is thus 
+h∗(u) = 10 − 140u + 400u2 − 250u3, 
+which is depicted by the dashed curve in Figure 2.4. 
+) 
+u
+(
+* 
+h 
+40 
+data points 
+true 
+30 
+20 
+10 
+0 
+10 
+0.0 0.2 0.4 0.6 0.8 1.0 u 
+Figure 2.4: Training data and the optimal polynomial prediction function h∗.
+Chapter 2. Statistical Learning 27 
+To obtain a good estimate of h∗(u) based on the training set τ = {(ui, yi), i = 1, . . . , n}, we minimize the outcome of the training loss (2.3): 
+`τ(h) =1nXni=1(yi − h(ui))2, (2.8) 
+over a suitable set H of candidate functions. Let us take the set Hp of polynomial functions in u of order p − 1: 
+h(u) := β1 + β2u + β3u2 + · · · + βpup−1(2.9) 
+for p = 1, 2, . . . and parameter vector β = [β1, β2, . . . , βp]>. This function class contains the best possible h∗(u) = E[Y | U = u] for p > 4. Note that optimization over Hp is a parametric optimization problem, in that we need to find the best β. Optimization of (2.8) over Hp is not straightforward, unless we notice that (2.9) is a linear function in β. In particular, if we map each feature u to a feature vector x = [1, u, u2, . . . , up−1]>, then the right-hand side of (2.9) can be written as the function 
+g(x) = x>β, 
+which is linear in x (as well as β). The optimal h∗(u) in Hp for p > 4 then corresponds to the function g∗(x) = x>β∗in the set Gp of linear functions from Rpto R, where β∗ = [10, −140, 400, −250, 0, . . . , 0]>. Thus, instead of working with the set Hp of polynomial functions we may prefer to work with the set Gp of linear functions. This brings us to a very important idea in statistical learning: 
+  
+Expand the feature space to obtain a linear prediction function. 
+Let us now reformulate the learning problem in terms of the new explanatory (feature) variables xi = [1, ui, u2i, . . . , up−1 
+i]>, i = 1, . . . , n. It will be convenient to arrange these 
+feature vectors into a matrix X with rows x>1, . . . , x>n: 
+X = 
+1 u1 u21· · · up−1 
+1 
+1 u2 u22· · · up−1 
+2 
+............... 1 un u2n· · · up−1 
+n 
+. (2.10) 
+Collecting the responses {yi} into a column vector y, the training loss (2.3) can now be written compactly as1 
+nky − Xβk2. (2.11) 
+To find the optimal learner (2.4) in the class Gp we need to find the minimizer of (2.11): 
+bβ = argmin β 
+ky − Xβk2, (2.12) 
+solution. As is illustrated in Figure 2.5, to find bβ, 
+which is called the ordinary least-squares ordinary 
+we choose Xbβ to be equal to the orthogonal projection of y onto the linear space spanned 
+least-squares 
+by the columns of the matrix X; that is, Xbβ = Py, where P is the projection matrix projection 
+.
+matrix 
+28 2.3. Training and Test Loss y 
+Xbβ 
+Xβ 
+Span(X) 
+Figure 2.5: Xbβ is the orthogonal projection of y onto the linear space spanned by the columns of the matrix X. 
+☞ 362 According to Theorem A.4, the projection matrix is given by 
+P = X X+, (2.13) 
+where the p × n matrix X+ ☞ 360 in (2.13) is the pseudo-inverse of X. If X happens to be of full pseudo-inverse column rank (so that none of the columns can be expressed as a linear combination of the ☞ 356 other columns), then X+ = (X>X)−1X>. 
+In any case, from Xbβ = Py and PX = X, we can see that bβ satisfies the normal normal equations 
+equations:X>Xβ = X>Py = (PX)>y = X>y. (2.14) 
+This is a set of linear equations, which can be solved very fast and whose solution can be written explicitly as:bβ = X+y. (2.15) Figure 2.6 shows the trained learners for various values of p: 
+hHp 
+τ (x) = x>bβ 
+) 
+u
+(
+p 
+h 
+τ (u) = gGp 
+data points 
+40 
+true 
+p = 2, underfit 
+p = 4, correct 
+30 
+p = 16, overfit 
+20 
+10 
+0 
+10 
+0.0 0.2 0.4 0.6 0.8 1.0 u 
+Figure 2.6: Training data with fitted curves for p = 2, 4, and 16. The true cubic polynomial curve for p = 4 is also plotted (dashed line).
+Chapter 2. Statistical Learning 29 
+We see that for p = 16 the fitted curve lies closer to the data points, but is further away from the dashed true polynomial curve, indicating that we overfit. The choice p = 4 (the true cubic polynomial) is much better than p = 16, or indeed p = 2 (straight line). Each function class Gp gives a different learner gGp 
+τ, p = 1, 2, . . .. To assess which is 
+better, we should not simply take the one that gives the smallest training loss. We can always get a zero training loss by taking p = n, because for any set of n points there exists a polynomial of degree n − 1 that interpolates all points! 
+Instead, we assess the predictive performance of the learners using the test loss (2.7), computed from a test data set. If we collect all n0test feature vectors in a matrix X0and the corresponding test responses in a vector y0, then, similar to (2.11), the test loss can be written compactly as 
+τ ) =1n0ky0 − X0bβk2, 
+`τ0(gGp 
+where bβ is given by (2.15), using the training data. 
+Figure 2.7 shows a plot of the test loss against the number of parameters in the vector β; that is, p. The graph has a characteristic “bath-tub” shape and is at its lowest for p = 4, correctly identifying the polynomial order 3 for the true model. Note that the test loss, as an estimate for the generalization risk (2.7), becomes numerically unreliable after p = 16 (the graph goes down, where it should go up). The reader may check that the graph for the training loss exhibits a similar numerical instability for large p, and in fact fails to numerically decrease to 0 for large p, contrary to what it should do in theory. The numerical problems arise from the fact that for large p the columns of the (Vandermonde) matrix X are of vastly different magnitudes and so floating point errors quickly become very large. 
+Finally, observe that the lower bound for the test loss is here around 21, which corres ponds to an estimate of the minimal (squared-error) risk `∗ = 25. 
+160 
+140 
+120 
+100 
+s 
+s
+o
+l
+ 
+t
+s
+eT
+80 
+60 
+40 
+20 
+1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 Number of parameters p 
+Figure 2.7: Test loss as function of the number of parameters p of the model. This script shows how the training data were generated and plotted in Python:
+30 2.3. Training and Test Loss 
+polyreg1.py 
+import numpy as np 
+from numpy.random import rand , randn 
+from numpy.linalg import norm , solve 
+import matplotlib .pyplot as plt 
+def generate_data (beta , sig , n): 
+u = np.random.rand(n, 1) 
+y = (u ** np.arange (0, 4)) @ beta + sig * np.random.randn(n, 1) 
+return u, y 
+np.random.seed (12) 
+beta = np.array ([[10 , -140, 400, -250]]).T 
+n = 100 
+sig = 5 
+u, y = generate_data (beta , sig , n) 
+xx = np.arange(np.min(u), np.max(u)+5e-3, 5e -3) 
+yy = np.polyval(np.flip(beta), xx) 
+plt.plot(u, y, '.', markersize =8) 
+plt.plot(xx , yy , '--',linewidth =3) 
+plt.xlabel(r'$u$') 
+plt.ylabel(r'$h^*(u)$') 
+plt.legend (['data points','true']) 
+plt.show () 
+The following code, which imports the code above, fits polynomial models with p = 1, . . . , K = 18 parameters to the training data and plots a selection of fitted curves, as shown in Figure 2.6. 
+polyreg2.py 
+from polyreg1 import * 
+max_p = 18 
+p_range = np.arange (1, max_p + 1, 1) 
+X = np.ones ((n, 1)) 
+betahat , trainloss = {}, {} 
+for p in p_range: # p is the number of parameters 
+if p > 1: 
+X = np.hstack ((X, u**(p -1))) # add column to matrix 
+betahat[p] = solve(X.T @ X, X.T @ y) 
+trainloss [p] = (norm(y - X @ betahat[p]) **2/n) 
+p = [2, 4, 16] # select three curves 
+#replot the points and true line and store in the list "plots" 
+plots = [plt.plot(u, y, 'k.', markersize =8) [0], 
+plt.plot(xx , yy , 'k--',linewidth =3) [0]] 
+# add the three curves 
+for i in p: 
+yy = np.polyval(np.flip(betahat[i]), xx) 
+plots.append(plt.plot(xx , yy)[0])
+Chapter 2. Statistical Learning 31 
+plt.xlabel(r'$u$') 
+plt.ylabel(r'$h^{\mathcal{H}_p}_{\tau}(u)$') 
+plt.legend(plots ,('data points', 'true','$p=2$, underfit', 
+'$p=4$, correct','$p=16$, overfit')) 
+plt.savefig('polyfitpy.pdf',format='pdf') 
+plt.show () 
+The last code snippet which imports the previous code, generates the test data and plots the graph of the test loss, as shown in Figure 2.7. 
+polyreg3.py 
+from polyreg2 import * 
+# generate test data 
+u_test , y_test = generate_data (beta , sig , n) 
+MSE = [] 
+X_test = np.ones ((n, 1)) 
+for p in p_range: 
+if p > 1: 
+X_test = np.hstack (( X_test , u_test **(p -1))) 
+y_hat = X_test @ betahat[p] # predictions 
+MSE.append(np.sum(( y_test - y_hat)**2/n)) 
+plt.plot(p_range , MSE , 'b', p_range , MSE , 'bo') 
+plt.xticks(ticks=p_range) 
+plt.xlabel('Number of parameters $p$') 
+plt.ylabel('Test loss') 
+2.4 Tradeoffs in Statistical Learning 
+The art of machine learning in the supervised case is to make the generalization risk (2.5) or expected generalization risk (2.6) as small as possible, while using as few computational resources as possible. In pursuing this goal, a suitable class G of prediction functions has to be chosen. This choice is driven by various factors, such as 
+• the complexity of the class (e.g., is it rich enough to adequately approximate, or even contain, the optimal prediction function g∗?), 
+• the ease of training the learner via the optimization program (2.4), 
+• how accurately the training loss (2.3) estimates the risk (2.1) within class G, 
+• the feature types (categorical, continuous, etc.). 
+As a result, the choice of a suitable function class G usually involves a tradeoff between conflicting factors. For example, a learner from a simple class G can be trained very
+32 2.4. Tradeoffs in Statistical Learning 
+quickly, but may not approximate g∗ very well, whereas a learner from a rich class G that contains g∗ may require a lot of computing resources to train. 
+To better understand the relation between model complexity, computational simplicity, and estimation accuracy, it is useful to decompose the generalization risk into several parts, so that the tradeoffs between these parts can be studied. We will consider two such decom positions: the approximation–estimation tradeoff and the bias–variance tradeoff. 
+We can decompose the generalization risk (2.5) into the following three components: 
+`(gGτ) = `∗ 
+|{z} 
+irreducible risk 
++ `(gG) − `∗ | {z } 
+approximation error 
++ `(gGτ) − `(gG) 
+| {z } statistical error 
+, (2.16) 
+irreducible risk ) is the irreducible risk and gG:= argming∈G `(g) is the best learner within 
+where `∗:= `(g∗ 
+class G. No learner can predict a new response with a smaller risk than `∗. 
+error; it measures the difference between 
+approximation The second component is the approximation error 
+the irreducible risk and the best possible risk that can be obtained by selecting the best prediction function in the selected class of functions G. Determining a suitable class G and minimizing `(g) over this class is purely a problem of numerical and functional analysis, as the training data τ are not present. For a fixed G that does not contain the optimal g∗, the approximation error cannot be made arbitrarily small and may be the dominant component in the generalization risk. The only way to reduce the approximation error is by expanding the class G to include a larger set of possible functions. 
+statistical The third component is the statistical (estimation) error 
+. It depends on the training 
+(estimation) error 
+set τ and, in particular, on how well the learner gGτ estimates the best possible prediction function, gG, within class G. For any sensible estimator this error should decay to zero (in 
+☞ 439 probability or expectation) as the training size tends to infinity. 
+approximation– The approximation–estimation tradeoff 
+pits two competing demands against each 
+estimation tradeoff 
+other. The first is that the class G has to be simple enough so that the statistical error is not too large. The second is that the class G has to be rich enough to ensure a small approx imation error. Thus, there is a tradeoff between the approximation and estimation errors. 
+For the special case of the squared-error loss, the generalization risk is equal to `(gGτ ) = E(Y − gGτ (X))2; that is, the expected squared error1 between the predicted value gGτ (X) and the response Y. Recall that in this case the optimal prediction function is given by g∗(x) = E[Y | X = x]. The decomposition (2.16) can now be interpreted as follows. 
+1. The first component, `∗ = E(Y − g∗(X))2, is the irreducible error, as no prediction function will yield a smaller expected squared error. 
+2. The second component, the approximation error `(gG) − `(g∗), is equal to E(gG(X) − g∗(X))2. We leave the proof (which is similar to that of Theorem 2.1) as an exercise; see Exercise 2. Thus, the approximation error (defined as a risk difference) can here be interpreted as the expected squared error between the optimal predicted value and the optimal predicted value within the class G. 
+3. For the third component, the statistical error, `(gGτ ) − `(gG) there is no direct inter pretation as an expected squared error unless G is the class of linear functions; that is, g(x) = x>β for some vector β. In this case we can write (see Exercise 3) the statistical error as `(gGτ ) − `(gG) = E(gGτ (X) − gG(X))2. 
+1Colloquially called mean squared error.
+Chapter 2. Statistical Learning 33 
+Thus, when using a squared-error loss, the generalization risk for a linear class G can be decomposed as: 
+`(gGτ) = E(gGτ(X) − Y)2 = `∗ + E(gG(X) − g∗(X))2 
+| {z } 
+approximation error 
++ E(gGτ(X) − gG(X))2 
+| {z } statistical error 
+. (2.17) 
+Note that in this decomposition the statistical error is the only term that depends on the training set. 
+Example 2.2 (Polynomial Regression (cont.)) We continue Example 2.1. Here G = Gp is the class of linear functions of x = [1, u, u2, . . . , up−1]>, and g∗(x) = x>β∗. Condi tional on X = x we have that Y = g∗(x) + ε(x), with ε(x) ∼ N(0, `∗), where `∗ = E(Y − g∗(X))2 = 25 is the irreducible error. We wish to understand how the approximation and statistical errors behave as we change the complexity parameter p. 
+First, we consider the approximation error. Any function g ∈ Gp can be written as g(x) = h(u) = β1 + β2u + · · · + βpup−1 = [1, u, . . . , up−1] β, 
+and so g(X) is distributed as [1, U, . . . , Up−1]β, where U ∼ U(0, 1). Similarly, g∗(X) is distributed as [1, U, U2, U3]β∗. It follows that an expression for the approximation error is: R 10 [1, u, . . . , up−1] β − [1, u, u2, u3] β∗ 2du. To minimize this error, we set the gradient with respect to β to zero and obtain the p linear equations ☞ 397 
+R 1 0 
+ [1, u, . . . , up−1] β − [1, u, u2, u3] β∗ du = 0, 
+ [1, u, . . . , up−1] β − [1, u, u2, u3]β∗ u du = 0, 
+R 1 
+0 
+... 
+R 1 
+0 
+Let 
+ [1, u, . . . , up−1] β − [1, u, u2, u3] β∗ up−1du = 0. Z 1 
+Hp = 
+0 
+[1, u, . . . , up−1]>[1, u, . . . , up−1] du 
+be the p × p Hilbert matrix, which has (i, j)-th entry given by Hilbert matrix R 10ui+j−2 du = 1/(i + j − 1). Then, the above system of linear equations can be written as Hpβ = Heβ∗, where He is the p × 4 upper left sub-block of Hep and ep = max{p, 4}. The solution, which we denote by βp, 
+is: 
+βp = 
+656, p = 1, 
+[−203, 35]>, p = 2, [−52, 10, 25]>, p = 3, [10, −140, 400, −250, 0, . . . , 0]>, p > 4. 
+(2.18) 
+Hence, the approximation error E gGp(X) − g∗(X) 2is given by 32225 
+Z 1 0 
+ [1, u, . . . , up−1] βp − [1, u, u2, u3] β∗ 2du = 
+252 ≈ 127.9, p = 1, 1625 
+63 ≈ 25.8, p = 2, 625 
+28 ≈ 22.3, p = 3, 0, p > 4. 
+(2.19)
+34 2.4. Tradeoffs in Statistical Learning 
+Notice how the approximation error becomes smaller as p increases. In this particular example the approximation error is in fact zero for p > 4. In general, as the class of ap proximating functions G becomes more complex, the approximation error goes down. 
+Next, we illustrate the typical behavior of the statistical error. Since gτ(x) = x>bβ, the statistical error can be written as 
+Z 1 
+ [1, . . . , up−1](bβ − βp) 2du = (bβ − βp)>Hp(bβ − βp). (2.20) 0 
+Figure 2.8 illustrates the decomposition (2.17) of the generalization risk for the same train ing set that was used to compute the test loss in Figure 2.7. Recall that test loss gives an estimate of the generalization risk, using independent test data. Comparing the two figures, we see that in this case the two match closely. The global minimum of the statistical error is approximately 0.28, with minimizer p = 4. Since the approximation error is monotonically decreasing to zero, p = 4 is also the global minimizer of the generalization risk. 
+150 approximation error statistical error 
+100 50 
+0 
+irreducible error generalization risk 
+0 2 4 6 8 10 12 14 16 18 
+Figure 2.8: The generalization risk for a particular training set is the sum of the irreducible error, the approximation error, and the statistical error. The approximation error decreases to zero as p increases, whereas the statistical error has a tendency to increase after p = 4. 
+Note that the statistical error depends on the estimate bβ, which in its turn depends on the training set τ. We can obtain a better understanding of the statistical error by consid ering its expected behavior; that is, averaged over many training sets. This is explored in Exercise 11. 
+Using again a squared-error loss, a second decomposition (for general G) starts from `(gGτ) = `∗ + `(gGτ) − `(g∗), 
+where the statistical error and approximation error are combined. Using similar reasoning as in the proof of Theorem 2.1, we have 
+`(gGτ) = E(gGτ(X) − Y)2 = `∗ + E gGτ(X) − g∗(X) 2= `∗ + ED2(X, τ),
+Chapter 2. Statistical Learning 35 
+where D(x, τ) := gGτ (x) − g∗(x). Now consider the random variable D(x,T) for a random training set T. The expectation of its square is: 
+E gGT(x) − g∗(x) 2= ED2(x,T) = (ED(x,T))2 + Var D(x,T) 
+= (EgGT(x) − g∗(x))2 
+| {z } pointwise squared bias 
++ Var gGT(x) 
+| {z } 
+pointwise variance 
+.(2.21) 
+If we view the learner gGT(x) as a function of a random training set, then the pointwise term is a measure for how close gGT(x) is on average to the true g∗(x), 
+squared bias pointwise squared bias 
+whereas the pointwise variance term measures the deviation of gGT(x) from its expectedpointwise value Eg variance GT(x). The squared bias can be reduced by making the class of functions G more complex. However, decreasing the bias by increasing the complexity often leads to an in crease in the variance term. We are thus seeking learners that provide an optimal balance between the bias and variance, as expressed via a minimal generalization risk. This is called the bias–variance tradeoff bias–variance 
+. 
+Note that the expected generalization risk (2.6) can be written as `∗+ED2(X,T), where X and T are independent. It therefore decomposes as 
+tradeoff 
+E `(gGT) = `∗ + E (E[gGT(X) | X] − g∗(X))2 
+| {z } 
+expected squared bias 
+2.5 Estimating Risk 
++ E[Var[gGT(X) | X]] 
+| {z } expected variance 
+. (2.22) 
+The most straightforward way to quantify the generalization risk (2.5) is to estimate it via the test loss (2.7). However, the generalization risk depends inherently on the training set, and so different training sets may yield significantly different estimates. Moreover, when there is a limited amount of data available, reserving a substantial proportion of the data for testing rather than training may be uneconomical. In this section we consider different methods for estimating risk measures which aim to circumvent these difficulties. 
+2.5.1 In-Sample Risk 
+We mentioned that, due to the phenomenon of overfitting, the training loss of the learner, `τ(gτ) (for simplicity, here we omit G from gGτ ), is not a good estimate of the generalization risk `(gτ) of the learner. One reason for this is that we use the same data for both training the model and assessing its risk. How should we then estimate the generalization risk or expected generalization risk? 
+To simplify the analysis, suppose that we wish to estimate the average accuracy of the predictions of the learner gτ at the n feature vectors x1, . . . , xn (these are part of the training set τ). In other words, we wish to estimate the in-sample risk of the learner gτ: in-sample risk 
+`in(gτ) =1nXni=1E Loss(Y0i, gτ(xi)), (2.23) 
+where each response Y0iis drawn from f(y | xi), independently. Even in this simplified set ting, the training loss of the learner will be a poor estimate of the in-sample risk. Instead, the
+36 2.5. Estimating Risk 
+proper way to assess the prediction accuracy of the learner at the feature vectors x1, . . . , xn, is to draw new response values Y0i ∼ f(y | xi), i = 1, . . . , n, that are independent from the responses y1, . . . , yn in the training data, and then estimate the in-sample risk of gτ via 
+1 n 
+Xn i=1 
+Loss(Y0i, gτ(xi)). 
+For a fixed training set τ, we can compare the training loss of the learner with the in-sample risk. Their difference, 
+opτ = `in(gτ) − `τ(gτ), 
+is called the optimism (of the training loss), because it measures how much the training loss underestimates (is optimistic about) the unknown in-sample risk. Mathematically, it is expected simpler to work with the expected optimism 
+optimism: 
+E[opT| X1 = x1, . . . , Xn = xn] =: EX opT, 
+where the expectation is taken over a random training set T, conditional on Xi = xi, i = 1, . . . , n. For ease of notation, we have abbreviated the expected optimism to EX opT, where EX denotes the expectation operator conditional on Xi = xi, i = 1, . . . , n. As in Ex ample 2.1, the feature vectors are stored as the rows of an n×p matrix X. It turns out that the expected optimism for various loss functions can be expressed in terms of the (conditional) covariance between the observed and predicted response. 
+Theorem 2.2: Expected Optimism 
+For the squared-error loss and 0–1 loss with 0–1 response, the expected optimism is EX opT =2nXni=1CovX(gT (xi), Yi). (2.24) 
+Proof: In what follows, all expectations are taken conditional on X1 = x1, . . . , Xn = xn. Let Yi be the response for xi and let bYi = gT (xi) be the predicted value. Note that the latter depends on Y1, . . . , Yn. Also, let Y0ibe an independent copy of Yi for the same xi, as in (2.23). In particular, Y0ihas the same distribution as Yi and is statistically independent of all {Yj}, including Yi, and therefore is also independent of bYi. We have 
+EX opT =1nXni=1EXh(Y0i − bYi)2 − (Yi − Ybi)2i=2nXni=1EXh(Yi − Y0i)bYii 
+=2nXni=1 EX[YibYi] − EXYi EXbYi =2nXni=1CovX(bYi, Yi). 
+The proof for the 0–1 loss with 0–1 response is left as Exercise 4.   
+In summary, the expected optimism indicates how much, on average, the training loss deviates from the expected in-sample risk. Since the covariance of independent random variables is zero, the expected optimism is zero if the learner gT is statistically independent from the responses Y1, . . . , Yn.
+Chapter 2. Statistical Learning 37 
+Example 2.3 (Polynomial Regression (cont.)) We continue Example 2.2, where the components of the response vector Y = [Y1, . . . , Yn]>are independent and normally distrib uted with variance `∗ = 25 (the irreducible error) and expectations EXYi = g∗(xi) = x>iβ∗, i = 1, . . . , n. Using the formula (2.15) for the least-squares estimator bβ, the expected op timism (2.24) is 
+2 n 
+Xn 
+CovX x>ibβ, Yi =2ntr CovX Xbβ, Y   =2ntrCovXXX+Y, Y   i=1 
+=2tr (XX+CovX (Y, Y)) 
+n=2`∗tr (XX+) 
+n=2`∗p 
+n. 
+In the last equation we used the cyclic property of the trace (Theorem A.1): tr(XX+) = ☞ 357 tr(X+X) = tr(Ip), assuming that rank(X) = p. Therefore, an estimate for the in-sample risk (2.23) is:b`in(gτ) = `τ(gτ) + 2`∗p/n, (2.25) where we have assumed that the irreducible risk `∗is known. Figure 2.9 shows that this estimate is very close to the test loss from Figure 2.7. Hence, instead of computing the test loss to assess the best model complexity p, we could simply have minimized the training loss plus the correction term 2`∗p/n. In practice, `∗also has to be estimated somehow. 
+150 
+100 
+50 
+0 
+2 4 6 8 10 12 14 16 18 
+Figure 2.9: In-sample risk estimate b`in(gτ) as a function of the number of parameters p of the model. The test loss is superimposed as a blue dashed curve. 
+2.5.2 Cross-Validation 
+In general, for complex function classes G, it is very difficult to derive simple formulas of the approximation and statistical errors, let alone for the generalization risk or expected generalization risk. As we saw, when there is an abundance of data, the easiest way to assess the generalization risk for a given training set τ is to obtain a test set τ0and evaluate the test loss (2.7). When a sufficiently large test set is not available but computational ☞ 24 
+resources are cheap, one can instead gain direct knowledge of the expected generalization risk via a computationally intensive method called cross-validation. cross-validation
+38 2.5. Estimating Risk 
+The idea is to make multiple identical copies of the data set, and to partition each copy into different training and test sets, as illustrated in Figure 2.10. Here, there are four copies of the data set (consisting of response and explanatory variables). Each copy is divided into a test set (colored blue) and training set (colored pink). For each of these sets, we estimate the model parameters using only training data and then predict the responses for the test set. The average loss between the predicted and observed responses is then a measure for the predictive power of the model. 
+                
+                                    
+ 
+   
+ 
+   
+ 
+   
+Figure 2.10: An illustration of four-fold cross-validation, representing four copies of the same data set. The data in each copy is partitioned into a training set (pink) and a test set (blue). The darker columns represent the response variable and the lighter ones the explanatory variables. 
+folds In particular, suppose we partition a data set T of size n into K folds C1, . . . , CK of sizes n1, . . . , nK (hence, n1 + · · · + nK = n). Typically nk ≈ n/K, k = 1, . . . , K. 
+Let `Ckbe the test loss when using Ck as test data and all remaining data, denoted T−k, as training data. Each `Ckis an unbiased estimator of the generalization risk for training set T−k; that is, for `(gT−k). 
+cross-validationloss is the weighted average of these risk estimators: K-fold The K-fold cross-validation 
+CVK = 
+XK k=1 
+nk 
+n`Ck(gT−k) 
+=1nXK k=1 
+X i∈Ck 
+Loss(gT−k(xi), yi) 
+=1nXni=1Loss(gT−κ(i)(xi), yi), 
+where the function κ : {1, . . . , n} 7→ {1, . . . , K} indicates to which of the K folds each of the n observations belongs. As the average is taken over varying training sets {T−k}, it estimates the expected generalization risk E `(gT ), rather than the generalization risk `(gτ) for the particular training set τ. 
+Example 2.4 (Polynomial Regression (cont.)) For the polynomial regression ex ample, we can calculate a K-fold cross-validation loss with a nonrandom partitioning of the training set using the following code, which imports the previous code for the polynomial regression example. We omit the full plotting code.
+Chapter 2. Statistical Learning 39 
+polyregCV.py 
+from polyreg3 import * 
+K_vals = [5, 10, 100] # number of folds 
+cv = np.zeros ((len(K_vals), max_p)) # cv loss 
+X = np.ones ((n, 1)) 
+for p in p_range: 
+if p > 1: 
+X = np.hstack ((X, u**(p -1))) 
+j = 0 
+for K in K_vals: 
+loss = [] 
+for k in range(1, K+1): 
+# integer indices of test samples 
+test_ind = ((n/K)*(k -1) + np.arange (1,n/K+1) -1).astype('int') 
+train_ind = np. setdiff1d (np.arange(n), test_ind) 
+X_train , y_train = X[train_ind , :], y[train_ind , :] 
+X_test , y_test = X[test_ind , :], y[ test_ind] 
+# fit model and evaluate test loss 
+betahat = solve(X_train.T @ X_train , X_train.T @ y_train) 
+loss.append(norm(y_test - X_test @ betahat) ** 2) 
+cv[j, p -1] = sum(loss)/n 
+j += 1 
+# basic plotting 
+plt.plot(p_range , cv[0, :], 'k-.') 
+plt.plot(p_range , cv[1, :], 'r') 
+plt.plot(p_range , cv[2, :], 'b--') 
+plt.show () 
+s s
+o
+l
+ 
+n
+o
+i
+t
+a
+d
+i
+l
+a
+v
+-
+s
+s
+o
+r
+c
+ 
+d
+l
+o
+f
+-
+K
+300 250 200 150 100 50 
+K=5 
+K=10 
+K=100 
+2 4 6 8 10 12 14 16 18 Number of parameters p 
+Figure 2.11: K-fold cross-validation for the polynomial regression example.
+40 2.6. Modeling Data Figure 2.11 shows the cross-validation loss for K ∈ {5, 10, 100}. The case K = 100 cor 
+leave-one-out 
+responds to the leave-one-out cross-validation, which can be computed more efficiently 
+cross-validation using the formula in Theorem 5.1. 
+☞ 174 
+2.6 Modeling Data 
+model The first step in any data analysis is to model the data in one form or another. For example, in an unsupervised learning setting with data represented by a vector x = [x1, . . . , xp]>, a very general model is to assume that x is the outcome of a random vector X = [X1, . . . , Xp]> with some unknown pdf f . The model can then be refined by assuming a specific form of f . 
+When given a sequence of such data vectors x1, . . . , xn, one of the simplest models is to assume that the corresponding random vectors X1, . . . , Xn are independent and identically ☞ 429 distributed (iid). We write 
+X1, . . . , Xniid∼ f or X1, . . . , Xniid∼ Dist, 
+to indicate that the random vectors form an iid sample from a sampling pdf f or sampling distribution Dist. This model formalizes the notion that the knowledge about one variable does not provide extra information about another variable. The main theoretical use of independent data models is that the joint density of the random vectors X1, . . . , Xn is simply ☞ 429 the product of the marginal ones; see Theorem C.1. Specifically, 
+fX1, ...,Xn(x1, . . . , xn) = f(x1) · · · f(xn). 
+In most models of this kind, our approximation or model for the sampling distribution is specified up to a small number of parameters. That is, g(x) is of the form g(x | β) which is known up to some parameter vector β. Examples for the one-dimensional case (p = 1) 
+include the N(µ, σ2 ☞ 425 ), Bin(n, p), and Exp(λ) distributions. See Tables C.1 and C.2 for other common sampling distributions. 
+Typically, the parameters are unknown and must be estimated from the data. In a non parametric setting the whole sampling distribution would be unknown. To visualize the underlying sampling distribution from outcomes x1, . . . , xn one can use graphical repres entations such as histograms, density plots, and empirical cumulative distribution func- ☞ 11 tions, as discussed in Chapter 1. 
+If the order in which the data were collected (or their labeling) is not informative or relevant, then the joint pdf of X1, . . . , Xn satisfies the symmetry: 
+fX1,...,Xn(x1, . . . , xn) = fXπ1,...,Xπn(xπ1, . . . , xπn) (2.26) 
+for any permutation π1, . . . , πn of the integers 1, . . . , n. We say that the infinite sequence exchangeable X1, X2, . . . is exchangeable if this permutational invariance (2.26) holds for any finite subset of the sequence. As we shall see in Section 2.9 on Bayesian learning, it is common to assume that the random vectors X1, . . . , Xn are a subset of an exchangeable sequence and thus satisfy (2.26). Note that while iid random variables are exchangeable, the converse is not necessarily true. Thus, the assumption of an exchangeable sequence of random vectors is weaker than the assumption of iid random vectors.
+Chapter 2. Statistical Learning 41 
+Figure 2.12 illustrates the modeling tradeoffs. The keywords within the triangle repres ent various modeling paradigms. A few keywords have been highlighted, symbolizing their importance in modeling. The specific meaning of the keywords does not concern us here, but the point is there are many models to choose from, depending on what assumptions are made about the data. 
+Figure 2.12: Illustration of the modeling dilemma. Complex models are more generally applicable, but may be difficult to analyze. Simple models may be highly tractable, but may not describe the data accurately. The triangular shape signifies that there are a great many specific models but not so many generic ones. 
+On the one hand, models that make few assumptions are more widely applicable, but at the same time may not be very mathematically tractable or provide insight into the nature of the data. On the other hand, very specific models may be easy to handle and interpret, but may not match the data very well. This tradeoff between the tractability and applicability of the model is very similar to the approximation–estimation tradeoff described in Section 2.4. 
+In the typical unsupervised setting we have a training set τ = {x1, . . . , xn} that is viewed as the outcome of n iid random variables X1, . . . , Xn from some unknown pdf f . The ob jective is then to learn or estimate f from the finite training data. To put the learning in a similar framework as for supervised learning discussed in the preceding Sections 2.3– 2.5, we begin by specifying a class of probability density functions Gp := {g(· | θ), θ ∈ Θ}, where θ is a parameter in some subset Θ of Rp. We now seek the best g in Gp to minimize some risk. Note that Gp may not necessarily contain the true f even for very large p. 
+We stress that our notation g(x) has a different meaning in the supervised and unsu pervised case. In the supervised case, g is interpreted as a prediction function for a response y; in the unsupervised setting, g is an approximation of a density f .   
+For each x we measure the discrepancy between the true model f(x) and the hypothes ized model g(x | θ) using the loss function 
+Loss(f(x), g(x | θ)) = ln f(x) 
+g(x | θ)= ln f(x) − ln g(x | θ).
+42 2.6. Modeling Data The expected value of this loss (that is, the risk) is thus 
+`(g) = E ln f(X) g(X | θ)= 
+Z 
+f(x) ln f(x) 
+g(x | θ)dx. (2.27) 
+The integral in (2.27) provides a fundamental way to measure the distance between two 
+densities and is called the Kullback–Leibler (KL) divergence2 Kullback– 
+between f and g(· | θ). Note 
+Leibler 
+divergence 
+that the KL divergence is not symmetric in f and g(· | θ). Moreover, it is always greater than or equal to 0 (see Exercise 15) and equal to 0 when f = g(· | θ). Using similar notation as for the supervised learning setting in Table 2.1, define gGp as the global minimizer of the risk in the class Gp; that is, gGp = argming∈Gp`(g). If we define 
+θ∗ = argmin 
+E Loss(f(X), g(X | θ)) = argmin 
+Z 
+ 
+ln f(x) − ln g(x | θ) f(x) dx 
+θ 
+= argmax θ 
+Z 
+θ 
+f(x) ln g(x | θ) dx = argmax θ 
+E ln g(X | θ), 
+then gGp = g(· | θ∗) and learning gGpis equivalent to learning (or estimating) θ∗. To learn θ∗ from a training set τ = {x1, . . . , xn} we then minimize the training loss, 
+1 
+n 
+giving: 
+Xn i=1 
+Loss(f(xi), g(xi| θ)) = −1nXni=1ln g(xi| θ) +1nXni=1ln f(xi), Xn 
+bθn := argmax θ 
+1 n 
+ln g(xi| θ). (2.28) i=1 
+As the logarithm is an increasing function, this is equivalent to 
+bθn := argmax θ 
+Yn i=1 
+g(xi| θ), 
+maximum likelihood estimate ☞ 456 
+where Qni=1 g(xi| θ) is the likelihood of the data; that is, the joint density of the {Xi} eval uated at the points {xi}. We therefore have recovered the classical maximum likelihood estimate of θ∗. 
+When the risk `(g(· | θ)) is convex in θ over a convex set Θ, we can find the maximum likelihood estimator by setting the gradient of the training loss to zero; that is, we solve 
+−1nXni=1S(xi| θ) = 0, 
+where S(x | θ) :=∂ ln g(x | θ) 
+score the score. 
+∂θis the gradient of ln g(x | θ) with respect to θ and is often called 
+Example 2.5 (Exponential Model) Suppose we have the training data τn = {x1, . . . , xn}, which is modeled as a realization of n positive iid random variables: X1, . . . , Xn ∼iid f(x). We select the class of approximating functions G to be the parametric class {g : g(x | θ) = 
+2Sometimes called cross-entropy distance.
+Chapter 2. Statistical Learning 43 
+θ exp(−x θ), x > 0, θ > 0}. In other words, we look for the best gG within the family of exponential distributions with unknown parameter θ > 0. The likelihood of the data is 
+Yn i=1 
+g(xi| θ) = 
+Yn i=1 
+θ exp(−θxi) = exp(−θ n xn + n ln θ) 
+and the score is S (x | θ) = −x+θ−1. Thus, maximizing the likelihood with respect to θ is the same as maximizing −θ n xn + n ln θ or solving −Pni=1 S (xi| θ)/n = xn − θ−1 = 0. In other words, the solution to (2.28) is the maximum likelihood estimate bθn = 1/xn. 
+In a supervised setting, where the data is represented by a vector x of explanatory variables and a response y, the general model is that (x, y) is an outcome of (X, Y) ∼ f for some unknown f . And for a training sequence (x1, y1), . . . ,(xn, yn) the default model assumption is that (X1, Y1), . . . ,(Xn, Yn) ∼iid f . As explained in Section 2.2, the analysis primarily involves the conditional pdf f(y | x) and in particular (when using the squared error loss) the conditional expectation g∗(x) = E[Y | X = x]. The resulting representation (2.2) allows us to then write the response at X = x as a function of the feature x plus an error term: Y = g∗(x) + ε(x). 
+This leads to the simplest and most important model for supervised learning, where we choose a linear class G of prediction or guess functions and assume that it is rich enough to contain the true g∗. If we further assume that, conditional on X = x, the error term ε does not depend on x, that is, E ε = 0 and Var ε = σ2, then we obtain the following model. 
+Definition 2.1: Linear Model 
+In a linear model the response Y depends on a p-dimensional explanatory variable linear model x = [x1, . . . , xp]> via the linear relationship 
+Y = x>β + ε, (2.29) 
+where E ε = 0 and Var ε = σ2. 
+Note that (2.29) is a model for a single pair (x, Y). The model for the training set {(xi, Yi)} is simply that each Yi satisfies (2.29) (with x = xi) and that the {Yi} are independ ent. Gathering all responses in the vector Y = [Y1, . . . , Yn]>, we can write 
+Y = Xβ + ε, (2.30) 
+where ε = [ε1, . . . , εn]>is a vector of iid copies of ε and X is the so-called model matrix, model matrix with rows x>1, . . . , x>n. Linear models are fundamental building blocks of statistical learning algorithms. For this reason, a large part of Chapter 5 is devoted to linear regression models. ☞ 167 
+Example 2.6 (Polynomial Regression (cont.)) For our running Example 2.1, we see ☞ 26 that the data is described by a linear model of the form (2.30), with model matrix X given in (2.10).
+44 2.7. Multivariate Normal Models 
+Before we discuss a few other models in the following sections, we would like to em phasize a number of points about modeling. 
+• Any model for data is likely to be wrong. For example, real data (as opposed to computer-generated data) are often assumed to come from a normal distribution, which is never exactly true. However, an important advantage of using a normal distribution is that it has many nice mathematical properties, as we will see in Sec tion 2.7. 
+• Most data models depend on a number of unknown parameters, which need to be estimated from the observed data. 
+• Any model for real-life data needs to be checked for suitability. An important cri terion is that data simulated from the model should resemble the observed data, at least for a certain choice of model parameters. 
+Here are some guidelines for choosing a model. Think of the data as a spreadsheet or data frame, as in Chapter 1, where rows represent the data units and the columns the data features (variables, groups). 
+• First establish the type of the features (quantitative, qualitative, discrete, continuous, etc.). 
+• Assess whether the data can be assumed to be independent across rows or columns. 
+• Decide on the level of generality of the model. For example, should we use a simple model with a few unknown parameters or a more generic model that has a large number of parameters? Simple specific models are easier to fit to the data (low es timation error) than more general models, but the fit itself may not be accurate (high approximation error). The tradeoffs discussed in Section 2.4 play an important role here. 
+• Decide on using a classical (frequentist) or Bayesian model. Section 2.9 gives a short ☞ 47 introduction to Bayesian learning. 
+2.7 Multivariate Normal Models 
+A standard model for numerical observations x1, . . . , xn (forming, e.g., a column in a spreadsheet or data frame) is that they are the outcomes of iid normal random variables 
+X1, . . . , Xniid∼ N(µ, σ2). 
+It is helpful to view a normally distributed random variable as a simple transformation of a standard normal random variable. To wit, if Z has a standard normal distribution, then X = µ + σZ has a N(µ, σ2) distribution. The generalization to n dimensions is discussed 
+in Appendix C.7. We summarize the main points: Let Z1, . . . , Zniid ☞ 434 ∼ N(0, 1). The pdf of Z = [Z1, . . . , Zn]>(that is, the joint pdf of Z1, . . . , Zn) is given by 
+fZ(z) = 
+Yn 
+1√2πe−12z2i = (2π)−n2 e−12z> z, z ∈ Rn. (2.31)i=1 
+Chapter 2. Statistical Learning 45 
+We write Z ∼ N(0,In) and say that Z has a standard normal distribution in Rn. Let X = µ + B Z (2.32) 
+for some m×n matrix B and m-dimensional vector µ. Then X has expectation vector µ and covariance matrix Σ = BB>; see (C.20) and (C.21). This leads to the following definition. ☞ 432 
+Definition 2.2: Multivariate Normal Distribution 
+An m-dimensional random vector X that can be written in the form (2.32) for some m-dimensional vector µ and m × n matrix B, with Z ∼ N(0,In), is said to have a multivariate normal multivariate 
+or multivariate Gaussian distribution with mean vector µ and 
+covariance matrix Σ = BB>. We write X ∼ N(µ, Σ). 
+The m-dimensional density of a multivariate normal distribution has a very similar form to the density of the one-dimensional normal distribution and is given in the next theorem. 
+normal 
+We leave the proof as an exercise; see Exercise 5. ☞ 59 
+Theorem 2.3: Density of a Multivariate Random Vector 
+Let X ∼ N(µ, Σ), where the m × m covariance matrix Σ is invertible. Then X has pdf fX(x) =1 
+√(2π)m |Σ|e−12(x−µ)>Σ−1(x−µ), x ∈ Rm. (2.33) 
+Figure 2.13 shows the pdfs of two bivariate (that is, two-dimensional) normal distribu tions. In both cases the mean vector is µ = [0, 0]>and the variances (the diagonal elements of Σ) are 1. The correlation coefficients (or, equivalently here, the covariances) are respect ively % = 0 and % = 0.8. 
+0.2 
+0.1 
+0 
+2 
+0 
+-20 2 -2 
+0.2 
+0.1 
+0 
+2 
+0 
+-20 2 -2 
+Figure 2.13: Pdfs of bivariate normal distributions with means zero, variances 1, and cor relation coefficients 0 (left) and 0.8 (right).
+46 2.8. Normal Linear Models 
+The main reason why the multivariate normal distribution plays an important role in data science and machine learning is that it satisfies the following properties, the details ☞ 434 and proofs of which can be found in Appendix C.7: 
+1. Affine combinations are normal. 
+2. Marginal distributions are normal. 
+3. Conditional distributions are normal. 
+2.8 Normal Linear Models 
+Normal linear models combine the simplicity of the linear model with the tractability of the Gaussian distribution. They are the principal model for traditional statistics, and include the classic linear regression and analysis of variance models. 
+Definition 2.3: Normal Linear Model 
+normal linear In a normal linear model 
+modelthe response Y depends on a p-dimensional explanatory variable x = [x1, . . . , xp]>, via the linear relationship 
+Y = x>β + ε, (2.34) 
+where ε ∼ N(0, σ2). 
+Thus, a normal linear model is a linear model (in the sense of Definition 2.1) with normal error terms. Similar to (2.30), the corresponding normal linear model for the whole training set {(xi, Yi)} has the form 
+Y = Xβ + ε, (2.35) 
+where X is the model matrix comprised of rows x>1, . . . , x>nand ε ∼ N(0, σ2In). Con sequently, Y can be written as Y = Xβ + σZ, where Z ∼ N(0,In), so that Y ∼ N(Xβ, σ2In). ☞ 45 It follows from (2.33) that its joint density is given by 
+g(y | β, σ2, X) = (2πσ2)−n2 e−12σ2||y−Xβ||2. (2.36) 
+Estimation of the parameter β can be performed via the least-squares method, as discussed in Example 2.1. An estimate can also be obtained via the maximum likelihood method. This simply means finding the parameters σ2and β that maximize the likelihood of the outcome y, given by the right-hand side of (2.36). It is clear that for every value of σ2 the likelihood is maximal when ky − Xβk2is minimal. As a consequence, the maximum likelihood estimate for β is the same as the least-squares estimate (2.15). We leave it as an exercise (see Exercise 18) to show that the maximum likelihood estimate of σ2 ☞ 63 is equal to 
+σc2 =ky − Xbβk2 
+n, (2.37) 
+where bβ is the maximum likelihood estimate (least squares estimate in this case) of β.
+Chapter 2. Statistical Learning 47 2.9 Bayesian Learning 
+In Bayesian unsupervised learning, we seek to approximate the unknown joint density f(x1, . . . , xn) of the training data Tn = {X1, . . . , Xn} via a joint pdf of the form 
+Z Yn i=1 
+g(xi| θ) 
+w(θ) dθ, (2.38) 
+where g(· | θ) belongs to a family of parametric densities Gp := {g(· | θ), θ ∈ Θ} (viewed as a family of pdfs conditional on a parameter θ in some set Θ ⊂ Rp) and w(θ) is a pdf that belongs to a (possibly different) family of densities Wp. Note how the joint pdf (2.38) satisfies the permutational invariance (2.26) and can thus be useful as a model for training data which is part of an exchangeable sequence of random variables. 
+Following standard practice in a Bayesian context, instead of writing fX(x) and fX | Y (x | y) for the pdf of X and the conditional pdf of X given Y, one simply writes f(x) and f(x | y). If Y is a different random variable, its pdf (at y) is thus denoted by f(y).   
+Thus, we will use the same symbol g for different (conditional) approximating probab ility densities and f for the different (conditional) true and unknown probability densities. Using Bayesian notation, we can write g(τ | θ) =Qni=1 g(xi| θ) and thus the approximating 
+joint pdf (2.38) can then be written as Rg(τ | θ)w(θ) dθ and the true unknown joint pdf as f(τ) = f(x1, . . . , xn). 
+Once Gp and Wp are specified, selecting an approximating function g(x) of the form Z 
+g(x) = 
+g(x | θ)w(θ) dθ 
+is equivalent to selecting a suitable w fromWp. Similar to (2.27), we can use the Kullback– Leibler risk to measure the discrepancy between the proposed approximation (2.38) and the true f(τ): 
+`(g) = E ln f(T) 
+Rg(T | θ)w(θ) dθ= 
+Z 
+f(τ) ln f(τ) 
+Rg(τ | θ)w(θ) dθdτ. (2.39) 
+The main difference with (2.27) is that since the training data is not necessarily iid (it may be exchangeable, for example), the expectation must be with respect to the joint density of ☞ 40 T, not with respect to the marginal f(x) (as in the iid case). 
+Minimizing the training loss is equivalent to maximizing the likelihood of the training data τ; that is, solving the optimization problem 
+Z 
+max w∈Wp 
+g(τ | θ)w(θ) dθ, 
+where the maximization is over an appropriate class Wp of density functions that is be lieved to result in the smallest KL risk.
+48 2.9. Bayesian Learning 
+Suppose that we have a rough guess, denoted w0(θ), for the best w ∈ Wp that min imizes the Kullback–Leibler risk. We can always increase the resulting likelihood L0 := Rg(τ | θ)w0(θ) dθ by instead using the density w1(θ) := w0(θ) g(τ | θ)/L0, giving a likeli hood L1 :=Rg(τ | θ)w1(θ) dθ. To see this, write L0 and L1 as expectations with respect to w0. In particular, we can write 
+L0 = Ew0g(τ | θ) and L1 = Ew1g(τ | θ) = Ew0g2(τ | θ)/L0. 
+It follows that 
+L1 − L0 =1L0Ew0hg2(τ | θ) − L20i=1L0Varw0[g(τ | θ)] > 0. (2.40) 
+We may thus expect to obtain better predictions using w1 instead of w0, because w1 has taken into account the observed data τ and increased the likelihood of the model. In fact, if we iterate this process (see Exercise 20) and create a sequence of densities w1,w2, . . . such that wt(θ) ∝ wt−1(θ) g(τ | θ), then wt(θ) concentrates more and more of its probability mass at the maximum likelihood estimator bθ (see (2.28)) and in the limit equals a (degen erate) point-mass pdf atbθ. In other words, in the limit we recover the maximum likelihood method: gτ(x) = g(x |bθ). Thus, unless the class of densities Wp is restricted to be non degenerate, maximizing the likelihood as much as possible leads to a degenerate choice for w(θ). 
+In many situations, the maximum likelihood estimate g(τ |bθ) is either not an ap propriate approximation to f(τ) (see Example 2.9), or simply fails to exist (see Exer- ☞ 161 cise 10 in Chapter 4). In such cases, given an initial non-degenerate guess w0(θ) = g(θ), one can obtain a more appropriate and non-degenerate approximation to f(τ) by taking w(θ) = w1(θ) ∝ g(τ | θ) g(θ) in (2.38), giving the following Bayesian learner of f(x): 
+g(x | θ)g(τ | θ) g(θ) 
+Rg(τ | ϑ) g(ϑ) dϑdθ, (2.41) 
+where R 
+Z 
+gτ(x) := 
+☞ 428 g(τ | ϑ) g(ϑ) dϑ = g(τ). Using Bayes’ formula for probability densities, g(θ | τ) =g(τ | θ) g(θ) 
+g(τ), (2.42) 
+we can write w1(θ) = g(θ | τ). With this notation, we have the following definitions. 
+Definition 2.4: Prior, Likelihood, and Posterior 
+Let τ and Gp := {g(· | θ), θ ∈ Θ} be the training set and family of approximating functions. 
+prior • A pdf g(θ) that reflects our a priori beliefs about θ is called the prior pdf. likelihood • The conditional pdf g(τ | θ) is called the likelihood. 
+posterior • Inference about θ is given by the posterior pdf g(θ | τ), which is proportional to the product of the prior and the likelihood: 
+g(θ | τ) ∝ g(τ | θ) g(θ).
+Chapter 2. Statistical Learning 49 
+Remark 2.1 (Early Stopping) Bayes iteration is an example of an “early stopping” heuristic for maximum likelihood optimization, where we exit after only one step. As ob served above, if we keep iterating, we obtain the maximum likelihood estimate (MLE). In a sense the Bayes rule provides a regularization of the MLE. Regularization is discussed in more detail in Chapter 6; see also Example 2.9. The early stopping rule is also of benefit in regularization; see Exercise 20 in Chapter 6. 
+On the one hand, the initial guess g(θ) conveys the a priori (prior to training the Bayesian learner) information about the optimal density in Wp that minimizes the KL risk. Using this prior g(θ), the Bayesian approximation to f(x) is the prior predictive density prior predictive 
+: 
+g(x) = 
+Z 
+g(x | θ) g(θ) dθ. 
+density 
+On the other hand, the posterior pdf conveys improved knowledge about this optimal dens ity in Wp after training with τ. Using the posterior g(θ | τ), the Bayesian learner of f(x) is the posterior predictive density posterior 
+: 
+gτ(x) = g(x | τ) = 
+Z 
+g(x | θ) g(θ | τ) dθ, 
+predictive density 
+where we have assumed that g(x | θ, τ) = g(x | θ); that is, the likelihood depends on τ only through the parameter θ. 
+The choice of the prior is typically governed by two considerations: 
+1. the prior should be simple enough to facilitate the computation or simulation of the posterior pdf; 
+2. the prior should be general enough to model ignorance of the parameter of interest. 
+Priors that do not convey much knowledge of the parameter are said to be uninformat ive. The uniform or flat prior in Example 2.9 (to follow) is frequently used.uninformative prior 
+For the purpose of analytical and numerical computations, we can view θ as a ran dom vector with prior density g(θ), which after training is updated to the posterior density g(θ | τ).   
+The above thinking allows us to write g(x | τ) ∝Rg(x | θ) g(τ | θ) g(θ) dθ, for example, thus ignoring any constants that do not depend on the argument of the densities. 
+Example 2.7 (Normal Model) Suppose that the training data T = {X1, . . . , Xn} is modeled using the likelihood g(x | θ) that is the pdf of 
+X | θ ∼ N(µ, σ2), 
+where θ := [µ, σ2]>. Next, we need to specify the prior distribution of θ to complete the model. We can specify prior distributions for µ and σ2separately and then take their product to obtain the prior for vector θ (assuming independence). A possible prior distri bution for µ is 
+µ ∼ N(ν, φ2). (2.43)
+50 2.9. Bayesian Learning 
+hyperparamet- It is typical to refer to any parameters of the prior density as hyperparameters ersof the 
+Bayesian model. Instead of giving directly a prior for σ2(or σ), it turns out to be con venient to give the following prior distribution to 1/σ2: 
+1 
+σ2∼ Gamma(α, β). (2.44) 
+The smaller α and β are, the less informative is the prior. Under this prior, σ2is said to have inverse gamma an inverse gamma3 distribution. If 1/Z ∼ Gamma(α, β), then the pdf of Z is proportional to exp (−β/z) /zα+1 ☞ 63 (Exercise 19). The Bayesian posterior is then given by: 
+g(µ, σ2| τ) ∝ g(µ) × g(σ2) × g(τ | µ, σ2) 
+×exp n−β/σ2o 
+( 
+∝ exp 
+−(µ − ν)2 2φ2 
+(σ2)α+1×exp n−Pi(xi − µ)2/(2σ2)o 
+) 
+(σ2)n/2 
+( 
+) 
+2φ2−βσ2−(µ − xn)2 + S2n 
+∝ (σ2)−n/2−α−1exp 
+−(µ − ν)2 
+2σ2/n 
+, 
+where S2n:=1nPi x2i − x2n =1nPi(xi − xn)2is the (scaled) sample variance. All inference about (µ, σ2) is then represented by the posterior pdf. To facilitate computations it is helpful to find out if the posterior belongs to a recognizable family of distributions. For example, the conditional pdf of µ given σ2and τ is 
+( 
+g(µ |σ2, τ) ∝ exp 
+−(µ − ν)2 
+2φ2−(µ − xn)2 2σ2/n 
+) 
+, 
+which after simplification can be recognized as the pdf of 
+(µ |σ2, τ) ∼ N γn xn + (1 − γn)ν, γn σ2/n , (2.45) 
+where we have defined the weight parameter: γn :=nσ2.   1φ2 +nσ2 . We can then see that the posterior mean E[µ |σ2, τ] = γn xn + (1 − γn)ν is a weighted linear combination of the prior mean ν and the sample average xn. Further, as n → ∞, the weight γn → 1 and thus the posterior mean approaches the maximum likelihood estimate xn. 
+It is sometimes possible to use a prior g(θ) that is not a bona fide probability density, in the sense that Rg(θ) dθ = ∞, as long as the resulting posterior g(θ | τ) ∝ g(τ | θ)g(θ) is a proper improper prior pdf. Such a prior is called an improper prior. 
+Example 2.8 (Normal Model (cont.)) An example of an improper prior is obtained from (2.43) when we let φ → ∞ (the larger φ is, the more uninformative is the prior). 
+Then, g(µ) ∝ 1 is a flat prior, but Rg(µ) dµ = ∞, making it an improper prior. Neverthe less, the posterior is a proper density, and in particular the conditional posterior of (µ |σ2, τ) 
+simplifies to 
+(µ |σ2, τ) ∼ N xn, σ2/n , 
+3Reciprocal gamma distribution would have been a better name.
+Chapter 2. Statistical Learning 51 
+because the weight parameter γn goes to 1 as φ → ∞. The improper prior g(µ) ∝ 1 also allows us to simplify the posterior marginal for σ2: 
+g(σ2| τ) = 
+( 
+Z 
+g(µ, σ2| τ) dµ ∝ (σ2)−(n−1)/2−α−1exp 
+−β + nS 2n/2 σ2 
+) 
+, 
+which we recognize as the density corresponding to     τ ∼ Gamma α +n − 1 
+1 
+σ2 
+2, β +n2S2n!. 
+In addition to g(µ) ∝ 1, we can also use an improper prior for σ2. If we take the limit α → 0 and β → 0 in (2.44), then we also obtain the improper prior g(σ2) ∝ 1/σ2(or equivalently g(1/σ2) ∝ 1/σ2). In this case, the posterior marginal density for σ2implies that: 
+nS 2n σ2 
+    τ ∼ χ2n−1 
+and the posterior marginal density for µ implies that: 
+µ − xn 
+S n/√n − 1 
+    τ ∼ tn−1. (2.46) 
+In general, deriving a simple formula for the posterior density of θ is either impossible or too tedious. Instead, the Monte Carlo methods in Chapter 3 can be used to simulate (approximately) from the posterior for the purposes of inference and prediction. 
+One way in which a distributional result such as (2.46) can be useful is in the construc tion of a 95% credible interval credible 
+I for the parameter µ; that is, an interval I such that the 
+probability P[µ ∈ I | τ] is equal to 0.95. For example, the symmetric 95% credible interval 
+interval 
+is 
+" 
+I = 
+xn −S n 
+√n − 1γ, xn +S n 
+√n − 1γ 
+# 
+, 
+where γ is the 0.975-quantile of the tn−1 distribution. Note that the credible interval is not a random object and that the parameter µ is interpreted as a random variable with a distribution. This is unlike the case of classical confidence intervals, where the parameter is nonrandom, but the interval is (the outcome of) a random object. ☞ 457 
+As a generalization of the 95% Bayesian credible interval we can define a 1−α credible region, which is any set R satisfying credible region Z 
+P[θ ∈ R | τ] = 
+θ∈R 
+g(θ | τ) dθ > 1 − α. (2.47)
+52 2.9. Bayesian Learning 
+Example 2.9 (Bayesian Regularization of Maximum Likelihood) Consider model ing the number of deaths during birth in a maternity ward. Suppose that the hospital data consists of τ = {x1, . . . , xn}, with xi = 1 if the i-th baby has died during birth and xi = 0 otherwise, for i = 1, . . . , n. A possible Bayesian model for the data is θ ∼ U(0, 1) (uniform prior) with (X1, . . . , Xn | θ)iid∼ Ber(θ). The likelihood is therefore 
+g(τ | θ) = 
+Yn i=1 
+θxi(1 − θ)1−xi = θs(1 − θ)n−s, 
+where s = x1 + · · · + xn is the total number of deaths. Since g(θ) = 1, the posterior pdf is g(θ | τ) ∝ θs(1 − θ)n−s, θ ∈ [0, 1], 
+which is the pdf of the Beta(s + 1, n − s + 1) distribution. The normalization constant is (n + 1) ns . The posterior pdf is shown in Figure 2.14 for (s, n) = (0, 100). It is not difficult 
+Figure 2.14: Posterior pdf for θ, with n = 100 and s = 0. 
+maximum a to see that the maximum a posteriori 
+posteriori(MAP) estimate of θ (the mode or maximizer of the 
+posterior density) is 
+argmax 
+θ 
+g(θ | τ) =sn, 
+which agrees with the maximum likelihood estimate. Figure 2.14 also shows that the left one-sided 95% credible interval for θ is [0, 0.0292], where 0.0292 is the 0.95 quantile (rounded) of the Beta(1, 101) distribution. 
+Observe that when (s, n) = (0, 100) the maximum likelihood estimate bθ = 0 infers that deaths at birth are not possible. We know that this inference is wrong — the probability of death can never be zero, it is simply (and fortunately) too small to be inferred accurately from a sample size of n = 100. In contrast to the maximum likelihood estimate, the pos terior mean E[θ | τ] = (s + 1)/(n + 2) is not zero for (s, n) = (0, 100) and provides the more reasonable point estimate of 0.0098 for the probability of death.
+Chapter 2. Statistical Learning 53 
+In addition, while computing a Bayesian credible interval poses no conceptual diffi culties, it is not simple to derive a confidence interval for the maximum likelihood estimate of bθ, because the likelihood as a function of θ is not differentiable at θ = 0. As a result of this lack of smoothness, the usual confidence intervals based on the normal approximation cannot be used. 
+We now return to the unsupervised learning setting of Section 2.6, but consider this from a Bayesian perspective. Recall from (2.39) that the Kullback–Leibler risk for an ap proximating function g is 
+Z 
+`(g) = 
+f(τ0n)[ln f(τ0n) − ln g(τ0n)] dτ0n, 
+where τ0n denotes the test data. Since Rf(τ0n) ln f(τ0n) dτ0n plays no role in minimizing the risk, we consider instead the cross-entropy risk, defined as ☞ 122 Z 
+`(g) = − 
+f(τ0n) ln g(τ0n) dτ0n. 
+Note that the smallest possible cross-entropy risk is `∗n = −Rf(τ0n) ln f(τ0n) dτ0n. The expec ted generalization risk of the Bayesian learner can then be decomposed as 
+Z 
+E `(gTn) = `∗n + 
+f(τ0n) lnf(τ0n) 
+E g(τ0n| Tn)dτ0n 
+Z 
++ E 
+f(τ0n) lnE g(τ0n| Tn) g(τ0n| Tn)dτ0n 
+, 
+| {z } “bias” component 
+| {z } “variance” component 
+where gTn(τ0n) = g(τ0n| Tn) =Rg(τ0n| θ) g(θ | Tn) dθ is the posterior predictive density after observing Tn. 
+Assuming that the sets Tn and T0nare comprised of 2n iid random variables with density f , we can show (Exercise 23) that the expected generalization risk simplifies to 
+E `(gTn) = E ln g(Tn) − E ln g(T2n), (2.48) 
+where g(τn) and g(τ2n) are the prior predictive densities of τn and τ2n, respectively. Let θn = argmaxθg(θ | Tn) be the MAP estimator of θ∗:= argmaxθ E ln g(X | θ). As suming that θn converges to θ∗(with probability one) and 1nE ln g(Tn | θn) = E ln g(X | θ∗) + O(1/n), we can use the following large-sample approximation of the expected generaliza tion risk. 
+Theorem 2.4: Approximating the Bayesian Cross-Entropy Risk 
+For n → ∞, the expected cross-entropy generalization risk satisfies: E`(gTn) ' −E ln g(Tn) −p2ln n, (2.49) 
+where (with p the dimension of the parameter vector θ and θn the MAP estimator): E ln g(Tn) ' E ln g(Tn | θn) −p2ln n. (2.50)
+54 2.9. Bayesian Learning Proof: To show (2.50), we apply Theorem C.21 to ln Re−nrn(θ) ☞ 450 g(θ) dθ, where rn(θ) := −1nln g(Tn | θ) = −1nXni=1ln g(Xi| θ)a.s. 
+−→ − E ln g(X | θ) =: r(θ) < ∞. 
+This gives (with probability one) 
+Z 
+ln 
+g(Tn | θ) g(θ) dθ ' −nr(θ∗) −p2ln(n). 
+Taking expectations on both sides and using nr(θ∗) = nE[rn(θn)] + O(1), we deduce (2.50). To demonstrate (2.49), we derive the asymptotic approximation of E ln g(T2n) by repeating the argument for (2.50), but replacing n with 2n, where necessary. Thus, we obtain: 
+E ln g(T2n) ' −2nr(θ∗) −p2ln(2n). 
+Then, (2.49) follows from the identity (2.48).   
+The results of Theorem 2.4 have two major implications for model selection and assess ment. First, (2.49) suggests that − ln g(Tn) can be used as a crude (leading-order) asymp totic approximation to the expected generalization risk for large n and fixed p. In this model evidence context, the prior predictive density g(Tn) is usually called the model evidence or marginal 
+likelihood for the class Gp. Since the integral Rg(Tn | θ) g(θ) dθ is rarely available in closed form, the exact computation of the model evidence is typically not feasible and may require ☞ 78 Monte Carlo estimation methods. 
+Second, when the model evidence is difficult to compute via Monte Carlo methods or otherwise, (2.50) suggests that we can use the following large-sample approximation: 
+−2E ln g(Tn) ' −2 ln g(Tn | θn) + p ln(n). (2.51) 
+The asymptotic approximation on the right-hand side of (2.51) is called the Bayesian in 
+Bayesian formation criterion 
+(BIC). We prefer the class Gp with the smallest BIC. The BIC is typic 
+information criterion 
+ally used when the model evidence is difficult to compute and n is sufficiently larger than p. For a fixed p, and as n becomes larger and larger, the BIC becomes a more and more accurate estimator of −2E ln g(Tn). Note that the BIC approximation is valid even when the true density f < Gp. The BIC provides an alternative to the Akaike information criterion 
+☞ 126 (AIC) for model selection. However, while the BIC approximation does not assume that the true model f belongs to the parametric class under consideration, the AIC assumes that f ∈ Gp. Thus, the AIC is merely a heuristic approximation based on the asymptotic approximations in Theorem 4.1. 
+Although the above Bayesian theory has been presented in an unsupervised learn ing setting, it can be readily extended to the supervised case. We only need to relabel the training set Tn. In particular, when (as is typical for regression models) the train ing responses Y1, . . . , Yn are considered as random variables but the corresponding fea ture vectors x1, . . . , xn are viewed as being fixed, then Tn is the collection of random re sponses {Y1, . . . , Yn}. Alternatively, we can simply identify Tn with the response vector Y = [Y1, . . . , Yn]>. We will adopt this notation in the next example.
+Chapter 2. Statistical Learning 55 
+Example 2.10 (Polynomial Regression (cont.)) Consider Example 2.2 once again, but now in a Bayesian framework, where the prior knowledge on (σ2, β) is specified by g(σ2) = 1/σ2and β |σ2 ∼ N(0, σ2D), and D is a (matrix) hyperparameter. Let Σ := (X>X + D−1)−1. Then the posterior can be written as: 
+(2πσ2)n/2×exp  −β>D−1β 
+  
+g(β, σ2| y) =exp  −ky−Xβk2 2σ2 
+  
+(2πσ2)p/2|D|1/2×1σ2,g(y) 2σ2 
+  
+=(σ2)−(n+p)/2−1 
+2σ2−(n + p + 2)σ2 
+! ,
+(2π)(n+p)/2|D|1/2exp
+−kΣ−1/2(β − β)k2 
+2σ2 
+g(y), 
+where β := ΣX>y and σ2:= y>(I − XΣX>)y/(n + p + 2) are the MAP estimates of β and σ2, and g(y) is the model evidence for Gp: 
+" 
+g(y) = 
+g(β, σ2, y) dβ dσ2 
+=|Σ|1/2 
+Z ∞ 
+  
+exp 
+−(n+p+2)σ2 2σ2 
+  
+(2π)n/2|D|1/2 
+(σ2)n/2+1dσ2 
+0 
+=|Σ|1/2Γ(n/2) 
+|D|1/2(π(n + p + 2)σ2)n/2. 
+Therefore, based on (2.49), we have 
+2E`(gTn) ' −2 ln g(y) = n ln hπ(n + p + 2) σ2i− 2 ln Γ(n/2) + ln |D| − ln |Σ|. On the other hand, the minus of the log-likelihood of Y can be written as − ln g(y | β, σ2) =ky − Xβk2 
+2σ2+n2ln(2πσ2) 
+2σ2+(n + p + 2) σ2 
+=kΣ−1/2(β − β)k2 
+Therefore, the BIC approximation (2.51) is 
+2σ2+n2ln(2πσ2). 
+−2 ln g(y | β,σ2) + (p + 1) ln(n) = n[ln(2πσ2) + 1] + (p + 1) ln(n) + (p + 2), (2.52) 
+where the extra ln(n) term in (p + 1) ln(n) is due to the inclusion of σ2in θ = (σ2, β). Figure 2.15 shows the model evidence and its BIC approximation, where we used a hyper parameter D = 104 × Ip for the prior density of β. We can see that both approximations exhibit a pronounced minimum at p = 4, thus identifying the true polynomial regression model. Compare the overall qualitative shape of the cross-entropy risk estimate with the shape of the square-error risk estimate in Figure 2.11.
+56 2.9. Bayesian Learning 800 
+750 
+700 
+650 
+600 
+1 2 3 4 5 6 7 8 910 
+Figure 2.15: The BIC and marginal likelihood used for model selection. 
+It is possible to give the model complexity parameter p a Bayesian treatment, in which we define a prior density on the set of all models under consideration. For example, let g(p), p = 1, . . . , m be a prior density on m candidate models. Treating the model com plexity index p as an additional parameter to θ ∈ Rp, and applying Bayes’ formula, the posterior for (θ, p) can be written as: 
+g(θ, p | τ) = g(θ | p, τ) × g(p | τ) 
+=g(τ | θ, p) g(θ | p) g(τ | p) 
+| {z } posterior of θ given model p 
+×g(τ | p) g(p) 
+. 
+g(τ) 
+| {z } 
+posterior of model p 
+The model evidence for a fixed p is now interpreted as the prior predictive density of τ, 
+conditional on the model p: 
+g(τ | p) = 
+Z 
+g(τ | θ, p) g(θ | p) dθ, 
+and the quantity g(τ) =Pmp=1 g(τ | p) g(p) is interpreted as the marginal likelihood of all the m candidate models. Finally, a simple method for model selection is to pick the index bp with the largest posterior probability: 
+bp = argmax p 
+g(p | τ) = argmax p 
+g(τ | p) g(p). 
+Example 2.11 (Polynomial Regression (cont.)) Let us revisit Example 2.10 by giving the parameter p = 1, . . . , m, with m = 10, a Bayesian treatment. Recall that we used the notation τ = y in that example. We assume that the prior g(p) = 1/m is flat and uninform ative so that the posterior is given by 
+g(p | y) ∝ g(y | p) =|Σ|1/2 Γ(n/2) 
+|D|1/2(π(n + p + 2)σ2)n/2,
+Chapter 2. Statistical Learning 57 
+where all quantities in g(y | p) are computed using the first p columns of X. Figure 2.16 shows the resulting posterior density g(p | y). The figure also shows the posterior density bg(y | p)  P10p=1bg(y | p), where 
+  
+bg(y | p) := exp
+! 
+−n[ln(2πσ2) + 1] + (p + 1) ln(n) + (p + 2) 2 
+is derived from the BIC approximation (2.52). In both cases, there is a clear maximum at p = 4, suggesting that a third-degree polynomial is the most appropriate model for the data. 
+1 
+0.8 
+0.6 
+0.4 
+0.2 
+0 
+1 2 3 4 5 6 7 8 9 10 Figure 2.16: Posterior probabilities for each polynomial model of degree p − 1. 
+Suppose that we wish to compare two models, say model p = 1 and model p = 2. Instead of computing the posterior g(p | τ) explicitly, we can compare the posterior odds ratio: 
+g(p = 1 | τ) 
+g(p = 2 | τ)=g(p = 1) 
+g(p = 2)×g(τ | p = 1) 
+. 
+g(τ | p = 2) 
+| {z } 
+Bayes factor B1 | 2 
+This gives rise to the Bayes factor Bi | j, whose value signifies the strength of the evidence Bayes factor in favor of model i over model j. In particular Bi | j > 1 means that the evidence in favor for model i is larger. 
+Example 2.12 (Savage–Dickey Ratio) Suppose that we have two models. Model p = 2 has a likelihood g(τ | µ, ν, p = 2), depending on two parameters. Model p = 1 has the same functional form for the likelihood but now ν is fixed to some (known) ν0; that is, g(τ | µ, p = 1) = g(τ | µ, ν = ν0, p = 2). We also assume that the prior information on µ
+58 Exercises 
+for model 1 is the same as that for model 2, conditioned on ν = ν0. That is, we assume g(µ | p = 1) = g(µ | ν = ν0, p = 2). As model 2 contains model 1 as a special case, the latter is said to be nested inside model 2. We can formally write (see also Exercise 26): Z 
+g(τ | p = 1) = = 
+Z 
+g(τ | µ, p = 1) g(µ | p = 1) dµ 
+g(τ | µ, ν = ν0, p = 2) g(µ | ν = ν0, p = 2) dµ 
+= g(τ | ν = ν0, p = 2) =g(τ, ν = ν0 | p = 2) 
+g(ν = ν0 | p = 2). 
+Hence, the Bayes factor simplifies to 
+  
+B1 | 2 =g(τ | p = 1) 
+g(τ | p = 2)=g(τ, ν = ν0 | p = 2) g(ν = ν0 | p = 2) 
+g(τ | p = 2) =g(ν = ν0 | τ, p = 2) g(ν = ν0 | p = 2). 
+In other words, B1 | 2 is the ratio of the posterior density to the prior density of ν, evaluated at ν = ν0 and both under the unrestricted model p = 2. This ratio of posterior to prior densities density ratio. 
+Savage–Dickey is called the Savage–Dickey density ratio 
+Whether to use a classical (frequentist) or Bayesian model is largely a question of con venience. Classical inference is useful because it comes with a huge repository of ready to-use results, and requires no (subjective) prior information on the parameters. Bayesian models are useful because the whole theory is based on the elegant Bayes’ formula, and uncertainty in the inference (e.g., confidence intervals) can be quantified much more nat urally (e.g., credible intervals). A usual practice is to “Bayesify” a classical model, simply by adding some prior information on the parameters. 
+Further Reading 
+A popular textbook on statistical learning is [55]. Accessible treatments of mathematical statistics can be found, for example, in [69], [74], and [124]. More advanced treatments are given in [10], [25], and [78]. A good overview of modern-day statistical inference is given in [36]. Classical references on pattern classification and machine learning are [12] and [35]. For advanced learning theory including information theory and Rademacher complexity, we refer to [28] and [109]. An applied reference for Bayesian inference is [46]. For a survey of numerical techniques relevant to computational statistics, see [90]. 
+Exercises 
+1. Suppose that the loss function is the piecewise linear function 
+Loss(y,by) = α (by − y)+ + β (y −by)+, α, β > 0, 
+where c+ is equal to c if c > 0, and zero otherwise. Show that the minimizer of the risk `(g) = E Loss(Y, g(X)) satisfies 
+P[Y < g∗(x) | X = x] =β 
+α + β. 
+In other words, g∗(x) is the β/(α + β) quantile of Y, conditional on X = x.
+Chapter 2. Statistical Learning 59 
+2. Show that, for the squared-error loss, the approximation error `(gG) − `(g∗) in (2.16), is equal to E(gG(X) − g∗(X))2. [Hint: expand `(gG) = E(Y − g∗(X) + g∗(X) − gG(X))2.] 
+3. Suppose G is the class of linear functions. A linear function evaluated at a feature x can be described as g(x) = β>x for some parameter vector β of appropriate dimension. Denote gG(x) = x>βGand gGτ (x) = x>bβ. Show that 
+E gGτ(X) − g∗(X) 2= E X>bβ − X>βG 2+ E X>βG − g∗(X) 2. 
+Hence, deduce that the statistical error in (2.16) is `(gGτ ) − `(gG) = E (gGτ (X) − gG(X))2. 4. Show that formula (2.24) holds for the 0–1 loss with 0–1 response. 
+5. Let X be an n-dimensional normal random vector with mean vector µ and covariance matrix Σ, where the determinant of Σ is non-zero. Show that X has joint probability density 
+fX(x) =1 
+√(2π)n|Σ|e−12(x−µ)>Σ−1(x−µ), x ∈ Rn. 
+6. Let bβ = A+y. Using the defining properties of the pseudo-inverse, show that for any ☞ 360 
+β ∈ Rp, 
+kAbβ − yk 6 kAβ − yk. 
+7. Suppose that in the polynomial regression Example 2.1 we select the linear class of functions Gp with p > 4. Then, g∗ ∈ Gp and the approximation error is zero, because gGp(x) = g∗(x) = x>β, where β = [10, −140, 400, −250, 0, . . . , 0]> ∈ Rp. Use the tower property to show that the learner gτ(x) = x>bβ with bβ = X+y, assuming rank(X) > 4, is ☞ 431 
+unbiased: unbiased E gT (x) = g∗(x). 
+8. (Exercise 7 continued.) Observe that the learner gT can be written as a linear combina tion of the response variable: gT (x) = x>X+Y. Prove that for any learner of the form x>Ay, where A ∈ Rp×nis some matrix and that satisfies EX[x>AY] = g∗(x), we have 
+VarX[x>X+Y] 6 VarX[x>AY], 
+where the equality is achieved for A = X+. This is called the Gauss–Markov inequality Gauss–Markov 
+. 
+Hence, using the Gauss–Markov inequality deduce that for the unconditional variance: Var gT (x) 6 Var[x>AY]. 
+Deduce that A = X+also minimizes the expected generalization risk. 
+9. Consider again the polynomial regression Example 2.1. Use the fact that EXbβ = X+h∗(u), where h∗(u) = E[Y | U = u] = [h∗(u1), . . . , h∗(un)]>, to show that the expected in-sample 
+inequality 
+risk is: 
+EX `in(gT ) = `∗ +kh∗(u)k2 − kXX+h∗(u)k2 n+`∗pn. 
+Also, use Theorem C.2 to show that the expected statistical error is: ☞ 430 EX (bβ − β)>Hp(bβ − β) = `∗tr(X+(X+)>Hp) + (X+h∗(u) − β)>Hp(X+h∗(u) − β).
+60 Exercises 10. Consider the setting of the polynomial regression in Example 2.2. Use Theorem C.19 
+☞ 449 to prove that 
+−→ N 0, `∗H−1 
+ , (2.53) 
+√n (bβn − βp)d 
+p + H−1 
+p MpH−1 
+p 
+where Mp := E[XX>(g∗(X) − gGp(X))2] is the matrix with (i, j)-th entry: 
+Z 1 
+ui+j−2(hHp(u) − h∗(u))2du, 
+0 
+and H−1 
+matrixwith (i, j)-th entry: 
+inverse Hilbert is the p × p inverse Hilbert matrix 
+p 
+(−1)i+j(i + j − 1)
+ p + i − 1 p − j 
+! p + j − 1 p − i 
+! i + j − 2 i − 1 
+!2 
+. 
+Observe that Mp = 0 for p > 4, so that the matrix Mp term is due to choosing a restrictive class Gp that does not contain the true prediction function. 
+11. In Example 2.2 we saw that the statistical error can be expressed (see (2.20)) as 
+Z 1 0 
+ [1, . . . , up−1](bβ − βp) 2du = (bβ − βp)>Hp(bβ − βp). 
+By Exercise 10 the random vector Zn :=√n(bβn − βp) has asymptotically a multivariate normal distribution with mean vector 0 and covariance matrix V := `∗H−1 
+p + H−1 
+p MpH−1 
+p. 
+☞ 430 Use Theorem C.2 to show that the expected statistical error is asymptotically E (bβ − βp)>Hp(bβ − βp) '`∗pn+tr(MpH−1 
+p) 
+n, n → ∞. (2.54) 
+Plot this large-sample approximation of the expected statistical error and compare it with the outcome of the statistical error. 
+We note a subtle technical detail: In general, convergence in distribution does not imply ☞ 442 convergence in Lp-norm (see Example C.6), and so here we have implicitly assumed that −→ Dist. ⇒ kZnkL2 
+kZnkd 
+−→ constant := limn↑∞ EkZnk. 
+12. Consider again Example 2.2. The result in (2.53) suggests that Ebβ → βpas n → ∞, where βpis the solution in the class Gp given in (2.18). Thus, the large-sample approxim T(x) = x>bβ at x = [1, . . . , up−1]>is 
+ation of the pointwise bias of the learner gGp 
+E gGp 
+T(x) − g∗(x) ' [1, . . . , up−1] βp − [1, u, u2, u3] β∗, n → ∞. 
+Use Python to reproduce Figure 2.17, which shows the (large-sample) pointwise squared bias of the learner for p ∈ {1, 2, 3}. Note how the bias is larger near the endpoints u = 0 and u = 1. Explain why the areas under the curves correspond to the approximation errors.
+Chapter 2. Statistical Learning 61 250 
+200 
+150 
+100 
+50 
+0 
+0 0.2 0.4 0.6 0.8 1 
+Figure 2.17: The large-sample pointwise squared bias of the learner for p = 1, 2, 3. The bias is zero for p > 4. 
+13. For our running Example 2.2 we can use (2.53) to derive a large-sample approximation of the pointwise variance of the learner gT (x) = x>bβn. In particular, show that for large n 
+n+x>H−1 
+Var gT (x) '`∗ x>H−1 p x 
+p MpH−1 
+p x 
+n, n → ∞. (2.55) 
+Figure 2.18 shows this (large-sample) variance of the learner for different values of the predictor u and model index p. Observe that the variance ultimately increases in p and that it is smaller at u = 1/2 than closer to the endpoints u = 0 or u = 1. Since the bias is also 
+4 
+3 
+2 
+1 
+0.05 
+3 
+0.5 1 0.95 
+7 
+5 
+9 
+Figure 2.18: The pointwise variance of the learner for various pairs of p and u. 
+larger near the endpoints, we deduce that the pointwise mean squared error (2.21) is larger near the endpoints of the interval [0, 1] than near its middle. In other words, the error is much smaller in the center of the data cloud than near its periphery.
+62 Exercises 
+14. Let h : x 7→ R be a convex function and let X be a random variable. Use the subgradi- ☞ 403 ent definition of convexity to prove Jensen’s inequality: 
+Jensen’s 
+inequality E h(X) > h(EX). (2.56) 
+15. Using Jensen’s inequality, show that the Kullback–Leibler divergence between prob ability densities f and g is always positive; that is, 
+E ln f(X) 
+g(X)> 0, 
+where X ∼ f . 
+Vapnik– 16. The purpose of this exercise is to prove the following Vapnik–Chernovenkis bound : for 
+Chernovenkis bound 
+any finite class G (containing only a finite number |G| of possible functions) and a general bounded loss function, l 6 Loss 6 u, the expected statistical error is bounded from above 
+according to: 
+E `(gGTn) − `(gG) 6(u − l)√2 ln(2|G|) 
+√n. (2.57) 
+Note how this bound conveniently does not depend on the distribution of the training set Tn (which is typically unknown), but only on the complexity (i.e., cardinality) of the class G. We can break up the proof of (2.57) into the following four parts: 
+(a) For a general function class G, training set T, risk function `, and training loss `T , we have, by definition, `(gG) 6 `(g) and `T (gGT) 6 `T (g) for all g ∈ G. Show that 
+`(gGT) − `(gG) 6 sup g∈G 
+|`T (g) − `(g)| + `T (gG) − `(gG), 
+where we used the notation sup (supremum) for the least upper bound. Since E`T (g) = E`(g), we obtain, after taking expectations on both sides of the inequal ity above: 
+E `(gGT) − `(gG) 6 E sup g∈G 
+|`T (g) − `(g)|. 
+(b) If X is a zero-mean random variable taking values in the interval [l, u], then the fol inequalitystates that the moment generating function satisfies 
+Hoeffding’s lowing Hoeffding’s inequality 
+E etX 6 exp
+ t2(u − l)2 8 
+! 
+, t ∈ R. (2.58) 
+Prove this result by using the fact that the line segment joining points (l, exp(tl)) and (u, exp(tu)) bounds the convex function x 7→ exp(tx) for x ∈ [l, u]; that is: 
+etx 6 etl u − x 
+u − l+ etu x − l 
+u − l, x ∈ [l, u]. 
+(c) Let Z1, . . . , Zn be (possibly dependent and non-identically distributed) zero-mean ran dom variables with moment generating functions that satisfy E exp(tZk) 6 exp(t2η2/2) ☞ 427 for all k and some parameter η. Use Jensen’s inequality (2.56) to prove that for any
