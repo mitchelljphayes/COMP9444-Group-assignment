@@ -4,6 +4,7 @@
 *.zip
 .venv
 .pdm-python
+.faiss_deeplearning_book/
 
 # Created by https://www.toptal.com/developers/gitignore/api/python,jupyternotebooks,visualstudiocode,virtualenv,venv,microsoftoffice,r
 # Edit at https://www.toptal.com/developers/gitignore?templates=python,jupyternotebooks,visualstudiocode,virtualenv,venv,microsoftoffice,r
